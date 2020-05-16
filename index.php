@@ -67,9 +67,9 @@ if(isset($_POST['login']))
 		$email 		= trim($_POST['email']);
 		$password 	= trim($_POST['password']);
 		
-		$md5Password = md5($password);
+		//$md5Password = md5($password);
 		
-		$sql = "select * from users where email = '".$email."' and password = '".$md5Password."'";
+		$sql = "select * from users where email = '".$email."' and password = '".$password."'";
 		$rs = mysqli_query($conn,$sql);
 		$getNumRows = mysqli_num_rows($rs);
 		

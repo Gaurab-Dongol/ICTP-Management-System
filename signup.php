@@ -95,15 +95,17 @@ if (isset($_POST['signup_btn'])) {
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                                     <div class="card-body">
                                         <form>
-                                            <div class="form-group"><label class="small mb-1">Sing Up As</label>
-                                              <select>
-                                                <option value="1">Admin</option>
-                                                <option value="2">Unit Cordinator</option>
-                                                <option value="3">Student</option>
-                                                <option value="4">Company</option>
-                                              </select>
+                                            <div class="form-group">
+                                             <div class="col-md-12">
+                                                    <div class="form-group"><label class="small mb-1">Sing Up As</label>
+                                                      <select class="form-control py-4">
+                                                        <option value="3">Student</option>
+                                                        <option value="4">Company</option>
+                                                      </select>
+                                              </div>
                                             </div>
-                                            <div class="form-row">
+</div>
+                                            <div class="form-group">
                                                 <div class="col-md-6">
                                                     <div class="form-group"><label class="small mb-1" for="inputFirstName">First Name</label>
                                                     <input class="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" /></div>

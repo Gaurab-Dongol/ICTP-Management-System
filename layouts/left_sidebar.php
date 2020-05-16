@@ -19,49 +19,49 @@
           </a>
         </li>
 		<?php 
-		//only visible to admin and editor
-		if($_SESSION['user_role_id'] != 4){?>
+		//only visible to admin 
+		if($_SESSION['user_role_id'] == 1){?>
 		
 			 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
 			  <a class="nav-link" href="#">
 				<i class="fa fa-fw fa fa-copy"></i>
-				<span class="nav-link-text">Pages</span>
+				<span class="nav-link-text">Students</span>
 			  </a>
 			</li>
 			
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
 			  <a class="nav-link" href="#">
 				<i class="fa fa-fw fa-circle-o-notch"></i>
-				<span class="nav-link-text">Categoris</span>
+				<span class="nav-link-text">Internship</span>
 			  </a>
 			</li>
 		
 		<?php }?>
-		
-		<?php 
-		//only visible to admin and editor
-		if(($_SESSION['user_role_id'] == 1) || $_SESSION['user_role_id'] == 2 ){?>
+    
+    <?php 
+		//only visible to unit co-ordinator
+		if(($_SESSION['user_role_id'] != 1 && $_SESSION['user_role_id'] != 3)){?>
 		
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Appearance</span>
+            <span class="nav-link-text">Student</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="#">Themes</a>
+              <a href="#">Internship</a>
             </li>
             <li>
-              <a href="#">Menus</a>
+              <a href="#">Completed</a>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Components</span>
+            <span class="nav-link-text">Company</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+          <!--<ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
               <a href="#">Login Page</a>
             </li>
@@ -74,10 +74,64 @@
             <li>
               <a href="#">Blank Page</a>
             </li>
-          </ul>
+          </ul>-->
         </li>
   
-		<?php } ?>
+    <?php } ?> 
+    
+    <?php 
+		//only visible to student
+		if(($_SESSION['user_role_id'] != 1 && $_SESSION['user_role_id'] != 2)){?>
+		
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">Opportunites</span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">My Internship</span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-address-book-o"></i>
+            <span class="nav-link-text">My Diary</span>
+          </a>
+        </li>
+  
+    <?php } ?>
+
+    <?php 
+		//only visible to Organization
+		if(($_SESSION['user_role_id'] != 1 && $_SESSION['user_role_id'] != 2) || ($_SESSION['user_role_id'] != 2 && $_SESSION['user_role_id'] != 3)){?>
+		
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-wrench"></i>
+            <span class="nav-link-text">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">Opportunites</span>
+          </a>
+        </li>
+          </a>
+        </li>
+  
+    <?php } ?>
 		<?php 
 		//only visible to admin
 		if($_SESSION['user_role_id'] == 1){?>
@@ -88,9 +142,7 @@
 			</a>
 		</li>
 		
-		<?php
-		}
-		?>
+		<?php	} ?>
         
       </ul>
      
