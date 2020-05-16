@@ -31,7 +31,7 @@
 		//only visible to admin and editor
 		if($_SESSION['user_role_id'] == 1){?>
         <div class="card mb-4">
-                            <div class="card-header"><i class="fas fa-table mr-1"></i>Student List</div>
+                            <div class="card-header"><i class="fa fa-table mr-1"></i>Student List</div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -45,15 +45,13 @@
                                                 <th>Specialisation</th>
                                             </tr>
                                         </thead>
-											
-                                            <tbody>
-											
+										<tbody>
 											<?php
-											//Display Student List
-											$query="select * from Student";
-											$rs = mysqli_query($conn,$query);
-											$count = 0;
-												foreach($rs as $row){
+												//Display Student List
+												$query="select * from Student";
+												$rs = mysqli_query($conn,$query);
+												$count = 0;
+													foreach($rs as $row){
 											?>  
 											<tr>
 												<td><?php echo ++$count;?> </td>

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Simple role based access control example using php and mysqli</title>
+  <title>ICTP Management System</title>
   <!-- Bootstrap core CSS-->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
