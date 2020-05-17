@@ -6,13 +6,39 @@
 		header('location:index.php?lmsg=true');
 		exit;
 	}		
-	
 
 	require_once('inc/config.php');
 	require_once('layouts/header.php'); 
 	require_once('layouts/left_sidebar.php'); 
 	
-	
+	//Upload .csv file
+	if(isset($_POST["submit"]))
+	{
+		if($_FILES['file']['name'])
+		{
+			$filename = explode(".", $_FILES['file']['name']);
+			if($filename[1] == 'csv')
+		{
+			$handle = fopen($_FILES['file']['tmp_name'], "r");
+			//Skips first row of excel file
+			fgetcsv($handle);	
+		while($data = fgetcsv($handle))
+		{
+			$item1 = mysqli_real_escape_string($conn, $data[0]);  
+			$item2 = mysqli_real_escape_string($conn, $data[1]);
+			$item3 = mysqli_real_escape_string($conn, $data[2]);  
+			$item4 = mysqli_real_escape_string($conn, $data[3]);
+			$item5 = mysqli_real_escape_string($conn, $data[4]);  
+			//$item6 = mysqli_real_escape_string($conn, $data[5]);
+			$query = "INSERT INTO Student (`First_Name`, `Last_Name`, `Email`, `Contact`,`Specialisation`,`UserID`) VALUES ('$item1', '$item2', '$item3', '$item4', '$item5', '3')";
+			mysqli_query($conn, $query);
+			
+		}
+			fclose($handle);
+			echo "<script>alert('Import done');</script>";
+		}
+		}
+	}
 ?>
 
   <div class="content-wrapper">
@@ -38,6 +64,7 @@
                                         <thead>
                                             <tr>
 												<th>No.</th>
+												<th>SID</th>
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>Email</th>
@@ -55,6 +82,7 @@
 											?>  
 											<tr>
 												<td><?php echo ++$count;?> </td>
+												<td><?php echo $row["SID"]?></td>
 												<td><?php echo $row["First_Name"];?></td>
 												<td><?php echo $row["Last_Name"];?></td>
 												<td><?php echo $row["Email"];?></td>
@@ -66,6 +94,14 @@
                                     </table>
                                 </div>
                             </div>
+							<form method="post" enctype="multipart/form-data">
+   	
+    <label>Select CSV File:</label>
+    <input type="file" name="file" />
+    <br />
+    <input type="submit" name="submit" value="Import" class="btn btn-info" />
+   
+  </form>
                         </div>
       <div style="height: 1000px;"></div>
 	</div> 
