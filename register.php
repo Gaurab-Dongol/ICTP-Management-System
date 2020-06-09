@@ -166,12 +166,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="form-group">
                                     <label>Western Email Address</label>
-                                    <input class="au-input au-input--full" type="username" name="username" placeholder="18763523@student.westernsydney.edu.au" required>
+                                    <input class="au-input au-input--full" type="email" name="username" placeholder="18763523@student.westernsydney.edu.au" required>
                                     <?php echo  "<p> <font color=red> $username_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Contact Number</label>
-                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61436XXXXXX" pattern="[+]{1}[0-9]{11,14}" required>
+                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61436XXXXXX">
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Specialisation</label>
