@@ -37,55 +37,8 @@ if (isset($_POST['signup_btn'])) {
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>UserAccounts - Sign up</title>
-  <!-- Bootstrap CSS -->
-  <!--<div class="container">
-    <div class="row">
-      <div class="col-md-4 col-md-offset-4">
-        <form class="form" action="signup.php" method="post" enctype="multipart/form-data">
-          <h2 class="text-center">Sign up</h2>
-          <div class="form-group">
-            <label class="control-label">Sing Up As</label>
-            <select class="selectpicker" multiple>
-                <option value="1">Admin</option>
-                <option value="2">Unit Cordinator</option>
-                <option value="3">Student</option>
-                <option value="4">Company</option>
-            </select>
-          </div>
-          <hr>
-          <div class="form-group">
-            <label class="control-label">First Name</label>
-            <input type="text" name="username" class="form-control">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Email Address</label>
-            <input type="email" name="email" class="form-control">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Password</label>
-            <input type="password" name="password" class="form-control">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Password confirmation</label>
-            <input type="password" name="passwordConf" class="form-control">
-          </div>
-          <div class="form-group" style="text-align: center;">
-            <img src="http://via.placeholder.com/150x150" id="profile_img" style="height: 100px; border-radius: 50%" alt="">
-            <!-- hidden file input to trigger with JQuery  -->
-            <!--<input type="file" name="profile_picture" id="profile_input" value="" style="display: none;">
-          </div>
-          <div class="form-group">
-            <button type="submit" name="signup_btn" class="btn btn-success btn-block">Sign up</button>
-          </div>
-          <p>Aready have an account? <a href="login.php">Sign in</a></p>
-        </form>
-      </div>
-    </div>
-  </div>-->
 
-  <div id="layoutAuthentication">
+<div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
@@ -140,10 +93,8 @@ if (isset($_POST['signup_btn'])) {
                 </main>
             </div>
         </div>
-  <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css" />
-  <!-- Custom styles -->
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
+                          
+                          </head>
 <body>
 
 <?php include(INCLUDE_PATH . "/layouts/footer.php") ?>

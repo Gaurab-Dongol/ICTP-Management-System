@@ -1,105 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>ICTP Management System</title>
-  <!-- Bootstrap core CSS-->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="assets/css/sb-admin.css" rel="stylesheet">
-</head>
-
-<body class="bg-dark">
-  <div class="container">
-    <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Login</div>
-      <div class="card-body">
-		<?php 
-			if(isset($errorMsg))
-			{
-				echo '<div class="alert alert-danger">';
-				echo $errorMsg;
-				echo '</div>';
-				unset($errorMsg);
-			}
-		?>
-        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" name="email" type="email" placeholder="Enter email" required>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" id="exampleInputPassword1" name="password" type="password" placeholder="Password" required>
-          </div>
-          <button class="btn btn-primary btn-block" type="submit" name="login">Login</button>
-        </form>
-       
-      </div>
-    </div>
-  </div>
-  <!-- Bootstrap core JavaScript-->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-</body>
-
-</html>
-
-
-<?php 
-session_start();
-
-require_once('inc/config.php');
-
-if(isset($_POST['login']))
-{
-	if(!empty($_POST['email']) && !empty($_POST['password']))
+    <?php 
+	session_start();
+	
+	if(!isset($_SESSION['id'],$_SESSION['user_role_id']))
 	{
-		$email 		= trim($_POST['email']);
-		$password 	= trim($_POST['password']);
-		
-		//$md5Password = md5($password);
-		
-		$sql = "select * from users where email = '".$email."' and password = '".$password."'";
-		$rs = mysqli_query($conn,$sql);
-		$getNumRows = mysqli_num_rows($rs);
-		
-		if($getNumRows == 1)
+		header('location:index.php?lmsg=true');
+		exit;
+	}		
+
+	require_once('inc/config.php');
+	require_once('layouts/header.php'); 
+	require_once('layouts/left_sidebar.php'); 
+	
+	//Upload .csv file
+	if(isset($_POST["submit"]))
+	{
+		if($_FILES['file']['name'])
 		{
-			$getUserRow = mysqli_fetch_assoc($rs);
-			unset($getUserRow['password']);
-			
-			$_SESSION = $getUserRow;
-						
-			header('location:dashboard.php');
-			exit;
+			$filename = explode(".", $_FILES['file']['name']);
+			if($filename[1] == 'csv')
+		{
+			$handle = fopen($_FILES['file']['tmp_name'], "r");
+			//Skips first row of excel file
+			fgetcsv($handle);	
+		while($data = fgetcsv($handle))
+		{
+			$item1 = mysqli_real_escape_string($conn, $data[0]);  
+			$item2 = mysqli_real_escape_string($conn, $data[1]);
+			$item3 = mysqli_real_escape_string($conn, $data[2]);  
+			$item4 = mysqli_real_escape_string($conn, $data[3]);
+			$item5 = mysqli_real_escape_string($conn, $data[4]);  
+			$item6 = mysqli_real_escape_string($conn, $data[5]);
+			$query = "INSERT INTO Student (`SID`,`First_Name`, `Last_Name`, `Email`, `Contact`,`Specialisation`,`UserID`) VALUES ('$item1','$item2', '$item3', '$item4', '$item5', '$item6', '3')";
+			mysqli_query($conn, $query);
 		}
-		else
-		{
-			$errorMsg = "Wrong email or password";
+			fclose($handle);
+			echo "<script>alert('Import done');</script>";
+		}
 		}
 	}
-}
-
-if(isset($_GET['logout']) && $_GET['logout'] == true)
-{
-	session_destroy();
-	header("location:index.php");
-	exit;
-}
-
-
-if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
-{
-	$errorMsg = "Login required to access dashboard";
-}
 ?>
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <form class="form-header" action="" method="POST">
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <button class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                            </form>
+                            <div class="header-button">
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">john doe</a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">john doe</a>
+                                                    </h5>
+                                                    <span class="email">johndoe@example.com</span>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h2 class="title-1 m-b-25">Student List</h2>
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                    <thead>
+                                            <tr>
+												<th>No.</th>
+												<th>SID</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Contact</th>
+                                                <th>Specialisation</th>
+                                            </tr>
+                                        </thead>
+										<tbody>
+											<?php
+												//Display Student List
+												$query="select * from Student";
+												$rs = mysqli_query($conn,$query);
+												$count = 0;
+													foreach($rs as $row){
+											?>  
+											<tr>
+												<td><?php echo ++$count;?> </td>
+												<td><?php echo $row["SID"]?></td>
+												<td><?php echo $row["First_Name"];?></td>
+												<td><?php echo $row["Last_Name"];?></td>
+												<td><?php echo $row["Email"];?></td>
+												<td><?php echo $row["Contact"];?></td>
+												<td><?php echo $row["Specialisation"];?></td>
+											</tr>
+											<?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <?php require_once('layouts/footer.php'); ?>

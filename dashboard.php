@@ -29,10 +29,9 @@
 			$item3 = mysqli_real_escape_string($conn, $data[2]);  
 			$item4 = mysqli_real_escape_string($conn, $data[3]);
 			$item5 = mysqli_real_escape_string($conn, $data[4]);  
-			//$item6 = mysqli_real_escape_string($conn, $data[5]);
-			$query = "INSERT INTO Student (`First_Name`, `Last_Name`, `Email`, `Contact`,`Specialisation`,`UserID`) VALUES ('$item1', '$item2', '$item3', '$item4', '$item5', '3')";
+			$item6 = mysqli_real_escape_string($conn, $data[5]);
+			$query = "INSERT INTO Student (`SID`,`First_Name`, `Last_Name`, `Email`, `Contact`,`Specialisation`,`UserID`) VALUES ('$item1','$item2', '$item3', '$item4', '$item5', '$item6', '3')";
 			mysqli_query($conn, $query);
-			
 		}
 			fclose($handle);
 			echo "<script>alert('Import done');</script>";
@@ -103,9 +102,10 @@
    
   </form>
                         </div>
-      <div style="height: 1000px;"></div>
-	</div> 
+      
 	<?php }?>
+
+	
 		</div>
     <!-- /.container-fluid-->
 	

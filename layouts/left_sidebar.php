@@ -1,42 +1,51 @@
- <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="dashboard.php"></a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="dashboard.php">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa fa-wpforms"></i>
-            <span class="nav-link-text">Posts</span>
-          </a>
-        </li>
-		<?php 
-		//only visible to admin 
-		if($_SESSION['user_role_id'] == 1){?>
-		
-			 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-			  <a class="nav-link" href="#">
-				<i class="fa fa-fw fa fa-copy"></i>
-				<span class="nav-link-text">Students</span>
-			  </a>
-			</li>
-			
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-			  <a class="nav-link" href="#">
-				<i class="fa fa-fw fa-circle-o-notch"></i>
-				<span class="nav-link-text">Internship</span>
-			  </a>
-			</li>
-		
-		<?php }?>
+<aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="#">
+                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <?php 
+		                //only visible to admin 
+		                    if($_SESSION['user_role_id'] == 1){?>
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                        </li>
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-table"></i>Student</a>
+                        </li>
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="far fa-check-square"></i>Intership</a>
+                        </li>
+                        <?php } ?>
+
+                        <?php 
+		//only visible to unit co-ordinator
+		if(($_SESSION['user_role_id'] != 1 && $_SESSION['user_role_id'] != 3)){?>
+                        <li>
+                            <a href="chart.html">
+                                <i class="fas fa-chart-bar"></i>Student</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="#">Internship</a>
+                                </li>
+                                <li>
+                                    <a href="#">Completed</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php } ?> 
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
     
     <?php 
 		//only visible to unit co-ordinator
