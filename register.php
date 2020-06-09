@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mysqli_stmt_store_result($stmt);
 
             if (mysqli_stmt_num_rows($stmt) > 0) {
-                $sid_err = "This studentid -" . $param_username . " is already registered.";
+                $sid_err = "This studentid -" . $param_sid . " is already registered.";
             } else {
                 $param_sid = trim($_POST["studentid"]);
             }
