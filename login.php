@@ -59,7 +59,7 @@ if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="index.php" method="post">
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <label>Email Address</label>
                                     <input class="au-input au-input--full" type="email" name="email" placeholder="18763523@student.westernsydney.edu.au" required>

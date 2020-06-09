@@ -48,8 +48,6 @@
             require_once('layouts/left_sidebar.php'); 
             ?>
 
-            <!-- PAGE CONTAINER-->
-            <div class="page-container">
             <!-- HEADER DESKTOP-->
             <header class="header-desktop">
                 <div class="section__content section__content--p30">
@@ -166,8 +164,6 @@
                 </div>
             </div>
             <!-- END MAIN CONTENT-->
-            </div>
-            <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
