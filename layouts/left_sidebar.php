@@ -1,7 +1,7 @@
 <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="images/456.png" alt="ICTP" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -20,7 +20,7 @@
                         </li>
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Intership</a>
+                                <i class="far fa-check-square"></i>Internship</a>
                         </li>
                         <?php } ?>
 
@@ -43,16 +43,16 @@
                                 <i class="fas fa-table"></i>Profile</a>
                         </li>
                         <li>
+                            <a href="diary.php">
+                                <i class="fas fa-map-marker-alt"></i>My Diary</a>
+                        </li>
+                        <li>
                             <a href="form.html">
                                 <i class="far fa-check-square"></i>Opportunites</a>
                         </li>
                         <li>
                             <a href="calendar.html">
                                 <i class="fas fa-calendar-alt"></i>My Internship</a>
-                        </li>
-                        <li>
-                            <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>My Diary</a>
                         </li>
                         <?php } ?>
                     </ul>

@@ -37,7 +37,7 @@
 		}
 		}
 	}
-?>
+    ?>
 
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
@@ -91,10 +91,6 @@
                                                     <a href="#">
                                                         <i class="zmdi zmdi-settings"></i>Setting</a>
                                                 </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
-                                                </div>
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a href="#">
@@ -114,68 +110,94 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-
-                        <?php 
-		                //only visible to admin 
-		                    if($_SESSION['RoleId'] == 1){?>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h2 class="title-1 m-b-25">Student List</h2>
-                                <div class="table-responsive table--no-card m-b-40">
-                                    <table class="table table-borderless table-striped table-earning">
-                                    <thead>
-                                            <tr>
-												<th>No.</th>
-												<th>SID</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th>Contact</th>
-                                                <th>Specialisation</th>
-                                                <th>Year Enrolled</th>
-                                                <th>Nationality</th>
-                                            </tr>
-                                        </thead>
-										<tbody>
-											<?php
-												//Display Student List
-												$query="select * from Student";
-												$rs = mysqli_query($conn,$query);
-												$count = 0;
-													foreach($rs as $row){
-											?>  
-											<tr>
-												<td><?php echo ++$count;?> </td>
-												<td><?php echo $row["StudentID"]?></td>
-												<td><?php echo $row["FirstName"];?></td>
-												<td><?php echo $row["LastName"];?></td>
-												<td><?php echo $row["EmailAddress"];?></td>
-												<td><?php echo $row["Contact"];?></td>
-												<td><?php echo $row["Specialisation"];?></td>
-                                                <td><?php echo $row["YearEnrolled"];?></td>
-												<td><?php echo $row["Nationality"];?></td>
-											</tr>
-											<?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <?php } ?>
-
-                        <div class="row">
+                    <?php 
+                    //only visible to admin 
+                    if($_SESSION['RoleId'] == 3){?>
+                    <div class="row">
                             <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                <div class="au-card">
+                                    <div>
+                                        <div class="table-button" align="right">
+                                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfile">
+                                                <i class="fas fa-edit"></i>Edit</button>
+                                        </div>
+                                        <h2>Yash Parekh</h2>
+                                        <h4>ICT Engineer</h4>
+                                        <h4>yash@gmail.com</h4>
+                                        <h4>0437564XXXX</h4>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <div class="table-button" align="right">
+                                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalWorkEx">
+                                                <i class="fas fa-edit"></i>Edit</button>
+                                        </div>
+                                        <h2>Work Experience</h2>
+                                        <h3>Software Developer</h3>
+                                        <h3>TGP Global</h3>
+                                        <h4>Sydney NSW</h4>
+                                        <h4>December 2019 to Current</h4>
+                                        <p>Worked with team towards developing PHP Applications and Building Websites using PHP, JavaScript, AJAX, JSON. Involved in architecting internal CRM Dashboard using various tools like Trello, Slack and Git Web application was implemented using Bootstrap, PHP, Node.js and MongoDB. Developed dynamic and interactive UI and UX for various responsive websites. REST API Testing and Documentation using Postman.r</p>
+                                    </div>    
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
+
+                    <?php 
+                    //only visible to admin 
+                    if($_SESSION['RoleId'] == 1){?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title-1 m-b-25">Student List</h2>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>SID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Contact</th>
+                                            <th>Specialisation</th>
+                                            <th>Year Enrolled</th>
+                                            <th>Nationality</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            //Display Student List
+                                            $query="select * from Student";
+                                            $rs = mysqli_query($conn,$query);
+                                            $count = 0;
+                                                foreach($rs as $row){
+                                        ?>  
+                                        <tr>
+                                            <td><?php echo ++$count;?> </td>
+                                            <td><?php echo $row["StudentID"]?></td>
+                                            <td><?php echo $row["FirstName"];?></td>
+                                            <td><?php echo $row["LastName"];?></td>
+                                            <td><?php echo $row["EmailAddress"];?></td>
+                                            <td><?php echo $row["Contact"];?></td>
+                                            <td><?php echo $row["Specialisation"];?></td>
+                                            <td><?php echo $row["YearEnrolled"];?></td>
+                                            <td><?php echo $row["Nationality"];?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <!-- Mdal Code Start -->
                 </div>
             </div>
             <!-- END MAIN CONTENT-->
         </div>
 
     </div>
+    <?php } ?>
 
     <?php require_once('layouts/footer.php'); ?>
