@@ -4,46 +4,70 @@ require_once('inc/config.php');
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
-$fname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
+$fname_err = $email_err = $username_err = $sid_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validate username
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter a username.";
-    } else {
-        // Prepare a select statement
-        $sql = "SELECT userid FROM login WHERE username = ?";
+    
+    // Prepare a select statement
+    $sql = "SELECT userid FROM login WHERE username = ?";
 
-        if ($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+    if ($stmt = mysqli_prepare($conn, $sql)) {
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "s", $param_username);
 
-            // Set parameters
-            $param_username = trim($_POST["username"]);
+        // Set parameters
+        $param_username = trim($_POST["username"]);
 
-            // Attempt to execute the prepared statement
-            if (mysqli_stmt_execute($stmt)) {
-                /* store result */
-                mysqli_stmt_store_result($stmt);
+        // Attempt to execute the prepared statement
+        if (mysqli_stmt_execute($stmt)) {
+            /* store result */
+            mysqli_stmt_store_result($stmt);
 
-                if (mysqli_stmt_num_rows($stmt) > 0) {
-                    $username_err = "This email -" . $param_username . " is already registered.";
-                } else {
-                    $username = trim($_POST["username"]);
-                }
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $username_err = "This email -" . $param_username . " is already registered.";
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                $username = trim($_POST["username"]);
             }
-
-            // Close statement
-            mysqli_stmt_close($stmt);
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
         }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+    
+        // Prepare a select statement
+    $sql5 = "SELECT studentid FROM student WHERE studentid = ?";
+
+    if ($stmt = mysqli_prepare($conn, $sql5)) {
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "s", $param_sid );
+
+        // Set parameters
+        $param_sid = trim($_POST["studentid"]);
+
+        // Attempt to execute the prepared statement
+        if (mysqli_stmt_execute($stmt)) {
+            /* store result */
+            mysqli_stmt_store_result($stmt);
+
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $sid_err = "This studentid -" . $param_username . " is already registered.";
+            } else {
+                $param_sid = trim($_POST["studentid"]);
+            }
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
     }
 
-
     // Check input errors before inserting in database
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+    if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($sid_err)  ) {
 
         // Prepare insert statement
         $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
@@ -88,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Redirect to login page
                 header("location: login.php");
             } else {
-                echo "Something went wrong. Please try again later.";
+                echo "Something went wrong. Please check that you have entered the correct details.";
             }
             mysqli_stmt_close($stmt2);
         }
@@ -155,6 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-group">
                                     <label>Student ID</label>
                                     <input class="au-input au-input--full" type="number" name="studentid" placeholder="19635243" required>
+                                    <?php echo  "<p> <font color=red> $sid_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>First Name</label>
