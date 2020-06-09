@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <div class="form-group">
                                     <label>Student ID</label>
-                                    <input class="au-input au-input--full" type="number" name="studentid" placeholder="19635243" required>
+                                    <input class="au-input au-input--full" type="number" name="studentid" placeholder="12345678" required>
                                     <?php echo  "<p> <font color=red> $sid_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="form-group">
                                     <label>Western Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="username" placeholder="18763523@student.westernsydney.edu.au" required>
+                                    <input class="au-input au-input--full" type="email" name="username" placeholder="12345678@student.westernsydney.edu.au" required>
                                     <?php echo  "<p> <font color=red> $username_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
