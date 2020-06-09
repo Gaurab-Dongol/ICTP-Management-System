@@ -1,3 +1,105 @@
+<?php
+// Include config file
+require_once('inc/config.php');
+ 
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$fname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    // Validate username
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter a username.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT userid FROM login WHERE username = ?";
+        
+        if($stmt = mysqli_prepare($conn, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+                
+                if(mysqli_stmt_num_rows($stmt) > 0 ){
+                    $username_err = "This username is already taken.";
+                } else{
+                    $username = trim($_POST["username"]);
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    
+    // Check input errors before inserting in database
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+        
+        // Prepare insert statement
+        $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
+        // Prepare second insert statement
+        $sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";   
+
+        if($stmt = mysqli_prepare($conn, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_password = trim($_POST["password"]);       
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        }
+        if($stmt2 = mysqli_prepare($conn, $sql2)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt2, "sssssssss", $param_sid, $param_fname,$param_lname,$param_cno,$param_spec, $param_yren, $param_natio, $param_email, $param_uid );    
+            
+            // Set parameters
+            $param_sid = trim($_POST["studentid"]);
+            $param_fname = trim($_POST["firstname"]);  
+            $param_lname = trim($_POST["lastname"]);  
+            $param_cno = trim($_POST["contactno"]);  
+            
+            $param_spec = trim($_POST["specialisation"]);  
+            $param_yren = trim($_POST["yearenrolled"]);  
+            $param_natio = trim($_POST["nationality"]);  
+            $param_email = trim($_POST["username"]);  
+            $param_username = trim($_POST["username"]);  
+            $sql3 = "select userid from login where username = '".$param_username."'";
+		    $rs = mysqli_query($conn,$sql3);         
+            $row = mysqli_fetch_row($rs);
+            $param_uid = $row[0];
+
+            
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt2)){
+            // Redirect to login page
+                header("location: login.php");
+            } else{
+                 echo "Something went wrong. Please try again later.";
+            }
+            mysqli_stmt_close($stmt2);
+        }
+
+    }
+    
+    // Close connection
+    mysqli_close($conn);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,10 +150,10 @@
                         </div>
                         <div class="login-form">
                             <h3><center>Register with Us!</center></h3>
-                            <form action="index.php" method="post">
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <div class="form-group">
                                     <label>Student ID</label>
-                                    <input class="au-input au-input--full" type="text" name="studentid" placeholder="19635243" required>
+                                    <input class="au-input au-input--full" type="number" name="studentid" placeholder="19635243" required>
                                 </div>
                                 <div class="form-group">
                                     <label>First Name</label>
@@ -63,38 +165,42 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Western Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="18763523@student.westernsydney.edu.au" required>
+                                    <input class="au-input au-input--full" type="username" name="username" placeholder="18763523@student.westernsydney.edu.au" required>
+                                    <?php echo $username_err; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Contact Number</label>
-                                    <input class="au-input au-input--full" type="tel" name="conatctno" placeholder="+61436XXXXXX" pattern="[+]{1}[0-9]{11,14}" required>
+                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61436XXXXXX" pattern="[+]{1}[0-9]{11,14}" required>
                                 </div>
                                <div class="form-group">
                                     <label for="select" class=" form-control-label">Specialisation</label>
-                                    <select name="select" id="specialisation" class="form-control">
+                                    <select name="specialisation" id="specialisation" class="form-control">
                                         <option value="0">Please select</option>
-                                        <option value="1">Networking</option>
-                                        <option value="2">Distributed Computing</option>
-                                        <option value="3">Management</option>
-                                        <option value="4">Web and Mobile Computing</option>
-                                        <option value="5">Health Informatics</option>
-                                        <option value="6">Data Analytics</option>
-                                        <option value="7">Digital Futures</option>
-                                        <option value="8">Innovation and Entrepreneurship</option>
+                                        <option value="Networking">Networking</option>
+                                        <option value="Distributed Computing">Distributed Computing</option>
+                                        <option value="Management">Management</option>
+                                        <option value="Web and Mobile Computing">Web and Mobile Computing</option>
+                                        <option value="Health Informatics">Health Informatics</option>
+                                        <option value="Data Analytics">Data Analytics</option>
+                                        <option value="Digital Futures">Digital Futures</option>
+                                        <option value="Innovation and Entrepreneurship">Innovation and Entrepreneurship</option>
                                     </select>            
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Year Enrolled</label>
-                                    <select name="select" id="yearenrolled" class="form-control">
+                                    <select name="yearenrolled" id="yearenrolled" class="form-control">
                                         <option value="0">Please select</option>
-                                        <option value="1">2018</option>
-                                        <option value="2">2019</option>
-                                        <option value="3">2020</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
                                     </select>            
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Nationality</label>
-                                    <select name="select" id="nationality" class="form-control">
+                                    <select name="nationality" id="nationality" class="form-control">
                                        <option value="Afganistan">Afghanistan</option>
                                        <option value="Albania">Albania</option>
                                        <option value="Algeria">Algeria</option>
@@ -345,11 +451,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" id="password" pattern="(?!000)([0-6]\d{2}|7([0-6]\d|7[012]))([ -])?(?!00)\d\d\3(?!0000)\d{4}" placeholder="Password" required>
+                                    <input class="au-input au-input--full" type="password" name="password" id="password"  placeholder="Password" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Re Enter Password</label>
-                                    <input class="au-input au-input--full" type="password" name="repassword" id="repassword" pattern="(?!000)([0-6]\d{2}|7([0-6]\d|7[012]))([ -])?(?!00)\d\d\3(?!0000)\d{4}" placeholder="Re Enter Password" required>
+                                    <input class="au-input au-input--full" type="password" name="repassword" id="repassword"  placeholder="Re Enter Password" required>
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
@@ -412,6 +518,5 @@
     <script src="js/main.js"></script>
 
 </body>
-
 </html>
 <!-- end document-->
