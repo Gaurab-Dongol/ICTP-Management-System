@@ -6,17 +6,18 @@ require_once('layouts/header.php');
 
 if(isset($_POST['login']))
 {
-	if(!empty($_POST['email']) && !empty($_POST['password']))
+	if(!empty($_POST['username']) && !empty($_POST['password']))
 	{
-		$email 		= trim($_POST['email']);
+		$username 	= trim($_POST['username']);
 		$password 	= trim($_POST['password']);
 		
 		//$md5Password = md5($password);
 		
-		$sql = "select * from users where email = '".$email."' and password = '".$password."'";
+		$sql = "select * from login where username = '".$username."' and password = '".$password."'";
 		$rs = mysqli_query($conn,$sql);
-		$getNumRows = mysqli_num_rows($rs);
-		
+        $getNumRows = mysqli_num_rows($rs);
+        //$ID = $_SESSION['RoleID'];
+       
 		if($getNumRows == 1)
 		{
 			$getUserRow = mysqli_fetch_assoc($rs);
@@ -62,7 +63,7 @@ if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="18763523@student.westernsydney.edu.au" required>
+                                    <input class="au-input au-input--full" type="email" name="username" placeholder="18763523@student.westernsydney.edu.au" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>

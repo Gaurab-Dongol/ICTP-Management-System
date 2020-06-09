@@ -13,17 +13,15 @@
 		die(mysqli_error());
 	}
 	
-	
-	
 	function getUserAccessRoleByID($id)
 	{
 		global $conn;
 		
-		$query = "select user_role from user_role where  id = ".$id;
+		$query = "select RoleId from role where RoleId = ".$id;
 	
 		$rs = mysqli_query($conn,$query);
-		$row = mysqli_fetch_assoc($rs);
+        $row = mysqli_fetch_assoc($rs);
 		
-		return $row['user_role'];
+		return $row['RoleId'];
 	}
 ?>

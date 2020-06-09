@@ -1,9 +1,9 @@
     <?php 
 	session_start();
 	
-	if(!isset($_SESSION['id'],$_SESSION['user_role_id']))
+	if(!isset($_SESSION['RoleId']))
 	{
-		header('location:index.php?lmsg=true');
+		header('location:login.php?lmsg=true');
 		exit;
 	}		
 
@@ -114,6 +114,10 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+
+                        <?php 
+		                //only visible to admin 
+		                    if($_SESSION['RoleId'] == 1){?>
                         <div class="row">
                             <div class="col-lg-12">
                                 <h2 class="title-1 m-b-25">Student List</h2>
@@ -128,6 +132,8 @@
                                                 <th>Email</th>
                                                 <th>Contact</th>
                                                 <th>Specialisation</th>
+                                                <th>Year Enrolled</th>
+                                                <th>Nationality</th>
                                             </tr>
                                         </thead>
 										<tbody>
@@ -140,12 +146,14 @@
 											?>  
 											<tr>
 												<td><?php echo ++$count;?> </td>
-												<td><?php echo $row["SID"]?></td>
-												<td><?php echo $row["First_Name"];?></td>
-												<td><?php echo $row["Last_Name"];?></td>
-												<td><?php echo $row["Email"];?></td>
+												<td><?php echo $row["StudentID"]?></td>
+												<td><?php echo $row["FirstName"];?></td>
+												<td><?php echo $row["LastName"];?></td>
+												<td><?php echo $row["EmailAddress"];?></td>
 												<td><?php echo $row["Contact"];?></td>
 												<td><?php echo $row["Specialisation"];?></td>
+                                                <td><?php echo $row["YearEnrolled"];?></td>
+												<td><?php echo $row["Nationality"];?></td>
 											</tr>
 											<?php } ?>
                                         </tbody>
@@ -153,6 +161,8 @@
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">

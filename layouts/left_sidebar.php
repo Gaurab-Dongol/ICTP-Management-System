@@ -9,7 +9,7 @@
                     <ul class="list-unstyled navbar__list">
                     <?php 
 		                //only visible to admin 
-		                    if($_SESSION['user_role_id'] == 1){?>
+		                    if($_SESSION['RoleId'] == 1){?>
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
@@ -26,7 +26,7 @@
 
                         <?php 
 		                    //only visible to unit co-ordinator
-		                    if(($_SESSION['user_role_id'] != 1 && $_SESSION['user_role_id'] != 3)){
+		                    if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 3)){
                         ?>
                         <li>
                             <a href="chart.html">
@@ -36,7 +36,7 @@
 
                         <?php 
 		                    //only visible to student
-                        if(($_SESSION['user_role_id'] != 1 && $_SESSION['user_role_id'] != 2))
+                        if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 2))
                         {?>
                         <li>
                             <a href="table.html">
