@@ -16,7 +16,6 @@ if(isset($_POST['login']))
 		$sql = "select * from login where username = '".$username."' and password = '".$password."'";
 		$rs = mysqli_query($conn,$sql);
         $getNumRows = mysqli_num_rows($rs);
-        //$ID = $_SESSION['RoleID'];
        
 		if($getNumRows == 1)
 		{
