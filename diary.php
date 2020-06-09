@@ -48,16 +48,16 @@
                         </div>
                         <div class="diary-form">
                         <h3><center>Diary</center></h3>
-                            <form action="index.php" method="post">
+                            <form action="dashboard.php" method="post">
                                 <div class="form-group">
                                     <label>Enter start Date:</label>
-                                    <input class="au-input au-input--full" type="date" name="start">
+                                    <input class="au-input au-input--full" type="date" name="start" required>
                                 
                                 </div>
                                 <div class="form-group">
                                 
                                     <label>Enter end Date:</label>
-                                    <input class="au-input au-input--full" type="date" name="start">
+                                    <input class="au-input au-input--full" type="date" name="end" required>
                                 
                                 </div>
                                 <?php
@@ -105,9 +105,9 @@
                                     
                                     <table>
                                     
-                                    <tr><td></td><td></td></tr>
+                                    
                                     <tr>
-
+                                    
                                     <td><?php echo createHours('start_hour',1); ?></td>
 
                                     <td><?php echo createMinutes('start_minute',1); ?></td>
@@ -120,15 +120,15 @@
                                     </div>
                                 <div class="form-group">
                                     <label>Task Description</label>
-                                    <input class="au-input au-input--full" type="text" name="Task description" >
+                                    <input class="au-input au-input--full" type="text" name="Task description" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Manager Remarks</label>
-                                    <input class="au-input au-input--full" type="text" name="manager remarks" >
+                                    <input class="au-input au-input--full" type="text" name="manager remarks" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Unit coordinator Remarks</label>
-                                    <input class="au-input au-input--full" type="text" name="unit co remarks" >
+                                    <input class="au-input au-input--full" type="text" name="unit co remarks" required>
                                 </div>
                                 
                               
