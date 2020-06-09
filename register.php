@@ -70,9 +70,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $param_fname = trim($_POST["firstname"]);  
             $param_lname = trim($_POST["lastname"]);  
             $param_cno = trim($_POST["contactno"]);  
-            $param_spec = trim($_POST["password"]);  
-            $param_yren = trim($_POST["password"]);  
-            $param_natio = trim($_POST["password"]);  
+            
+            $param_spec = trim($_POST["specialisation"]);  
+            $param_yren = trim($_POST["yearenrolled"]);  
+            $param_natio = trim($_POST["nationality"]);  
             $param_email = trim($_POST["username"]);  
             $param_username = trim($_POST["username"]);  
             $sql3 = "select userid from login where username = '".$param_username."'";
@@ -173,30 +174,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 </div>
                                <div class="form-group">
                                     <label for="select" class=" form-control-label">Specialisation</label>
-                                    <select name="select" id="specialisation" class="form-control">
+                                    <select name="specialisation" id="specialisation" class="form-control">
                                         <option value="0">Please select</option>
-                                        <option value="1">Networking</option>
-                                        <option value="2">Distributed Computing</option>
-                                        <option value="3">Management</option>
-                                        <option value="4">Web and Mobile Computing</option>
-                                        <option value="5">Health Informatics</option>
-                                        <option value="6">Data Analytics</option>
-                                        <option value="7">Digital Futures</option>
-                                        <option value="8">Innovation and Entrepreneurship</option>
+                                        <option value="Networking">Networking</option>
+                                        <option value="Distributed Computing">Distributed Computing</option>
+                                        <option value="Management">Management</option>
+                                        <option value="Web and Mobile Computing">Web and Mobile Computing</option>
+                                        <option value="Health Informatics">Health Informatics</option>
+                                        <option value="Data Analytics">Data Analytics</option>
+                                        <option value="Digital Futures">Digital Futures</option>
+                                        <option value="Innovation and Entrepreneurship">Innovation and Entrepreneurship</option>
                                     </select>            
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Year Enrolled</label>
-                                    <select name="select" id="yearenrolled" class="form-control">
+                                    <select name="yearenrolled" id="yearenrolled" class="form-control">
                                         <option value="0">Please select</option>
-                                        <option value="1">2018</option>
-                                        <option value="2">2019</option>
-                                        <option value="3">2020</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
                                     </select>            
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Nationality</label>
-                                    <select name="select" id="nationality" class="form-control">
+                                    <select name="nationality" id="nationality" class="form-control">
                                        <option value="Afganistan">Afghanistan</option>
                                        <option value="Albania">Albania</option>
                                        <option value="Algeria">Algeria</option>
