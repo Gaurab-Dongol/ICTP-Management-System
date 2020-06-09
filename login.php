@@ -1,39 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+session_start();
 
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+require_once('inc/config.php');
+require_once('layouts/header.php'); 
 
-    <!-- Title Page-->
-    <title>Login</title>
+if(isset($_POST['login']))
+{
+	if(!empty($_POST['email']) && !empty($_POST['password']))
+	{
+		$email 		= trim($_POST['email']);
+		$password 	= trim($_POST['password']);
+		
+		//$md5Password = md5($password);
+		
+		$sql = "select * from users where email = '".$email."' and password = '".$password."'";
+		$rs = mysqli_query($conn,$sql);
+		$getNumRows = mysqli_num_rows($rs);
+		
+		if($getNumRows == 1)
+		{
+			$getUserRow = mysqli_fetch_assoc($rs);
+			unset($getUserRow['password']);
+			
+			$_SESSION = $getUserRow;
+						
+			header("location:dashboard.php");
+			exit;
+		}
+		else
+		{
+			$errorMsg = "Wrong email or password";
+		}
+	}
+}
 
-    <!-- Fontfaces CSS-->
-    <link href="css/font-face.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+if(isset($_GET['logout']) && $_GET['logout'] == true)
+{
+	session_destroy();
+	header("location:login.php");
+	exit;
+}
 
-    <!-- Bootstrap CSS-->
-    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-
-    <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="css/theme.css" rel="stylesheet" media="all">
-
-</head>
+if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
+{
+	$errorMsg = "Login required to access dashboard";
+}
+?>
 
 <body class="animsition">
     <div class="page-wrapper">
@@ -64,7 +76,7 @@
                                         <a href="#">Forgotten Password?</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" action="index.php" type="submit">sign in</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" name="login">sign in</button>
                                 
                             </form>
                             <div class="register-link">
@@ -81,31 +93,4 @@
 
     </div>
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
-
-    <!-- Main JS-->
-    <script src="js/main.js"></script>
-
-</body>
-
-</html>
-<!-- end document-->
+    <?php require_once('layouts/footer.php'); ?>
