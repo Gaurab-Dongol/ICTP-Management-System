@@ -34,13 +34,6 @@ if(isset($_POST['login']))
 	}
 }
 
-if(isset($_GET['logout']) && $_GET['logout'] == true)
-{
-	session_destroy();
-	header("location:login.php");
-	exit;
-}
-
 if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
 {
 	$errorMsg = "Login required to access dashboard";
@@ -82,7 +75,7 @@ if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
                             <div class="register-link">
                                 <p>
                                     Don't you have account?
-                                    <a href="#">Sign Up Here</a>
+                                    <a href="register.php">Sign Up Here</a>
                                 </p>
                             </div>
                         </div>

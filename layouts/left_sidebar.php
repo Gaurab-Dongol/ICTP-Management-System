@@ -29,7 +29,7 @@
 		                    if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 3)){
                         ?>
                         <li>
-                            <a href="chart.html">
+                            <a href="#">
                                 <i class="fas fa-chart-bar"></i>Internship</a>
                         </li>
                         <?php } ?>
@@ -39,19 +39,19 @@
                         if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 2))
                         {?>
                         <li>
-                            <a href="table.html">
+                            <a href="dashboard.php">
                                 <i class="fas fa-table"></i>Profile</a>
                         </li>
                         <li>
-                            <a href="diary.php">
+                            <a href="add_diary.php">
                                 <i class="fas fa-map-marker-alt"></i>My Diary</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="#">
                                 <i class="far fa-check-square"></i>Opportunites</a>
                         </li>
                         <li>
-                            <a href="calendar.html">
+                            <a href="#">
                                 <i class="fas fa-calendar-alt"></i>My Internship</a>
                         </li>
                         <?php } ?>
