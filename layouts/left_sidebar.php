@@ -47,7 +47,7 @@
                                 <i class="fas fa-map-marker-alt"></i>My Diary</a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="opportunities.php">
                                 <i class="far fa-check-square"></i>Opportunites</a>
                         </li>
                         <li>

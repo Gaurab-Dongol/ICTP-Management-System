@@ -35,6 +35,22 @@
 
 </head>
 
+<?php 
+session_start();
+	
+if(!isset($_SESSION['RoleId']))
+{
+    header('location:login.php?lmsg=true');
+    exit;
+}		
+
+require_once('inc/config.php');
+// Attempt insert query execution
+$sql = "INSERT INTO diary (InternshipId, StudentID, DateSubmitted,TotalHours,TaskDesc,VersionNO,StudentComment,ManagerRemarks,UCRemarks) VALUES
+            ($InternshipId, $StudentID, $DateSubmitted,$TotalHours,$TaskDesc,$VersionNO,$StudentComment,$ManagerRemarks,$UCRemarks)";
+mysqli_query($conn, $query);
+?>
+
 <body class="animsition">
     <div class="page-wrapper">
         <div>
@@ -48,8 +64,8 @@
                         </div>
                         <div class="diary-form">
                         <h3><center>Diary</center></h3>
-                            <form action="dashboard.php" method="post">
-                                <div class="form-group">
+                            <form action="" method="post">
+                                <!--<div class="form-group">
                                     <label>Enter start Date:</label>
                                     <input class="au-input au-input--full" type="date" name="start" required>
                                 
@@ -59,7 +75,9 @@
                                     <label>Enter end Date:</label>
                                     <input class="au-input au-input--full" type="date" name="end" required>
                                 
-                                </div>
+                                </div>-->
+
+                                
                                 <?php
                                 function createHours($id='hours_select', $selected=null)
                                 
@@ -101,12 +119,16 @@
     ?>
 
                                     <div class="form-group">
+                                    <div class="form-group">
+                                    <label>Task Description</label>
+                                    <input class="au-input au-input--full" type="text" name="Task description" required>
+                                </div>
                                     <label>Enter Numbers of Hour</label>
-                                    
+                                    <input class="au-input au-input--full" type="text" name="Enter Numbers of hours" required>
                                     <table>
                                     
                                     
-                                    <tr>
+                                    <!--<tr>
                                     
                                     <td><?php echo createHours('start_hour',1); ?></td>
 
@@ -114,22 +136,19 @@
 
 
 
-                                    </tr>
+                                    </tr>-->
 
                                     </table>
                                     </div>
-                                <div class="form-group">
-                                    <label>Task Description</label>
-                                    <input class="au-input au-input--full" type="text" name="Task description" required>
-                                </div>
-                                <div class="form-group">
+                                
+                                <!--<div class="form-group">
                                     <label>Manager Remarks</label>
                                     <input class="au-input au-input--full" type="text" name="manager remarks" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Unit coordinator Remarks</label>
                                     <input class="au-input au-input--full" type="text" name="unit co remarks" required>
-                                </div>
+                                </div>-->
                                 
                               
                                 

@@ -64,10 +64,19 @@
                                             <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfile">
                                                 <i class="fas fa-edit"></i>Edit</button>
                                         </div>
-                                        <h2>Yash Parekh</h2>
-                                        <h4>ICT Engineer</h4>
-                                        <h4>yash@gmail.com</h4>
-                                        <h4>0437564XXXX</h4>
+                                        <?php
+                                            //Display Student List
+                                            $query="select * from student where StudentID='19513498'";
+                                            $rs = mysqli_query($conn,$query);
+                                            //$count = 0;
+                                                foreach($rs as $row){
+                                        ?> 
+                                        <h2><?php echo $row["FirstName"]?></h2>
+                                        <h4><?php echo $row["Specialisation"]?></h4>
+                                        <h4><?php echo $row["EmailAddress"]?></h4>
+                                        <h4><?php echo $row["ContactNo"]?></h4>
+                                        <h4><?php echo $row["Nationality"]?></h4>
+                                                <?php } ?>
                                     </div>
                                     <hr>
                                     <div>
@@ -87,7 +96,118 @@
                         </div>
                     </div>
                     <?php } ?>
+                    <!-- Mdal Code Start -->
+           	<div id="myModalProfile" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+              <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Profile</strong>
+                          </div>
+                          <div class="card-body card-block">
+                            <div class="form-group">
+                              <label for="qualification" class=" form-control-label">Name</label>
+                              <input type="text" id="qualification" placeholder="Enter your Full Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="email" class=" form-control-label">Email</label>
+                              <input type="text" id="email" placeholder="17364724@student.westernstydney.edu.au" class="form-control">
+                            </div>
+                            <div class="form-group">
+                             <label for="contact" class=" form-control-label">Contact No</label>
+                             <input type="tel" id="contact" placeholder="Enter Contact No" class="form-control">
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Code Finish-->
 
+            <!-- Mdal Code Start -->
+            <div id="myModalWorkEx" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+              <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Work Experience</strong>
+                          </div>
+                          <div class="card-body card-block">
+                            <div class="form-group">
+                              <label for="designation" class=" form-control-label">Designation</label>
+                              <input type="text" id="designation" placeholder="Enter your Designation" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="email" class=" form-control-label">Employer</label>
+                              <input type="text" id="email" placeholder="Company Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                             <label for="location" class=" form-control-label">Location</label>
+                             <input type="text" id="location" placeholder="Enter Location" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                             <label for="duration" class=" form-control-label">Duration</label>
+                                <div class="col col-md-3">
+                                <label for="select" class=" form-control-label">Years</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                  <select name="selectYears" id="selectYears" class="form-control">
+                                    <option value="0">Less then one year</option>
+                                    <option value="1">1 Year</option>
+                                    <option value="2">2 Years</option>
+                                    <option value="3">3 Years</option>
+                                  </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                             <label for="duration" class=" form-control-label">Duration</label>
+                                <div class="col col-md-3">
+                                <label for="select" class=" form-control-label">Years</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                  <select name="selectYears" id="selectYears" class="form-control">
+                                    <option value="0">Less then one year</option>
+                                    <option value="1">1 Year</option>
+                                    <option value="2">2 Years</option>
+                                    <option value="3">3 Years</option>
+                                  </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                             <label for="discription" class=" form-control-label">Description</label>
+                             <textarea rows="4" cols="50" id="discription" placeholder="Description" class="form-control"> </textarea>
+                            </div>
+
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Code Finish-->
                     <?php 
                     //only visible to admin 
                     if($_SESSION['RoleId'] == 1){?>

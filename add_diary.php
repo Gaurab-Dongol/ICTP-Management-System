@@ -52,34 +52,31 @@
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
-                                                <th>name</th>
-                                                <th>email</th>
-                                                <th>description</th>
-                                                <th>date</th>
+                                                <th>Version No</th>
+                                                <th>Total hours</th>
+                                                <th>Task Description</th>
+                                                <th>Date submitted</th>
+                                                <!--<th>Manager Remarks</th>
                                                 <th>status</th>
                                                 <th>price</th>
-                                                <th></th>
+                                                <th></th>-->
                                             </tr>
                                         </thead>
                                         <?php
                                             //Display Student List
-                                            $query="select * from diary";
+                                            $query='select * from diary';
                                             $rs = mysqli_query($conn,$query);
                                             //$count = 0;
                                                 foreach($rs as $row){
                                         ?> 
                                         <tbody>
                                             <tr class="tr-shadow">
-                                                <td>Lori Lynch</td>
+                                                <td><?php echo $row["VersionNO"]?></td>
                                                 <td>
-                                                    <span class="block-email">lori@example.com</span>
+                                                    <span class="block-email"><?php echo $row["TotalHours"]?></span>
                                                 </td>
-                                                <td class="desc">Samsung S8 Black</td>
-                                                <td>2018-09-27 02:12</td>
-                                                <td>
-                                                    <span class="status--process">Processed</span>
-                                                </td>
-                                                <td>$679.00</td>
+                                                <td class="desc"><?php echo $row["TaskDesc"]?></td>
+                                                <td class="desc"><?php echo $row["DateSubmitted"]?></td>
                                                 <td>
                                                     <div class="table-data-feature">
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
