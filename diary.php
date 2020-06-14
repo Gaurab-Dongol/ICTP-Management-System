@@ -31,14 +31,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             //$param_InternshipId = trim($_POST[""])
             //$param_InternshipId = '888';
 
-            $sql1a = "select internshipid from student_intern where studentid = 222 ";
+            $UID = $_GET['UID'];
+            $SID = "select studentid from student where USERID='".$UID."'";
+            $user = mysqli_query($conn, $SID);
+            $row = mysqli_fetch_row($user);
+
+            $sql1a = "select internshipid from student_intern where studentid = '".$SID."'";
             $rs = mysqli_query($conn, $sql1a);
             $row = mysqli_fetch_row($rs);
             $param_InternshipId = $row[0];
 
             //$param_sid = trim($_POST[""]);
             //$param_sid = '222';
-            $sql2a = "select studentid from student_intern where studentid = 222 ";
+            $sql2a = "select studentid from student_intern where studentid = '".$SID."'";
             $rs = mysqli_query($conn, $sql2a);
             $row = mysqli_fetch_row($rs);
             $param_sid = $row[0];
@@ -49,7 +54,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to add page
-                header("location: add_diary.php");
+                header("location: add_diary.php?UID=$UID");
             } else{
                 echo "not working";
             }
@@ -132,7 +137,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <input class="au-input au-input--full" type="text" name="TaskDes" required>
                                 </div>
                                     <label>Enter Numbers of Hour</label>
-                                    <input class="au-input au-input--full" type="text" name="TotalHours" required>
+                                    <input class="au-input au-input--full" type="number" name="NoHours" required>
                                     <table>
                                     
                                     
@@ -148,7 +153,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                                     </table>
                                     </div>
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                     <label>Enter start Date:</label>
                                     <input class="au-input au-input--full" type="date" name="start" required>
                                 
@@ -166,14 +171,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <div class="form-group">
                                     <label>Unit coordinator Remarks</label>
                                     <input class="au-input au-input--full" type="text" name="unit co remarks" required>
-                                </div>
-                                
-                              
-                                
-                                
-                               
-                                
-                                
+                                </div>-->
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
                                 
                             </form>
