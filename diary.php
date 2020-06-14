@@ -46,9 +46,63 @@ if(!isset($_SESSION['RoleId']))
 
 require_once('inc/config.php');
 // Attempt insert query execution
-$sql = "INSERT INTO diary (InternshipId, StudentID, DateSubmitted,TotalHours,TaskDesc,VersionNO,StudentComment,ManagerRemarks,UCRemarks) VALUES
-            ($InternshipId, $StudentID, $DateSubmitted,$TotalHours,$TaskDesc,$VersionNO,$StudentComment,$ManagerRemarks,$UCRemarks)";
-mysqli_query($conn, $query);
+ 
+// Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$fname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Check input errors before inserting in database
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+        
+        // Prepare an insert statement
+        $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc  ) VALUES (?,?,?,?)";
+         
+        if($stmt = mysqli_prepare($conn, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ssss", $param_InternshipId, $param_sid, $param_totalHour, $param_taskDesc);
+            
+            // Set parameters
+            //$param_InternshipId = trim($_POST[""])
+            //$param_InternshipId = '888';
+
+            $sql1a = "select internshipid from student_intern where studentid = 222 ";
+            $rs = mysqli_query($conn, $sql1a);
+            $row = mysqli_fetch_row($rs);
+            $param_InternshipId = $row[0];
+
+            //$param_sid = trim($_POST[""]);
+            //$param_sid = '222';
+            $sql2a = "select studentid from student_intern where studentid = 222 ";
+            $rs = mysqli_query($conn, $sql2a);
+            $row = mysqli_fetch_row($rs);
+            $param_sid = $row[0];
+
+            $param_totalHour = trim($_POST["NoHours"]);
+            $param_taskDesc = trim($_POST["TaskDesc"]);
+            // Attempt to execute the prepared statement
+
+            if(mysqli_stmt_execute($stmt)){
+                // Redirect to add page
+                header("location: add_diary.php");
+            } else{
+                echo "not working";
+            }
+
+            // Close statement
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+    // Close connection
+    mysqli_close($conn);
+}
+?>
+
+
+
 ?>
 
 <body class="animsition">
@@ -121,10 +175,10 @@ mysqli_query($conn, $query);
                                     <div class="form-group">
                                     <div class="form-group">
                                     <label>Task Description</label>
-                                    <input class="au-input au-input--full" type="text" name="Task description" required>
+                                    <input class="au-input au-input--full" type="text" name="TaskDesc" required>
                                 </div>
                                     <label>Enter Numbers of Hour</label>
-                                    <input class="au-input au-input--full" type="text" name="Enter Numbers of hours" required>
+                                    <input class="au-input au-input--full" type="number" name="NoHours" required>
                                     <table>
                                     
                                     
