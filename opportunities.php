@@ -46,22 +46,29 @@
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
-                                                <th>position</th>
+                                                <th>Position</th>
                                                 <th>Company</th>
-                                                <th>email</th>
-                                                <th>description</th>
-                                                <th>closes</th>
+                                                <th>Job Role</th>
+                                                <th>Description</th>
+                                                <th>Closes</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
+                                        <?php
+                                            //Display Student List
+                                            $query='select * from internship';
+                                            $rs = mysqli_query($conn,$query);
+                                            //$count = 0;
+                                                foreach($rs as $row){
+                                        ?> 
                                         <tbody>
                                             <tr class="tr-shadow">
-                                                <td>Junior Web Developer</td>
+                                                <td><?php echo $row["JobRole"]?></td>
                                                 <td>Web World Inc</td>
                                                 <td>
                                                     <span class="block-email">lori@webworld.com.au</span>
                                                 </td>
-                                                <td class="desc">We are looking for a talented and creative content creator who specialises in social media. The right candidate would ideally be an influencer who is a passionate foodie and cafe lover. $30 / Hour. Hornsby, NSW. Casual position.</td>
+                                                <td class="desc"><?php echo $row["Description"]?></td>
                                                 <td>2020-06-17</td>
                                                 <td>
                                                     <div class="table-data-feature">
@@ -71,58 +78,8 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr class="spacer"></tr>
-                                            <tr class="tr-shadow">
-                                                <td>iOS Developer</td>
-                                                <td>TGS Global</td>
-                                                <td>
-                                                    <span class="block-email">john@tgs.com</span>
-                                                </td>
-                                                <td class="desc">Looking for a iOS Developer - React.js for an AI project. Part-time opportunity. Melbourne, VIC location. $26.00 per hour.</td>
-                                                <td>2020-05-29</td>
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="spacer"></tr>
-                                            <tr class="tr-shadow">
-                                                <td>Graduate Program</td>
-                                                <td>Clean Energy Regulator</td>
-                                                <td>
-                                                    <span class="block-email">lyn@cer.com</span>
-                                                </td>
-                                                <td class="desc">iThe Clean Energy Regulator Graduate Development Program is seeking highly motivated graduates for their 2021 Graduate Development Program.</td>
-                                                <td>2018-09-25</td>
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="spacer"></tr>
-                                            <tr class="tr-shadow">
-                                                <td>ICT Intern</td>
-                                                <td>Western Sydney University</td>
-                                                <td>
-                                                    <span class="block-email">jenny@wsu.edu.au</span>
-                                                </td>
-                                                <td class="desc">WSU is looking for up to three students to join them for a three-month internship as Computer Application Developers. The internship will be based entirely from home, and will focus the development of computer applications. Unpaid Internship. 'Working from Home' based opportunity.</td>
-                                                <td>2018-09-24</td>
-                                                <td>
-                                                    <div class="table-data-feature">
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button
-                                                    </div>
-                                                </td>
-                                            </tr>
                                         </tbody>
+                                                <?php } ?>
                                     </table>
                                 </div>
                                 <!-- END DATA TABLE -->

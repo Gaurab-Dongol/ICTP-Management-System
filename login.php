@@ -24,7 +24,7 @@ if(isset($_POST['login']))
 			
 			$_SESSION = $getUserRow;
 						
-			header("location:dashboard.php");
+			header("location:dashboard.php?UID=".$getUserRow['USERID']);
 			exit;
 		}
 		else

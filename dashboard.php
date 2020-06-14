@@ -1,4 +1,4 @@
-    <?php 
+<?php 
 	session_start();
 	
 	if(!isset($_SESSION['RoleId']))
@@ -97,7 +97,63 @@
                     </div>
                     <?php } ?>
                     <!-- Mdal Code Start -->
-           	<div id="myModalProfile" class="modal fade" role="dialog">
+           	
+            <!-- Modal Code Finish-->
+                    <?php 
+                    //only visible to admin 
+                    if($_SESSION['RoleId'] == 1){?>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title-1 m-b-25">Student List</h2>
+                            <div class="table-responsive table--no-card m-b-40">
+                                <table class="table table-borderless table-striped table-earning">
+                                <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>SID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Contact</th>
+                                            <th>Specialisation</th>
+                                            <th>Year Enrolled</th>
+                                            <th>Nationality</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            //Display Student List
+                                            $query="select * from Student";
+                                            $rs = mysqli_query($conn,$query);
+                                            $count = 0;
+                                                foreach($rs as $row){
+                                        ?>  
+                                        <tr>
+                                            <td><?php echo ++$count;?> </td>
+                                            <td><?php echo $row["StudentID"]?></td>
+                                            <td><?php echo $row["FirstName"];?></td>
+                                            <td><?php echo $row["LastName"];?></td>
+                                            <td><?php echo $row["EmailAddress"];?></td>
+                                            <td><?php echo $row["ContactNo"];?></td>
+                                            <td><?php echo $row["Specialisation"];?></td>
+                                            <td><?php echo $row["YearEnrolled"];?></td>
+                                            <td><?php echo $row["Nationality"];?></td>
+                                        </tr>
+                                        <?php }?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                      </div>
+                        <?php } ?>
+                    </div>
+                    <!-- Mdal Code Start -->
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+    
+            <div id="myModalProfile" class="modal fade" role="dialog">
               <div class="modal-dialog">
               <!-- Modal content-->
                 <div class="modal-content">
@@ -207,61 +263,4 @@
                 </div>
               </div>
             </div>
-            <!-- Modal Code Finish-->
-                    <?php 
-                    //only visible to admin 
-                    if($_SESSION['RoleId'] == 1){?>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h2 class="title-1 m-b-25">Student List</h2>
-                            <div class="table-responsive table--no-card m-b-40">
-                                <table class="table table-borderless table-striped table-earning">
-                                <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>SID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Email</th>
-                                            <th>Contact</th>
-                                            <th>Specialisation</th>
-                                            <th>Year Enrolled</th>
-                                            <th>Nationality</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                            //Display Student List
-                                            $query="select * from Student";
-                                            $rs = mysqli_query($conn,$query);
-                                            $count = 0;
-                                                foreach($rs as $row){
-                                        ?>  
-                                        <tr>
-                                            <td><?php echo ++$count;?> </td>
-                                            <td><?php echo $row["StudentID"]?></td>
-                                            <td><?php echo $row["FirstName"];?></td>
-                                            <td><?php echo $row["LastName"];?></td>
-                                            <td><?php echo $row["EmailAddress"];?></td>
-                                            <td><?php echo $row["ContactNo"];?></td>
-                                            <td><?php echo $row["Specialisation"];?></td>
-                                            <td><?php echo $row["YearEnrolled"];?></td>
-                                            <td><?php echo $row["Nationality"];?></td>
-                                        </tr>
-                                        <?php }?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <?php } ?>
-                    </div>
-                    <!-- Mdal Code Start -->
-                    </div>
-                </div>
-            </div>
-            <!-- END MAIN CONTENT-->
-        </div>
-    </div>
-    
-
     <?php require_once('layouts/footer.php'); ?>

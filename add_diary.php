@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="table-data__tool-right">
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i><a href="diary.php">add item</a></button>
+                                            <i class="zmdi zmdi-plus"></i><a href="diary.php?UID=<?php echo $_GET['UID']?>">add item</a></button>
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                                             <div class="dropDownSelect2"></div>
                                         </div>
@@ -64,7 +64,9 @@
                                         </thead>
                                         <?php
                                             //Display Student List
-                                            $query='select * from diary';
+                                            $UID = $_GET['UID'];
+                                            $query= "SELECT student.StudentID, Diary.* FROM student INNER JOIN Diary ON student.StudentID=Diary.StudentID WHERE student.USERID='$UID'";
+                                            //$query='select * from diary';
                                             $rs = mysqli_query($conn,$query);
                                             //$count = 0;
                                                 foreach($rs as $row){

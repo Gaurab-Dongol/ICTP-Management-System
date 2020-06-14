@@ -39,15 +39,15 @@
                         if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 2))
                         {?>
                         <li>
-                            <a href="dashboard.php">
+                            <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-table"></i>Profile</a>
                         </li>
                         <li>
-                            <a href="add_diary.php">
+                            <a href="add_diary.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-map-marker-alt"></i>My Diary</a>
                         </li>
                         <li>
-                            <a href="opportunities.php">
+                            <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="far fa-check-square"></i>Opportunites</a>
                         </li>
                         <li>
