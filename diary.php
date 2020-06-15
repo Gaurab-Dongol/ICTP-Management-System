@@ -14,6 +14,7 @@ require_once('layouts/header.php');
 $username = $password = $confirm_password = "";
 $fname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
  
+$UID = $_GET['UID'];
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -23,18 +24,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an insert statement
         $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc ) VALUES (?,?,?,?)";
          
-        if($stmt = mysqli_prepare($conn, $sql)){
+        if($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssss", $param_InternshipId, $param_sid, $param_totalHour, $param_taskDesc);
             
             // Set parameters
             //$param_InternshipId = trim($_POST[""])
             //$param_InternshipId = '888';
-
-            $UID = $_GET['UID'];
-            $SID = "select studentid from student where USERID='".$UID."'";
-            $user = mysqli_query($conn, $SID);
-            $row = mysqli_fetch_row($user);
+            $sql4 = "select studentid from student where USERID='".$UID."'";
+            $rs = mysqli_query($conn, $sql4);
+            $row = mysqli_fetch_row($rs);
+            $SID = $row[0];
 
             $sql1a = "select internshipid from student_intern where studentid = '".$SID."'";
             $rs = mysqli_query($conn, $sql1a);
@@ -134,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <div class="form-group">
                                     <div class="form-group">
                                     <label>Task Description</label>
-                                    <input class="au-input au-input--full" type="text" name="TaskDes" required>
+                                    <input class="au-input au-input--full" type="text" name="TaskDesc" required>
                                 </div>
                                     <label>Enter Numbers of Hour</label>
                                     <input class="au-input au-input--full" type="number" name="NoHours" required>
