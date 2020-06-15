@@ -135,7 +135,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <div class="form-group">
                                     <div class="form-group">
                                     <label>Task Description</label>
-                                    <input class="au-input au-input--full" type="text" name="TaskDes" required>
+                                    <input class="au-input au-input--full" type="text" name="TaskDesc" required>
                                 </div>
                                     <label>Enter Numbers of Hour</label>
                                     <input class="au-input au-input--full" type="number" name="NoHours" required>
