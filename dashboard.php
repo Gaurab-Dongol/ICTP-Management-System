@@ -40,16 +40,22 @@
     
     if(isset($_POST["Update"]))
     {
-        $update = "UPDATE student SET 'FirstName'=".$_POST['firstname'].",'LastName'=".$_POST['lastname'].",'EmailAddress'=".$_POST['Email'].",'ContactNo'=".$_POST['ContactNo'].",'Specialisation'=".$_POST['Specialisation']." where USERID='".$UID."'";
-        $rs = mysqli_query($conn, $update);
-        $row = mysqli_fetch_row($rs);
+        $UID = $_GET['UID'];
+        $firstname = $_POST['firstname'];
+        $lastName = $_POST['lastName'];
+        $Email = $_POST['Email'];
+        $ContactNo = $_POST['ContactNo'];
+        $Specialisation = $_POST['Specialisation'];
+        $Nationality = $_POST['Nationality'];
+        $update = "UPDATE student SET FirstName='$firstname',LastName='$lastName',EmailAddress='$Email',ContactNo='$ContactNo',Specialisation='$Specialisation',Nationality='$Nationality' where USERID='".$UID."'";
+        mysqli_query($conn, $update);
     }
 
     //Fetch data of student from database for input type
     $UID = $_GET['UID'];
     $fetch = "SELECT * from student where USERID='".$UID."'";
     $s = mysqli_query($conn, $fetch);
-    $r = mysqli_fetch_row($s);
+    $r = mysqli_fetch_array($s);
     ?>
 
     <div class="page-wrapper">
@@ -188,7 +194,7 @@
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Last Name</label>
-                              <input type="text" value="<?php echo $r["LastName"];?>" class="form-control" name="lastname">
+                              <input type="text" value="<?php echo $r["LastName"];?>" class="form-control" name="lastName">
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Specialisation</label>
@@ -200,12 +206,12 @@
                             </div>
                             <div class="form-group">
                              <label class=" form-control-label">Contact No</label>
-                             <input type="tel" value="<?php echo $r["ContactNo"];?>" class="form-control" name="ContactNo">
+                             <input type="text" value="<?php echo $r["ContactNo"];?>" class="form-control" name="ContactNo">
                             </div>
                             
                             <div class="form-group">
                              <label class=" form-control-label">Nationality</label>
-                             <input type="tel" value="<?php echo $r["Nationality"];?>" class="form-control" name="Nationality">
+                             <input type="text" value="<?php echo $r["Nationality"];?>" class="form-control" name="Nationality">
                             </div>
                           </div>
                       </div>
