@@ -36,7 +36,20 @@
 			echo "<script>alert('Import done');</script>";
 		}
 		}
-	}
+    }
+    
+    if(isset($_POST["Update"]))
+    {
+        $update = "UPDATE student SET 'FirstName'=".$_POST['firstname'].",'LastName'=".$_POST['lastname'].",'EmailAddress'=".$_POST['Email'].",'ContactNo'=".$_POST['ContactNo'].",'Specialisation'=".$_POST['Specialisation']." where USERID='".$UID."'";
+        $rs = mysqli_query($conn, $update);
+        $row = mysqli_fetch_row($rs);
+    }
+
+    //Fetch data of student from database for input type
+    $UID = $_GET['UID'];
+    $fetch = "SELECT * from student where USERID='".$UID."'";
+    $s = mysqli_query($conn, $fetch);
+    $r = mysqli_fetch_row($s);
     ?>
 
     <div class="page-wrapper">
@@ -72,7 +85,7 @@
                                             //$count = 0;
                                                 foreach($rs as $row){
                                         ?> 
-                                        <h2><?php echo $row["FirstName"]?></h2>
+                                        <h2><?php echo $row["FirstName"]." ".$row["LastName"]?></h2>
                                         <h4><?php echo $row["Specialisation"]?></h4>
                                         <h4><?php echo $row["EmailAddress"]?></h4>
                                         <h4><?php echo $row["ContactNo"]?></h4>
@@ -164,31 +177,47 @@
                   <div class="modal-body">
                     <div class="card">
                         <div class="card-header">
+                        
                             <strong>Profile</strong>
                           </div>
+                          <form action="" method="POST">
                           <div class="card-body card-block">
                             <div class="form-group">
-                              <label for="qualification" class=" form-control-label">Name</label>
-                              <input type="text" id="qualification" placeholder="Enter your Full Name" class="form-control">
+                              <label class=" form-control-label">First Name</label>
+                              <input type="text" value="<?php echo $r["FirstName"];?>"class="form-control" name="firstname">
                             </div>
                             <div class="form-group">
-                              <label for="email" class=" form-control-label">Email</label>
-                              <input type="text" id="email" placeholder="17364724@student.westernstydney.edu.au" class="form-control">
+                              <label class=" form-control-label">Last Name</label>
+                              <input type="text" value="<?php echo $r["LastName"];?>" class="form-control" name="lastname">
                             </div>
                             <div class="form-group">
-                             <label for="contact" class=" form-control-label">Contact No</label>
-                             <input type="tel" id="contact" placeholder="Enter Contact No" class="form-control">
+                              <label class=" form-control-label">Specialisation</label>
+                              <input type="text" value="<?php echo $r["Specialisation"];?>" class="form-control" name="Specialisation">
+                            </div>
+                            <div class="form-group">
+                              <label class=" form-control-label">Email</label>
+                              <input type="text" value="<?php echo $r["EmailAddress"];?>" class="form-control" name="Email">
+                            </div>
+                            <div class="form-group">
+                             <label class=" form-control-label">Contact No</label>
+                             <input type="tel" value="<?php echo $r["ContactNo"];?>" class="form-control" name="ContactNo">
+                            </div>
+                            
+                            <div class="form-group">
+                             <label class=" form-control-label">Nationality</label>
+                             <input type="tel" value="<?php echo $r["Nationality"];?>" class="form-control" name="Nationality">
                             </div>
                           </div>
                       </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default" name="Update">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
             </div>
+            </form>
             <!-- Modal Code Finish-->
 
             <!-- Mdal Code Start -->

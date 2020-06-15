@@ -36,6 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $rs = mysqli_query($conn, $sql4);
             $row = mysqli_fetch_row($rs);
             $SID = $row[0];
+            
             $sql1a = "select internshipid from student_intern where studentid = '".$SID."'";
             $rs = mysqli_query($conn, $sql1a);
             $row = mysqli_fetch_row($rs);
