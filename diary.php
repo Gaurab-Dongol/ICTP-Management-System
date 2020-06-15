@@ -23,11 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc ) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc, Task_StartDate, Task_EndDate ) VALUES (?,?,?,?,?,?)";
 
         if($stmt = mysqli_prepare($conn, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssss", $param_InternshipId, $param_sid, $param_totalHour, $param_taskDesc);
+            mysqli_stmt_bind_param($stmt, "ssssss", $param_InternshipId, $param_sid, $param_totalHour, $param_taskDesc, $param_start, $param_end);
             
             // Set parameters
             //$param_InternshipId = trim($_POST[""])
@@ -48,6 +48,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             $param_totalHour = trim($_POST["NoHours"]);
             $param_taskDesc = trim($_POST["TaskDesc"]);
+            //$param_start = '2020-02-28';
+            $timestamp = strtotime($_POST["start"]);
+            $param_start = date("Y-m-d", $timestamp);
+            
+            $timestamp = strtotime($_POST["end"]);
+            $param_end = date("Y-m-d", $timestamp);
+
+
             // Attempt to execute the prepared statement
 
             if(mysqli_stmt_execute($stmt)){
@@ -100,7 +108,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <input class="au-input au-input--full" type="number" name="NoHours" required>
                                    
                                     </div>
-                                    <!--<div class="form-group">
+                                    <div class="form-group">
                                     <label>Enter start Date:</label>
                                     <input class="au-input au-input--full" type="date" name="start" required>
                                 
@@ -111,7 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <input class="au-input au-input--full" type="date" name="end" required>
                                 
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Manager Remarks</label>
                                     <input class="au-input au-input--full" type="text" name="manager remarks" required>
                                 </div>
