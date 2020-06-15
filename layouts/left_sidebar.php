@@ -28,6 +28,10 @@
 		                    //only visible to unit co-ordinator
 		                    if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 3)){
                         ?>
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-table"></i>Student</a>
+                        </li>
                         <li>
                             <a href="#">
                                 <i class="fas fa-chart-bar"></i>Internship</a>

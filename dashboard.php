@@ -121,7 +121,7 @@
             <!-- Modal Code Finish-->
                     <?php 
                     //only visible to admin 
-                    if($_SESSION['RoleId'] == 1){?>
+                    if($_SESSION['RoleId'] == 1 || $_SESSION['RoleId'] == 2){?>
                     <div class="row">
                         <div class="col-lg-12">
                             <h2 class="title-1 m-b-25">Student List</h2>
