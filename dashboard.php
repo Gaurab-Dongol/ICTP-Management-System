@@ -66,7 +66,8 @@
                                         </div>
                                         <?php
                                             //Display Student List
-                                            $query="select * from student where StudentID='19513498'";
+                                            $UID = $_GET['UID'];
+                                            $query="select * from student where USERID=$UID";
                                             $rs = mysqli_query($conn,$query);
                                             //$count = 0;
                                                 foreach($rs as $row){

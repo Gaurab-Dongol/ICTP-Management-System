@@ -10,6 +10,7 @@ if(!isset($_SESSION['RoleId']))
 require_once('inc/config.php');
 require_once('layouts/header.php'); 
 
+$UID = $_GET['UID'];
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = "";
 $fname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
@@ -31,19 +32,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Set parameters
             //$param_InternshipId = trim($_POST[""])
             //$param_InternshipId = '888';
+<<<<<<< HEAD
             $sql4 = "select studentid from student where USERID='".$UID."'";
             $rs = mysqli_query($conn, $sql4);
             $row = mysqli_fetch_row($rs);
             $SID = $row[0];
+=======
 
-            $sql1a = "select internshipid from student_intern where studentid = '".$SID."'";
+            $SID = "select studentid from student where USERID='".$UID."'";
+            $user = mysqli_query($conn, $SID);
+            $row = mysqli_fetch_row($user);
+            $StudentID= $row[0];
+>>>>>>> dce0269ae109e873cb4d793267f47731c617e034
+
+            $sql1a = "select internshipid from student_intern where studentid = '".$StudentID."'";
             $rs = mysqli_query($conn, $sql1a);
             $row = mysqli_fetch_row($rs);
             $param_InternshipId = $row[0];
 
             //$param_sid = trim($_POST[""]);
             //$param_sid = '222';
-            $sql2a = "select studentid from student_intern where studentid = '".$SID."'";
+            $sql2a = "select studentid from student_intern where studentid = '".$StudentID."'";
             $rs = mysqli_query($conn, $sql2a);
             $row = mysqli_fetch_row($rs);
             $param_sid = $row[0];
