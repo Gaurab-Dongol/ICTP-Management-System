@@ -89,45 +89,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="diary-form">
                         <h3><center>Diary</center></h3>
                             <form action="" method="POST">
-                                <?php
-                                function createHours($id='hours_select', $selected=null)
-                                
- 
-                                {
-        /*** range of hours ***/
-        $r = range(1, 12);
-
-        /*** current hour ***/
-        $selected = is_null($selected) ? date('h') : $selected;
-
-        $select = "<select name=\"$id\" id=\"$id\">\n";
-        foreach ($r as $hour)
-        {
-            $select .= "<option value=\"$hour\"";
-            $select .= ($hour==$selected) ? ' selected="selected"' : '';
-            $select .= ">$hour</option>\n";
-        }
-        $select .= '</select>';
-        return $select;
-    }
-    function createMinutes($id='minute_select', $selected=null)
-    {
-        /*** array of mins ***/
-        $minutes = array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59);
-
-    $selected = in_array($selected, $minutes) ? $selected : 0;
-
-        $select = "<select name=\"$id\" id=\"$id\">\n";
-        foreach($minutes as $min)
-        {
-            $select .= "<option value=\"$min\"";
-            $select .= ($min==$selected) ? ' selected="selected"' : '';
-            $select .= ">".str_pad($min, 1, '1')."</option>\n";
-        }
-        $select .= '</select>';
-        return $select;
-    }
-    ?>
+                               
 
                                     <div class="form-group">
                                     <div class="form-group">
@@ -136,16 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 </div>
                                     <label>Enter Numbers of Hour</label>
                                     <input class="au-input au-input--full" type="number" name="NoHours" required>
-                                    <table>
-                                    
-                                    
-                                    <!--<tr>
-                                    
-                                    <td><?php echo createHours('start_hour',1); ?></td>
-                                    <td><?php echo createMinutes('start_minute',1); ?></td>
-                                    </tr>-->
-
-                                    </table>
+                                   
                                     </div>
                                     <!--<div class="form-group">
                                     <label>Enter start Date:</label>
