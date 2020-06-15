@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to add page
-                header("location: add_diary.php");
+                header("location: add_diary.php?UID=$UID");
             } else{
                 echo "not working";
             }
