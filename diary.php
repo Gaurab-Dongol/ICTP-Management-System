@@ -95,30 +95,45 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             </a>
                         </div>-->
                         <div class="diary-form">
-                        <h3><center>Diary</center></h3>
+                        <h3><center>Weekly Diary</center></h3>
                             <form action="" method="POST">
                                
 
                                     <div class="form-group">
-                                    <div class="form-group">
+                                   
+                                    <!--<div class="form-group">
                                     <label>Task Description</label>
                                     <input class="au-input au-input--full" type="text" name="TaskDesc" required>
-                                </div>
+                                    </div> -->
+                                    
+                                    <div class="form-group">
+                                    <label for="textarea-input" class=" form-control-label">Completed Task</label>
+                                    </div>
+                                    <div class="au-input au-input--full">
+                                    <textarea name="TaskDesc" id="textarea-input" rows="8" placeholder=" Please list your completed tasks in bullet form. e.g 
+                                                                                                             > Created ETL scripts
+                                                                                                             > Performed Unit Test
+                                                                                                             > Presented to client a workaround on using Single Sign On " class="form-control"></textarea>
+                                    </div>
+                                    </div>
+
+
+
+
+
                                     <label>Enter Numbers of Hour</label>
                                     <input class="au-input au-input--full" type="number" name="NoHours" required>
-                                   
                                     </div>
+
                                     <div class="form-group">
                                     <label>Enter start Date:</label>
                                     <input class="au-input au-input--full" type="date" name="start" required>
-                                
-                                </div>
-                                <div class="form-group">
-                                
+                                     </div>
+                                    
+                                    <div class="form-group">
                                     <label>Enter end Date:</label>
                                     <input class="au-input au-input--full" type="date" name="end" required>
-                                
-                                </div>
+                                     </div>
                                 <!-- <div class="form-group">
                                     <label>Manager Remarks</label>
                                     <input class="au-input au-input--full" type="text" name="manager remarks" required>
