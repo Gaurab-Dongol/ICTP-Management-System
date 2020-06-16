@@ -5,6 +5,12 @@ if(isset($_GET['logout']) && $_GET['logout'] == true)
 	header("location:login.php");
 	exit;
 }
+
+//Fetch data of student from database for input type
+$UID = $_GET['UID'];
+$fetch = "SELECT * from student where USERID='".$UID."'";
+$s = mysqli_query($conn, $fetch);
+$r = mysqli_fetch_array($s);
 ?>
 <!-- HEADER DESKTOP-->
 <header class="header-desktop">

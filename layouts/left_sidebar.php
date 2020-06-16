@@ -9,18 +9,42 @@
                     <ul class="list-unstyled navbar__list">
                     <?php 
 		                //only visible to admin 
-		                    if($_SESSION['RoleId'] == 1){?>
+                            if($_SESSION['RoleId'] == 1){?>
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                                <i class="fas fa-tachometer-alt"></i>Student</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">Student List</a>
+                                </li>
+                                <li>
+                                    <a href="addstudent.php">Add Student</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Student</a>
+                                <i class="fas fa-tachometer-alt"></i>Internship</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="opportunities.php">opportunities</a>
+                                </li>
+                                <li>
+                                    <a href="addinternship.php">Add Internships</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="far fa-check-square"></i>Internship</a>
+                                <i class="fas fa-tachometer-alt"></i>Unit Coordinator</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="#">UC List</a>
+                                </li>
+                                <li>
+                                    <a href="addstaff.php">Add Staff</a>
+                                </li>
+                            </ul>
                         </li>
                         <?php } ?>
 
