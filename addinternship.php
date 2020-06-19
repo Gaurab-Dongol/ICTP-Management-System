@@ -21,7 +21,7 @@
         $companyUserid = $row['companyUserid'];
         $JobRole = $_POST['JobRole'];
         $INTERNSHIPDESCRIPTION = $_POST['INTERNSHIPDESCRIPTION'];
-        $update = "INSERT INTO internship (`JobRole`, `Description`, `CompanyID`, `CompanyUserId`) VALUES ('$JobRole','$INTERNSHIPDESCRIPTION','1001','3')";
+        $update = "INSERT INTO internship (JobRole,Description,CompanyID,CompanyUserId) VALUES ('$JobRole','$INTERNSHIPDESCRIPTION','1001','3')";
         mysqli_query($conn, $update);
     }
     ?>
