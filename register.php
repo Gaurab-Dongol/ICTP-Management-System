@@ -105,8 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $row = mysqli_fetch_row($rs);
             $param_uid = $row[0];
 
-
-
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt2)) {
                 // Redirect to login page

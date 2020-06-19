@@ -56,7 +56,7 @@
                                         </thead>
                                         <?php
                                             //Display Student List
-                                            $query='select * from internship';
+                                            $query='SELECT internship.*, company.* FROM internship INNER JOIN company ON internship.CompanyID=company.CompanyId';
                                             $rs = mysqli_query($conn,$query);
                                             //$count = 0;
                                                 foreach($rs as $row){
@@ -64,9 +64,9 @@
                                         <tbody>
                                             <tr class="tr-shadow">
                                                 <td><?php echo $row["JobRole"]?></td>
-                                                <td>Web World Inc</td>
+                                                <td><?php echo $row["CompanyName"]?></td>
                                                 <td>
-                                                    <span class="block-email">lori@webworld.com.au</span>
+                                                    <span class="block-email"><?php echo $row["Website"]?></span>
                                                 </td>
                                                 <td class="desc"><?php echo $row["Description"]?></td>
                                                 <td>2020-06-17</td>

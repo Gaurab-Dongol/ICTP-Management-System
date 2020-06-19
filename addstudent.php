@@ -27,13 +27,8 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                    <?php 
-                    //only visible to admin 
-                    if($_SESSION['RoleId'] == 3){?>
-                    <?php } ?>
-                  
-
-            
+                    <div class="login-wrap">
+                    <div class="login-content">
                         <div class="login-form">
                             <h3>
                                 <center>ADD STUDENT</center>
@@ -345,6 +340,8 @@
 
 
                 </div>
+            </div>
+            </div>
             </div>
             <!-- END MAIN CONTENT-->
         </div>
