@@ -8,9 +8,20 @@
 	}		
 
 	require_once('inc/config.php');
-	require_once('layouts/header.php'); 
-	
-	
+    require_once('layouts/header.php'); 
+    
+    $UID = $_GET['UID'];
+	if(isset($_POST['submit']))
+    {
+        $staffid = $_POST['STAFFID'];
+        $firstName = $_POST['FIRSTNAME'];
+        $lastname = $_POST['LASTNAME'];
+        $email = $_POST['EMAIL'];
+        $contactnumber = $_POST['CONTACTNUMBER'];
+        $position = $_POST['POSITION'];
+        $update = "INSERT INTO staff (StaffID,FirstName,LastName,EmailAddress,ContactNo,Position,USERID) VALUES ('$staffid', '$firstName', '$lastname', '$email', '$contactnumber','$position','$UID')";
+        mysqli_query($conn, $update);
+    }
     ?>
 
     <div class="page-wrapper">
@@ -27,29 +38,24 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                    <?php 
-                    //only visible to admin 
-                    if($_SESSION['RoleId'] == 3){?>
-                    <?php } ?>
-                  
-
-            
+                    <div class="login-wrap">
+                    <div class="login-content">
                         <div class="login-form">
                             <h3>
                                 <center>ADD STAFF</center>
                             </h3>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <form action="addstaff.php?UID=<?php echo $_GET['UID']?>" method="post">
                                 <div class="form-group">
                                     <label>STAFF ID</label>
-                                    <input class="au-input au-input--full" type="number" name="STAFF ID" placeholder="STAFF ID" required>
+                                    <input class="au-input au-input--full" type="number" name="STAFFID" placeholder="STAFF ID" required>
                                 </div>
                                 <div class="form-group">
                                     <label>FIRST NAME</label>
-                                    <input class="au-input au-input--full" type="text" name="FIRST NAME" placeholder="FIRST NAME" required>
+                                    <input class="au-input au-input--full" type="text" name="FIRSTNAME" placeholder="FIRST NAME" required>
                                 </div>
                                 <div class="form-group">
                                     <label>LAST NAME</label>
-                                    <input class="au-input au-input--full" type="text" name="LAST NAME" placeholder="LAST NAME" required>
+                                    <input class="au-input au-input--full" type="text" name="LASTNAME" placeholder="LAST NAME" required>
                                 </div
                                 <div class="form-group">
                                     <label>CONTACT EMAIL</label>
@@ -57,22 +63,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
-                                    <input class="au-input au-input--full" type="tel" name="CONTACT NUMBER" placeholder="+61XXXXXXXXX"required>
+                                    <input class="au-input au-input--full" type="tel" name="CONTACTNUMBER" placeholder="+61XXXXXXXXX"required>
                                 </div>
                                 <div class="form-group">
                                     <label>POSITION</label>
                                     <input class="au-input au-input--full" type="text" name="POSITION" placeholder="POSITION" required>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
-</div>
-</form>
-
-
+                                </form>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                        <!-- END MAIN CONTENT-->
                 </div>
             </div>
-            <!-- END MAIN CONTENT-->
-        </div>
-    </div>
-    
-
+            
     <?php require_once('layouts/footer.php'); ?>

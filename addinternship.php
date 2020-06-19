@@ -10,22 +10,21 @@
 	require_once('inc/config.php');
 	require_once('layouts/header.php'); 
     
+    
     //ADD INTERNSHIP
     if(isset($_POST["submit"]))
     {
         $UID = $_GET['UID'];
-        $firstname = $_POST['firstname'];
-        $lastName = $_POST['lastName'];
-        $Email = $_POST['Email'];
-        $ContactNo = $_POST['ContactNo'];
-        $Specialisation = $_POST['Specialisation'];
-        $Nationality = $_POST['Nationality'];
-        $update = "UPDATE student SET FirstName='$firstname',LastName='$lastName',EmailAddress='$Email',ContactNo='$ContactNo',Specialisation='$Specialisation',Nationality='$Nationality' where USERID='".$UID."'";
+        $sql1a = "select companyUserid from companyuser where UserID = '".$UID."'";
+        $rs = mysqli_query($conn, $sql1a);
+        $row = mysqli_fetch_row($rs);
+        $companyUserid = $row['companyUserid'];
+        $JobRole = $_POST['JobRole'];
+        $INTERNSHIPDESCRIPTION = $_POST['INTERNSHIPDESCRIPTION'];
+        $update = "INSERT INTO internship (`JobRole`, `Description`, `CompanyID`, `CompanyUserId`) VALUES ('$JobRole','$INTERNSHIPDESCRIPTION','1001','3')";
         mysqli_query($conn, $update);
     }
-	
     ?>
-
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
         <div class="page-container">
@@ -56,8 +55,10 @@
                                     $results = mysqli_query($conn,$query);
                                     while ($rows = mysqli_fetch_assoc($results))
                                     { 
+                                    $companyid = $rows['CompanyId'];
+                                    $companyname = $rows['CompanyName'];
                                     ?>
-                                    <option value="<?php echo $rows['CompanyId']?>"><?php echo $rows['CompanyName']?></option>
+                                    <option value="<?php echo $companyid ?>"><?php echo $companyname?></option>
                                     <?php
                                     } 
                                     ?>
@@ -78,14 +79,14 @@
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
                                     <input class="au-input au-input--full" type="tel" name="CONTACT NUMBER" placeholder="+61XXXXXXXXX"required>
-                                </div>
-                                <div class="form-group">
-                                    <label>CONTACT EMAIL</label>
-                                    <input class="au-input au-input--full" type="email" name="EMAIL" placeholder="EMAIL"required>
                                 </div>-->
                                 <div class="form-group">
+                                    <label>JOB ROLE</label>
+                                    <input class="au-input au-input--full" name="JobRole" placeholder="Job Role"required>
+                                </div>
+                                <div class="form-group">
                                     <label> INTERNSHIP DESCRIPTION</label>
-                                    <input class="au-input au-input--full" type="text" name="INTERNSHIP DESCRIPTION" placeholder="INTERNSHIP DESCRIPTION" required>
+                                    <input class="au-input au-input--full" type="text" name="INTERNSHIPDESCRIPTION" placeholder="INTERNSHIP DESCRIPTION" required>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
 </div>

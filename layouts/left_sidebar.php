@@ -18,7 +18,7 @@
                                     <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">Student List</a>
                                 </li>
                                 <li>
-                                    <a href="addstudent.php">Add Student</a>
+                                    <a href="addstudent.php?UID=<?php echo $_GET['UID']?>">Add Student</a>
                                 </li>
                             </ul>
                         </li>
@@ -27,10 +27,10 @@
                                 <i class="fas fa-tachometer-alt"></i>Internship</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="opportunities.php">opportunities</a>
+                                    <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">opportunities</a>
                                 </li>
                                 <li>
-                                    <a href="addinternship.php">Add Internships</a>
+                                    <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">Add Internships</a>
                                 </li>
                             </ul>
                         </li>
@@ -39,10 +39,10 @@
                                 <i class="fas fa-tachometer-alt"></i>Unit Coordinator</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="#">UC List</a>
+                                    <a href="staff.php?UID=<?php echo $_GET['UID']?>">UC List</a>
                                 </li>
                                 <li>
-                                    <a href="addstaff.php">Add Staff</a>
+                                    <a href="addstaff.php?UID=<?php echo $_GET['UID']?>">Add Staff</a>
                                 </li>
                             </ul>
                         </li>

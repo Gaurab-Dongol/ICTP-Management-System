@@ -117,11 +117,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                                                                                              > Presented to client a workaround on using Single Sign On " class="form-control"></textarea>
                                     </div>
                                     </div>
-
-
-
-
-
                                     <label>Enter Numbers of Hour</label>
                                     <input class="au-input au-input--full" type="number" name="NoHours" required>
                                     </div>
