@@ -13,15 +13,26 @@
     $UID = $_GET['UID'];
 	if(isset($_POST['submit']))
     {
-        $staffid = $_POST['STAFFID'];
-        $firstName = $_POST['FIRSTNAME'];
-        $lastname = $_POST['LASTNAME'];
-        $email = $_POST['EMAIL'];
-        $contactnumber = $_POST['CONTACTNUMBER'];
-        $position = $_POST['POSITION'];
-        $update = "INSERT INTO staff (StaffID,FirstName,LastName,EmailAddress,ContactNo,Position,USERID) VALUES ('$staffid', '$firstName', '$lastname', '$email', '$contactnumber','$position','$UID')";
-        mysqli_query($conn, $update);
-    }
+        $sql1 = "INSERT INTO staff (StaffID,FirstName,LastName,EmailAddress,ContactNo,Position,USERID) VALUES (?,?,?,?,?,?,?)";
+        if ($stmt = mysqli_prepare($conn, $sql1)) {
+            mysqli_stmt_bind_param ($stmt, "sssssss",$staffid, $firstName, $lastname, $email, $contactnumber,$position,$UID);
+            $staffid = $_POST['STAFFID'];
+            $firstName = $_POST['FIRSTNAME'];
+            $lastname = $_POST['LASTNAME'];
+            $email = $_POST['EMAIL'];
+            $contactnumber = $_POST['CONTACTNUMBER'];
+            $position = $_POST['POSITION'];
+        
+            if (mysqli_stmt_execute($stmt)) {
+                // Redirect to login page
+                header("location: staff.php");
+            }else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+            mysqli_stmt_close($stmt);
+            }
+        }
+        
     ?>
 
     <div class="page-wrapper">

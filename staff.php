@@ -9,7 +9,12 @@
 
 	require_once('inc/config.php');
     require_once('layouts/header.php'); 
-    ?>
+
+    
+
+
+
+?>
 
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
