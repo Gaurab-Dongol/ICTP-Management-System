@@ -27,7 +27,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Internship</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">opportunities</a>
+                                    <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">Internship</a>
                                 </li>
                                 <li>
                                     <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">Add Internships</a>
@@ -76,7 +76,7 @@
                         </li>
                         <li>
                             <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="far fa-check-square"></i>Opportunites</a>
+                                <i class="far fa-check-square"></i>Internship</a>
                         </li>
                         <li>
                             <a href="#">
