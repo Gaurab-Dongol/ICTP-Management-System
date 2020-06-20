@@ -9,8 +9,36 @@
 
 	require_once('inc/config.php');
 	require_once('layouts/header.php'); 
-	
-	
+
+    // Check input errors before inserting in database
+    if (isset($_POST['submit'])) {
+
+        // Prepare second insert statement
+        $sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
+
+        if ($stmt2 = mysqli_prepare($conn, $sql2)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt2, "sssssssss", $param_sid, $param_fname, $param_lname, $param_cno, $param_spec, $param_yren, $param_natio, $param_email, $param_uid);
+
+            // Set parameters
+            $param_sid = trim($_POST["studentid"]);
+            $param_fname = trim($_POST["firstname"]);
+            $param_lname = trim($_POST["lastname"]);
+            $param_cno = trim($_POST["contactno"]);
+            $param_spec = trim($_POST["specialisation"]);
+            $param_yren = trim($_POST["yearenrolled"]);
+            $param_natio = trim($_POST["nationality"]);
+            $param_email = trim($_POST["username"]);
+            $param_username = trim($_POST["username"]);
+            $sql3 = "select userid from login where username = '" . $param_username . "'";
+            $rs = mysqli_query($conn, $sql3);
+            $row = mysqli_fetch_row($rs);
+            $param_uid = $row[0];
+
+    }
+    // Close connection
+    mysqli_close($conn);
+}
     ?>
 
     <div class="page-wrapper">
@@ -33,7 +61,7 @@
                             <h3>
                                 <center>ADD STUDENT</center>
                             </h3>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                 <div class="form-group">
                                     <label>STUDENT ID</label>
                                     <input class="au-input au-input--full" type="number" name="STUDENT ID" placeholder="STUDENT ID" required>

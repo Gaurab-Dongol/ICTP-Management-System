@@ -111,10 +111,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                     <label for="textarea-input" class=" form-control-label">Completed Task</label>
                                     </div>
                                     <div class="au-input au-input--full">
-                                    <textarea name="TaskDesc" id="textarea-input" rows="8" placeholder=" Please list your completed tasks in bullet form. e.g 
+                                    <textarea class="ckeditor" name="TaskDesc" placeholder=" Please list your completed tasks in bullet form. e.g 
                                                                                                              > Created ETL scripts
                                                                                                              > Performed Unit Test
-                                                                                                             > Presented to client a workaround on using Single Sign On " class="form-control"></textarea>
+                                                                                                             > Presented to client a workaround on using Single Sign On " ></textarea>
                                     </div>
                                     </div>
                                     <label>Enter Numbers of Hour</label>

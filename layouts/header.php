@@ -33,8 +33,10 @@
     <!-- FullCalendar -->
     <link href='vendor/fullcalendar-3.10.0/fullcalendar.css' rel='stylesheet' media="all" />
 
-    <!-- Main CSS-->
+    <!-- Main CSS -->
     <link href="css/theme.css" rel="stylesheet" media="all">
+    <!-- CKEDITOR -->
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 </head>
 
 <body class="animsition">

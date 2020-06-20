@@ -12,16 +12,17 @@
     
     
     //ADD INTERNSHIP
+    $UID = $_GET['UID'];
     if(isset($_POST["submit"]))
     {
-        $UID = $_GET['UID'];
-        $sql1a = "select companyUserid from companyuser where UserID = '".$UID."'";
+        $sql1a = "select * from companyuser where UserID = '$UID'";
         $rs = mysqli_query($conn, $sql1a);
         $row = mysqli_fetch_row($rs);
         $companyUserid = $row['companyUserid'];
+        $companyid = $rows['CompanyId'];;
         $JobRole = $_POST['JobRole'];
         $INTERNSHIPDESCRIPTION = $_POST['INTERNSHIPDESCRIPTION'];
-        $update = "INSERT INTO internship (JobRole,Description,CompanyID,CompanyUserId) VALUES ('$JobRole','$INTERNSHIPDESCRIPTION','1001','3')";
+        $update = "INSERT INTO internship (JobRole,Description,CompanyID,CompanyUserId) VALUES ('$JobRole','$INTERNSHIPDESCRIPTION','$companyid ','$companyUserid')";
         mysqli_query($conn, $update);
     }
     ?>
@@ -55,10 +56,8 @@
                                     $results = mysqli_query($conn,$query);
                                     while ($rows = mysqli_fetch_assoc($results))
                                     { 
-                                    $companyid = $rows['CompanyId'];
-                                    $companyname = $rows['CompanyName'];
                                     ?>
-                                    <option value="<?php echo $companyid ?>"><?php echo $companyname?></option>
+                                    <option value="<?php echo $rows['CompanyId']?>"><?php echo $rows['CompanyName']?></option>
                                     <?php
                                     } 
                                     ?>
