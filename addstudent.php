@@ -7,11 +7,128 @@
 		exit;
 	}		
 
-	require_once('inc/config.php');
-	require_once('layouts/header.php'); 
-	
-	
-    ?>
+require_once('inc/config.php');
+require_once('layouts/header.php'); 
+    // Define variables and initialize with empty values
+$username = $password = $confirm_password = "";
+$fname_err = $email_err = $username_err = $sid_err = $password_err = $confirm_password_err = "";
+$pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Validate username
+    
+    // Prepare a select statement
+    $sql = "SELECT userid FROM login WHERE username = ?";
+
+    if ($stmt = mysqli_prepare($conn, $sql)) {
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+        // Set parameters
+        $param_username = trim($_POST["username"]);
+
+        // Attempt to execute the prepared statement
+        if (mysqli_stmt_execute($stmt)) {
+            /* store result */
+            mysqli_stmt_store_result($stmt);
+
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $username_err = "This email -" . $param_username . " is already registered.";
+            } else {
+                $username = trim($_POST["username"]);
+            }
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+    
+        // Prepare a select statement
+    $sql5 = "SELECT studentid FROM student WHERE studentid = ?";
+
+    if ($stmt = mysqli_prepare($conn, $sql5)) {
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "s", $param_sid );
+
+        // Set parameters
+        $param_sid = trim($_POST["studentid"]);
+
+        // Attempt to execute the prepared statement
+        if (mysqli_stmt_execute($stmt)) {
+            /* store result */
+            mysqli_stmt_store_result($stmt);
+
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $sid_err = "This studentid -" . $param_sid . " is already registered.";
+            } else {
+                $param_sid = trim($_POST["studentid"]);
+            }
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    // Check input errors before inserting in database
+    if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($sid_err)  ) {
+
+        // Prepare insert statement
+        $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
+        // Prepare second insert statement
+        $sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_password = trim($_POST["password"]);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        }
+        if ($stmt2 = mysqli_prepare($conn, $sql2)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt2, "sssssssss", $param_sid, $param_fname, $param_lname, $param_cno, $param_spec, $param_yren, $param_natio, $param_email, $param_uid);
+
+            // Set parameters
+            $param_sid = trim($_POST["studentid"]);
+            $param_fname = trim($_POST["firstname"]);
+            $param_lname = trim($_POST["lastname"]);
+            $param_cno = trim($_POST["contactno"]);
+
+            $param_spec = trim($_POST["specialisation"]);
+            $param_yren = trim($_POST["yearenrolled"]);
+            $param_natio = trim($_POST["nationality"]);
+            $param_email = trim($_POST["username"]);
+            $param_username = trim($_POST["username"]);
+            $sql3 = "select userid from login where username = '" . $param_username . "'";
+            $rs = mysqli_query($conn, $sql3);
+            $row = mysqli_fetch_row($rs);
+            $param_uid = $row[0];
+
+            // Attempt to execute the prepared statement
+            if (mysqli_stmt_execute($stmt2)) {
+                // Redirect to login page
+                header("location: dashboard.php?UID=$UID");
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+            mysqli_stmt_close($stmt2);
+        }
+    }
+
+    // Close connection
+    mysqli_close($conn);
+}
+    
+
+?>
 
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
@@ -36,23 +153,23 @@
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <div class="form-group">
                                     <label>STUDENT ID</label>
-                                    <input class="au-input au-input--full" type="number" name="STUDENT ID" placeholder="STUDENT ID" required>
+                                    <input class="au-input au-input--full" type="number" name="studentid" placeholder="STUDENT ID" required>
                                 </div>
                                 <div class="form-group">
                                     <label>FIRST NAME</label>
-                                    <input class="au-input au-input--full" type="text" name="FIRST NAME" placeholder="FIRST NAME" required>
+                                    <input class="au-input au-input--full" type="text" name="firstname" placeholder="FIRST NAME" required>
                                 </div>
                                 <div class="form-group">
                                     <label>LAST NAME</label>
-                                    <input class="au-input au-input--full" type="text" name="LAST NAME" placeholder="LAST NAME" required>
+                                    <input class="au-input au-input--full" type="text" name="lastname" placeholder="LAST NAME" required>
                                 </div
                                 <div class="form-group">
                                     <label>UNIVERSITY EMAIL</label>
-                                    <input class="au-input au-input--full" type="email" name="UNIVERSITY EMAIL" placeholder="UNIVERSITY EMAIL"required>
+                                    <input class="au-input au-input--full" type="email" name="username" placeholder="UNIVERSITY EMAIL"required>
                                 </div>
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
-                                    <input class="au-input au-input--full" type="tel" name="CONTACT NUMBER" placeholder="+61XXXXXXXXX"required>
+                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61XXXXXXXXX"required>
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Specialisation</label>
@@ -334,6 +451,16 @@
                                         <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="au-input au-input--full" type="password" name="password" pattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$" id="password" placeholder="Password" required>
+                                    <?php echo  "<p> <font color=blue> $pwd_format </font> </p>"; ?>
+                                </div>
+                                <div class="form-group">
+                                    <label>Re Enter Password</label>
+                                    <input class="au-input au-input--full" type="password" name="repassword" pattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$" id="repassword" placeholder="Re Enter Password" required>
+                                </div>
+
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
 </div>
 </form>
