@@ -48,7 +48,7 @@
                                             <tr>
                                                 <th>Position</th>
                                                 <th>Company</th>
-                                                <th>Job Role</th>
+                                                <th>Website</th>
                                                 <th>Description</th>
                                                 <th>Closes</th>
                                                 <th></th>
