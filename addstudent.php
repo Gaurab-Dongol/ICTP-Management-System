@@ -64,23 +64,23 @@
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                 <div class="form-group">
                                     <label>STUDENT ID</label>
-                                    <input class="au-input au-input--full" type="number" name="STUDENT ID" placeholder="STUDENT ID" required>
+                                    <input class="au-input au-input--full" type="number" name="studentid" placeholder="STUDENT ID" required>
                                 </div>
                                 <div class="form-group">
                                     <label>FIRST NAME</label>
-                                    <input class="au-input au-input--full" type="text" name="FIRST NAME" placeholder="FIRST NAME" required>
+                                    <input class="au-input au-input--full" type="text" name="firstname" placeholder="FIRST NAME" required>
                                 </div>
                                 <div class="form-group">
                                     <label>LAST NAME</label>
-                                    <input class="au-input au-input--full" type="text" name="LAST NAME" placeholder="LAST NAME" required>
+                                    <input class="au-input au-input--full" type="text" name="lastname" placeholder="LAST NAME" required>
                                 </div
                                 <div class="form-group">
                                     <label>UNIVERSITY EMAIL</label>
-                                    <input class="au-input au-input--full" type="email" name="UNIVERSITY EMAIL" placeholder="UNIVERSITY EMAIL"required>
+                                    <input class="au-input au-input--full" type="email" name="username" placeholder="UNIVERSITY EMAIL"required>
                                 </div>
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
-                                    <input class="au-input au-input--full" type="tel" name="CONTACT NUMBER" placeholder="+61XXXXXXXXX"required>
+                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61XXXXXXXXX"required>
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Specialisation</label>
@@ -362,6 +362,16 @@
                                         <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="au-input au-input--full" type="password" name="password" pattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$" id="password" placeholder="Password" required>
+                                    <?php echo  "<p> <font color=blue> $pwd_format </font> </p>"; ?>
+                                </div>
+                                <div class="form-group">
+                                    <label>Re Enter Password</label>
+                                    <input class="au-input au-input--full" type="password" name="repassword" pattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$" id="repassword" placeholder="Re Enter Password" required>
+                                </div>
+
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
 </div>
 </form>
