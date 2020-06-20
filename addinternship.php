@@ -64,7 +64,7 @@
                                     ?>
                                     </select>
                                 </div>
-                                <!--<div class="form-group">
+                                <div class="form-group">
                                     <label>INDUSTRY</label>
                                     <input class="au-input au-input--full" type="text" name="INDUSTRY" placeholder="INDUSTRY" required>
                                 </div>
@@ -79,7 +79,7 @@
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
                                     <input class="au-input au-input--full" type="tel" name="CONTACT NUMBER" placeholder="+61XXXXXXXXX"required>
-                                </div>-->
+                                </div>
                                 <div class="form-group">
                                     <label>JOB ROLE</label>
                                     <input class="au-input au-input--full" name="JobRole" placeholder="Job Role"required>

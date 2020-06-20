@@ -25,7 +25,7 @@
         
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
-                header("location: staff.php");
+                header("location: staff.php?UID=$UID");
             }else {
                 echo "Something went wrong. Please check that you have entered the correct details.";
             }
