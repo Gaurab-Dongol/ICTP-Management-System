@@ -27,7 +27,11 @@
                                 <i class="fas fa-tachometer-alt"></i>Internship</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
+<<<<<<< HEAD
                                     <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">Internship List</a>
+=======
+                                    <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">Internship</a>
+>>>>>>> 29dffb9195ce6e6622becba8ae4842cac7f4d113
                                 </li>
                                 <li>
                                     <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">Add Internship</a>
