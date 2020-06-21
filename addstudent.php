@@ -9,7 +9,7 @@
 
 	require_once('inc/config.php');
 	require_once('layouts/header.php'); 
-
+    $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
     // Check input errors before inserting in database
     if (isset($_POST['submit'])) {
 
