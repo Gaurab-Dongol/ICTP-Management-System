@@ -1,81 +1,27 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <!-- Required meta tags-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="au theme template">
-        <meta name="author" content="Hau Nguyen">
-        <meta name="keywords" content="au theme template">
-    
-        <!-- Title Page-->
-        <title>ICT Practicum</title>
-    
-        <!-- Fontfaces CSS-->
-        <link href="css/font-face.css" rel="stylesheet" media="all">
-        <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-        <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-        <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    
-        <!-- Bootstrap CSS-->
-        <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-    
-        <!-- Vendor CSS-->
-        <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-        <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-        <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-        <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-        <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-        <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-        <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-    
-        <!-- FullCalendar -->
-        <link href='vendor/fullcalendar-3.10.0/fullcalendar.css' rel='stylesheet' media="all" />
-    
-        <!-- Main CSS-->
-        <link href="css/theme.css" rel="stylesheet" media="all">
-    </head>
-<body>
-
-    <aside class="menu-sidebar d-none d-lg-block">
-        <div class="logo">
-            <a href="#">
-                <img src="images/456.png" alt="ICTP" />
-            </a>
-        </div>
-        <div class="menu-sidebar__content js-scrollbar1">
-            <nav class="navbar-sidebar">
-                <ul class="list-unstyled navbar__list">
-                    <li class="active has-sub">
-                        <a class="js-arrow" href="studentprofile.html">
-                            <i class="fas fa-table"></i>Student Profile</a>
-                    </li>
-                    <li>
-                        <a href="weeklydiary.html">
-                            <i class="fas fa-chart-bar"></i>Weekly Diary</a>
-                    </li>
-                   
-                    <li>
-                        <a href="finalreport.html">
-                            <i class="fas fa-table"></i>Final Report</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
-    
-</aside>
+<?php 
+	session_start();
+	
+	if(!isset($_SESSION['RoleId']))
+	{
+		header('location:login.php?lmsg=true');
+		exit;
+    }		
+    require_once('inc/config.php');
+    require_once('layouts/header.php'); 
+?>
 <div class="page-wrapper">
     <!-- PAGE CONTAINER-->
     <div class="page-container">
-        
-        
+        <!-- LEFT SIDEBAR-->
+        <?php 
+            require_once('layouts/left_sidebar.php'); 
+            require_once('layouts/usersetting.php'); 
+            ?>
         <!-- MAIN CONTENT-->
         <div class="main-content">
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
-<div class="row">
+    <div class="row">
     <div class="col-lg-12">
         <h2 class="title-1 m-b-25">Final Report</h2>
         <div class="table-responsive table--no-card m-b-40">
@@ -224,9 +170,5 @@
     </div>
     </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</body>
-</html>
+
+<?php require_once('layouts/footer.php'); ?>

@@ -82,6 +82,10 @@
                             <a href="internship.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-calendar-alt"></i>My Internship</a>
                         </li>
+                        <li>
+                            <a href="finalreport.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-calendar-alt"></i>My Report</a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </nav>
