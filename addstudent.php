@@ -365,7 +365,7 @@
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" pattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$" id="password" placeholder="Password" required>
-                                    <?php echo  "<p> <font color=blue> $pwd_format </font> </p>"; ?>
+                                    <?php echo  "<p> <font color=blue> <small> $pwd_format </small></font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Re Enter Password</label>
