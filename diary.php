@@ -99,7 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <h3><center>Weekly Diary</center></h3>
                             <form action="" method="POST">
                                     <div class="form-group">
-                                    <label for="textarea-input" class=" form-control-label">Completed Task</label>
+                                    <label for="textarea-input" class="form-control-label">Completed Task <small><i>(in bullet form)</i></small> </label>
                                     </div>
                                     <div class="form-group">
                                     <textarea class="ckeditor" name="TaskDesc"></textarea>
