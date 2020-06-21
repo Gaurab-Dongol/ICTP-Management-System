@@ -21,6 +21,9 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    
+    <!-- CKEDITOR -->
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
 </body>
 
