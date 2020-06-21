@@ -23,7 +23,8 @@
     <script src="js/main.js"></script>
     
     <!-- CKEDITOR -->
-    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <!--<script type="text/javascript" src="ckeditor/ckeditor.js"></script>-->
+    <script src="//cdn.ckeditor.com/4.14.1/basic/ckeditor.js"></script>
 
 </body>
 

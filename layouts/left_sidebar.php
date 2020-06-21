@@ -79,7 +79,7 @@
                                 <i class="far fa-check-square"></i>Internship</a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="internship.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-calendar-alt"></i>My Internship</a>
                         </li>
                         <?php } ?>
