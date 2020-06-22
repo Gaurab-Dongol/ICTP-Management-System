@@ -6,15 +6,30 @@
 		header('location:login.php?lmsg=true');
 		exit;
 	}		
-
 	require_once('inc/config.php');
-	require_once('layouts/header.php'); 
+    require_once('layouts/header.php'); 
+    $UID = $_GET['UID'];
     $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
     // Check input errors before inserting in database
     if (isset($_POST['submit'])) {
 
         // Prepare second insert statement
+        
+        $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
+        // Prepare second insert statement
         $sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_password = trim($_POST["password"]);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        }
 
         if ($stmt2 = mysqli_prepare($conn, $sql2)) {
             // Bind variables to the prepared statement as parameters
@@ -34,7 +49,15 @@
             $rs = mysqli_query($conn, $sql3);
             $row = mysqli_fetch_row($rs);
             $param_uid = $row[0];
+            
+            if (mysqli_stmt_execute($stmt2)) {
+                // Redirect to login page
+                header("location: dashboard.php?UID=$UID");
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
 
+            mysqli_stmt_close($stmt2);    
     }
     // Close connection
     mysqli_close($conn);
