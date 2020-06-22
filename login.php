@@ -48,7 +48,8 @@ if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="images/456.png" alt="WSU">
+                                <!--<img src="images/456.png" alt="WSU">-->
+                                <h1>ICT Practicum</h1>
                             </a>
                         </div>
                         <div class="login-form">
