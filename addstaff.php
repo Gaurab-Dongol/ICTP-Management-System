@@ -28,14 +28,19 @@
         }
         $sql1 = "INSERT INTO staff (StaffID,FirstName,LastName,EmailAddress,ContactNo,Position,USERID) VALUES (?,?,?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql1)) {
-            mysqli_stmt_bind_param ($stmt, "sssssss",$staffid, $firstName, $lastname, $email, $contactnumber,$position,$UID);
+            mysqli_stmt_bind_param ($stmt, "sssssss",$staffid, $firstName, $lastname, $email, $contactnumber,$position,$param_uid);
             $staffid = $_POST['STAFFID'];
             $firstName = $_POST['FIRSTNAME'];
             $lastname = $_POST['LASTNAME'];
             $email = $_POST['EMAIL'];
             $contactnumber = $_POST['CONTACTNUMBER'];
             $position = $_POST['POSITION'];
-        
+            $param_username = trim($_POST["EMAIL"]);
+            $sql3 = "select userid from login where username = '" . $param_username . "'";
+            $rs = mysqli_query($conn, $sql3);
+            $row = mysqli_fetch_row($rs);
+            $param_uid = $row[0];
+
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
                 header("location: staff.php?UID=$UID");
