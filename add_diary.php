@@ -13,6 +13,12 @@
     {
      
     }
+
+    //Fetch data of student from database for input type
+    $UID = $_GET['UID'];
+    $fetch = "SELECT * FROM login AS A LEFT OUTER JOIN student AS B ON A.USERID = B.USERID LEFT OUTER JOIN staff AS C ON B.USERID = C.USERID LEFT OUTER JOIN companyuser AS D ON C.USERID = D.UserId WHERE A.USERID = '".$UID."'";
+    $s = mysqli_query($conn, $fetch);
+    $r = mysqli_fetch_array($s);
 ?>
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
@@ -28,9 +34,6 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                    <?php 
-                    //only visible to admin 
-                    if($_SESSION['RoleId'] == 3){?>
                     <div class="row">
                     <div class="col-md-12">
                                 <!-- DATA TABLE -->
@@ -77,16 +80,14 @@
                                                 <td class="desc"><?php echo $row["TaskDesc"]?></td>
                                                 <td class="desc"><?php echo $row["DateSubmitted"]?></td>
                                                 <td>
-                                                <form method="POST">
                                                     <div class="table-data-feature">
-                                                        <button class="item" data-toggle="modal" data-target="#myModalProfile" title="Edit" name="Edit">
+                                                            <button class="item" data-toggle="modal" data-target="#myModalProfile" name="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button>
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete" name="Delete">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
                                                     </div>
-                                                </form>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -96,9 +97,8 @@
                                 <!-- END DATA TABLE -->
                             </div> 
                     </div>
-                    </div>
-                    </div>
-                    <?php } ?>
+                </div>
+            </div>
     
     <div id="myModalProfile" class="modal fade" role="dialog">
               <div class="modal-dialog">

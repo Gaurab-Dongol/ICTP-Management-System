@@ -75,16 +75,16 @@
                                 <i class="fas fa-map-marker-alt"></i>My Diary</a>
                         </li>
                         <li>
-                            <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="far fa-check-square"></i>Internship</a>
-                        </li>
-                        <li>
                             <a href="internship.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-calendar-alt"></i>My Internship</a>
                         </li>
                         <li>
-                            <a href="finalreport.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-calendar-alt"></i>My Report</a>
+                            <a href="studentreport.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-folder-open"></i>My Report</a>
+                        </li>
+                        <li>
+                            <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="far fa-check-square"></i>Opportunities</a>
                         </li>
                         <?php } ?>
                     </ul>

@@ -53,9 +53,9 @@
 
     //Fetch data of student from database for input type
     $UID = $_GET['UID'];
-    $fetch = "SELECT * from student where USERID='".$UID."'";
-    $s = mysqli_query($conn, $fetch);
-    $r = mysqli_fetch_array($s);
+    $fetch = "SELECT * from student where USERID= $UID";
+    $student = mysqli_query($conn, $fetch);
+    $rstudent = mysqli_fetch_array($student);
     ?>
 
     <div class="page-wrapper">
@@ -190,28 +190,28 @@
                           <div class="card-body card-block">
                             <div class="form-group">
                               <label class=" form-control-label">First Name</label>
-                              <input type="text" value="<?php echo $r["FirstName"];?>"class="form-control" name="firstname">
+                              <input type="text" value="<?php echo $rstudent["FirstName"]?>"class="form-control" name="firstname">
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Last Name</label>
-                              <input type="text" value="<?php echo $r["LastName"];?>" class="form-control" name="lastName">
+                              <input type="text" value="<?php echo $rstudent["LastName"]?>" class="form-control" name="lastName">
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Specialisation</label>
-                              <input type="text" value="<?php echo $r["Specialisation"];?>" class="form-control" name="Specialisation">
+                              <input type="text" value="<?php echo $rstudent["Specialisation"]?>" class="form-control" name="Specialisation">
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Email</label>
-                              <input type="text" value="<?php echo $r["EmailAddress"];?>" class="form-control" name="Email">
+                              <input type="text" value="<?php echo $rstudent["EmailAddress"]?>" class="form-control" name="Email">
                             </div>
                             <div class="form-group">
                              <label class=" form-control-label">Contact No</label>
-                             <input type="text" value="<?php echo $r["ContactNo"];?>" class="form-control" name="ContactNo">
+                             <input type="text" value="<?php echo $rstudent["ContactNo"]?>" class="form-control" name="ContactNo">
                             </div>
                             
                             <div class="form-group">
                              <label class=" form-control-label">Nationality</label>
-                             <input type="text" value="<?php echo $r["Nationality"];?>" class="form-control" name="Nationality">
+                             <input type="text" value="<?php echo $rstudent["Nationality"]?>" class="form-control" name="Nationality">
                             </div>
                           </div>
                       </div>
