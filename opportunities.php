@@ -50,7 +50,7 @@
                                                 <th>Company</th>
                                                 <th>Website</th>
                                                 <th>Description</th>
-                                                <th>Closes</th>
+                                                <th>Closing_Date</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
