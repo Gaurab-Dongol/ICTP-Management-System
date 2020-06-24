@@ -11,7 +11,6 @@ function getCompany(val) {
 	}
 	});
 }
-
 </script>   
 
 <?php 
@@ -48,7 +47,7 @@ function getCompany(val) {
             //$row = mysqli_fetch_row($rs);
             //$param_companyid = $row[0];
             $param_companyid =   trim($_POST["companynm"]);
-            $param_companyuid = '6';  //trim($_POST["contactNm"]);
+            $param_companyuid = trim($_POST["contactNm"]);
             $param_jobrole = trim($_POST["JobRl"]); 
             $param_desc = trim($_POST["InternDesc"]);
         
