@@ -6,7 +6,7 @@ if(isset($_GET['logout']) && $_GET['logout'] == true)
 	exit;
 }
 
-//Fetch data of student from database for input type
+//Fetch data 
 $UID = $_GET['UID'];
 $fetch = "SELECT username FROM login AS A LEFT OUTER JOIN student AS B ON A.USERID = B.USERID LEFT OUTER JOIN staff AS C ON B.USERID = C.USERID LEFT OUTER JOIN companyuser AS D ON C.USERID = D.UserId WHERE A.USERID = '".$UID."'";
 $s = mysqli_query($conn, $fetch);
@@ -30,7 +30,7 @@ $usersetting = mysqli_fetch_array($s);
                                             <img src="" alt="" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#"><?php echo $usersetting[0]?></a>
+                                            <a class="js-acc-btn" href="#"><?php echo $usersetting['username']?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -43,7 +43,7 @@ $usersetting = mysqli_fetch_array($s);
                                                     <!--<h5 class="name">
                                                         <a href="#">Student</a>
                                                     </h5>-->
-                                                    <span class="email"><?php echo $usersetting[0]?></span>
+                                                    <span class="email"><?php echo $usersetting['username']?></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">

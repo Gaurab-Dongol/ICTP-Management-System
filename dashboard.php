@@ -53,7 +53,7 @@
 
     //Fetch data of student from database for input type
     $UID = $_GET['UID'];
-    $fetch = "SELECT * from student where USERID= $UID";
+    $fetch = "SELECT * from student";
     $student = mysqli_query($conn, $fetch);
     $rstudent = mysqli_fetch_array($student);
     ?>
