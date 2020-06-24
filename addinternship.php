@@ -129,10 +129,13 @@ function getCompany(val) {
                                     <label> <strong>Job Role</strong></label>
                                     <input class="au-input au-input--full" type="text" name="JobRl" placeholder="Internship Role" required>
                                 </div>
+                                
                                 <div class="form-group">
-                                    <label> <strong>Internship Description</strong> </label>
-                                    <input class="au-input au-input--full" type="text" name="InternDesc" placeholder="Internship Description" required>
-                                </div>
+                                    <label for="textarea-input" class="form-control-label"> <strong> Internship Description </strong><small><i>(in bullet form)</i></small> </label>
+                                    </div>
+                                    <div class="form-group">
+                                    <textarea class="ckeditor" name="InternDesc"></textarea>
+                                    </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
 </div>
 </form>
