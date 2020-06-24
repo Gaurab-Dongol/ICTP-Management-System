@@ -54,13 +54,11 @@
             if (mysqli_stmt_execute($stmt2)) {
                 // Redirect to login page
                 header("location: dashboard.php?UID=$UID");
-            } else {
+            }else {
                 echo "Something went wrong. Please check that you have entered the correct details.";
             }
-
-            mysqli_stmt_close($stmt2);    
-    }
-    // Close connection
+            mysqli_stmt_close($stmt2);
+            }
 
 }
     ?>
@@ -85,7 +83,8 @@
                             <h3>
                                 <center>ADD STUDENT</center>
                             </h3>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                            <form action="addstudent.php?UID=<?php echo $_GET['UID']?>" method="post">
+
                                 <div class="form-group">
                                     <label>STUDENT ID</label>
                                     <input class="au-input au-input--full" type="number" name="studentid" placeholder="STUDENT ID" required>

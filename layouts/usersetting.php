@@ -9,8 +9,8 @@ if(isset($_GET['logout']) && $_GET['logout'] == true)
 //Fetch data 
 $UID = $_GET['UID'];
 $fetch = "SELECT username FROM login AS A LEFT OUTER JOIN student AS B ON A.USERID = B.USERID LEFT OUTER JOIN staff AS C ON B.USERID = C.USERID LEFT OUTER JOIN companyuser AS D ON C.USERID = D.UserId WHERE A.USERID = '".$UID."'";
-$s = mysqli_query($conn, $fetch);
-$usersetting = mysqli_fetch_array($s);
+$st = mysqli_query($conn, $fetch);
+$usersetting = mysqli_fetch_array($st);
 ?>
 <!-- HEADER DESKTOP-->
 <header class="header-desktop">
