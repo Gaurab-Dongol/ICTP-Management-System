@@ -37,10 +37,10 @@ function getCompany(val) {
 
     if(isset($_POST['submit']))
     {
-        $sql = "INSERT INTO internship (companyid, companyuserid, jobrole, description, closingdate) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO internship (companyid, companyuserid, jobrole, description, closingdate, location) VALUES (?,?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             
-            mysqli_stmt_bind_param($stmt, "sssss", $param_companyid, $param_companyuid, $param_jobrole, $param_desc, $param_cdate);
+            mysqli_stmt_bind_param($stmt, "ssssss", $param_companyid, $param_companyuid, $param_jobrole, $param_desc, $param_cdate, $param_loc);
             //$param_cnid = trim($_POST["companyn"]);
             //$sql3 = "select companyId from company where companyname = '" . $param_cnid . "'";
             //$rs = mysqli_query($conn, $sql3);
@@ -53,7 +53,8 @@ function getCompany(val) {
             
             $timestamp = strtotime($_POST["cdate"]);
             $param_cdate = date("Y-m-d", $timestamp);
-        
+            
+            $param_loc = trim($_POST["location"]);    
         
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
@@ -139,6 +140,10 @@ function getCompany(val) {
                                     </div>
                                     <div class="form-group">
                                     <textarea class="ckeditor" name="InternDesc"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>Location</strong></label>
+                                    <input class="au-input au-input--full" type="text" name="location" required>
                                 </div>
                                 <div class="form-group">
                                     <label><strong>Close Date</strong></label>

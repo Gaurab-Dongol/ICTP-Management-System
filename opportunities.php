@@ -50,6 +50,7 @@
                                                 <th>Company</th>
                                                 <th>Website</th>
                                                 <th>Description</th>
+                                                <th>Location</th>
                                                 <th>Closing_Date</th>
                                                 <th></th>
                                             </tr>
@@ -69,6 +70,7 @@
                                                     <span class="block-email"><?php echo $row["Website"]?></span>
                                                 </td>
                                                 <td class="desc"><?php echo $row["Description"]?></td>
+                                                <td><?php echo $row["Location"]?></td>
                                                 <td><?php echo $row["ClosingDate"]?></td>
                                                 <td>
                                                     <div class="table-data-feature">
