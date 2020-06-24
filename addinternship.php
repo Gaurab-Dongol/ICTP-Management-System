@@ -37,10 +37,10 @@ function getCompany(val) {
 
     if(isset($_POST['submit']))
     {
-        $sql = "INSERT INTO internship (companyid, companyuserid, jobrole, description) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO internship (companyid, companyuserid, jobrole, description, closingdate) VALUES (?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             
-            mysqli_stmt_bind_param($stmt, "ssss", $param_companyid, $param_companyuid, $param_jobrole, $param_desc);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_companyid, $param_companyuid, $param_jobrole, $param_desc, $param_cdate);
             //$param_cnid = trim($_POST["companyn"]);
             //$sql3 = "select companyId from company where companyname = '" . $param_cnid . "'";
             //$rs = mysqli_query($conn, $sql3);
@@ -50,6 +50,10 @@ function getCompany(val) {
             $param_companyuid = trim($_POST["contactNm"]);
             $param_jobrole = trim($_POST["JobRl"]); 
             $param_desc = trim($_POST["InternDesc"]);
+            
+            $timestamp = strtotime($_POST["cdate"]);
+            $param_cdate = date("Y-m-d", $timestamp);
+        
         
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
@@ -135,7 +139,11 @@ function getCompany(val) {
                                     </div>
                                     <div class="form-group">
                                     <textarea class="ckeditor" name="InternDesc"></textarea>
-                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>Close Date</strong></label>
+                                    <input class="au-input au-input--full" type="date" name="cdate" required>
+                                </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
 </div>
 </form>
