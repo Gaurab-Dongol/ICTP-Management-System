@@ -7,24 +7,25 @@
 		exit;
 	}		
 
-	require_once('inc/config.php');
+    
+    require_once('inc/config.php');
     require_once('layouts/header.php'); 
 
     $UID = $_GET['UID'];
 	if(isset($_POST['submit']))
     {
-        $sql2 = "INSERT INTO companyuser (firstname, lastname, role, emailaddress, contactno) VALUES (?,?,?,?,?)";
+        $sql2 = "INSERT INTO companyuser (firstname, lastname, role, emailaddress, contactno, companyid) VALUES (?,?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql2)) {
-            mysqli_stmt_bind_param($stmt, "sssss", $param_fname, $param_lname, $param_role, $param_emailadd, $param_cno);
-
+            mysqli_stmt_bind_param($stmt, "ssssss", $param_fname, $param_lname, $param_role, $param_emailadd, $param_cno, $param_cid);
+            
+           
             $param_fname = trim($_POST["firstName"]);
             $param_lname =  trim($_POST["lastName"]);
             $param_role = trim($_POST["role"]);
             $param_emailadd = trim($_POST["emailadd"]);
             $param_cno = trim($_POST["contactNo"]);
-            $cid = "1002";
-            //$param_uid = 1;
-
+            $param_cid = trim($_POST["companynm"]);
+           
 
             if (mysqli_stmt_execute($stmt)) {
                 // Redirect to login page
@@ -59,7 +60,24 @@
                             <h3>
                                 <center>ADD COMPANY <b> CONTACT </b> </center>
                             </h3>
-                            <form action="add_company.php?UID=<?php echo $_GET['UID']?>" method="post">
+                            <form action="addcontact.php?UID=<?php echo $_GET['UID']?>" method="post">
+ 
+                                    <div class="form-group">
+                                    <label for="select" class=" form-control-label">COMPANY NAME </label>
+                                    <select name="companynm" id="companynm" class="form-control" >
+                                    <?php
+                                    $query = "SELECT * from company order by companyname";
+                                    $results = mysqli_query($conn,$query);
+                                    while ($rows = mysqli_fetch_assoc($results))
+                                    { 
+                                    ?>
+                                    <option value="<?php echo $rows['CompanyId']?>"><?php echo $rows['CompanyName']?></option>
+                                    <?php
+                                    } 
+                                    ?>
+                                    </select>
+                                    </div>
+                            
                                 <div class="form-group">
                                     <label>FIRST NAME</label>
                                     <input class="au-input au-input--full" type="text" name="firstName" placeholder="First Name" required>
