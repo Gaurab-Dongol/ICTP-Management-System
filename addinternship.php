@@ -1,3 +1,19 @@
+<!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+function getCompany(val) {
+	$.ajax({
+	type: "POST",
+	url: "fetch.php",
+	data:'cid='+val,
+	success: function(data){
+		$("#contact-Nm").html(data);
+	}
+	});
+}
+
+</script>   
+
 <?php 
 	session_start();
 	
@@ -11,7 +27,16 @@
     require_once('layouts/header.php'); 
 
     $UID = $_GET['UID'];
-	if(isset($_POST['submit']))
+    $company = "";
+    $query = "SELECT companyid, CompanyName  from company order by companyname";
+    $results = mysqli_query($conn,$query);
+    while ($rows = mysqli_fetch_array($results))
+    {
+     $company .= '<option value="'.$rows["companyid"].'">'.$rows["CompanyName"] .'</option>';
+    }
+     
+
+    if(isset($_POST['submit']))
     {
         $sql = "INSERT INTO internship (companyid, companyuserid, jobrole, description) VALUES (?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
@@ -23,7 +48,7 @@
             //$row = mysqli_fetch_row($rs);
             //$param_companyid = $row[0];
             $param_companyid =   trim($_POST["companynm"]);
-            $param_companyuid = '1234';  //trim($_POST["contactNm"]);
+            $param_companyuid = '6';  //trim($_POST["contactNm"]);
             $param_jobrole = trim($_POST["JobRl"]); 
             $param_desc = trim($_POST["InternDesc"]);
         
@@ -60,25 +85,19 @@
                             <h3>
                                 <center>ADD INTERNSHIP</center>
                             </h3>
-                            <form action="" method="POST">                                
+                            <form action="addinternship.php?UID=<?php echo $_GET['UID']?>" method="POST">                                
                                 <div class="card">
                                     <div class="card-header">
                                         <strong>Company Name</strong>
                                     </div>
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label"></label>
-                                    <select name="companynm" id="companynm" class="form-control" >
-                                    <?php
-                                    $query = "SELECT * from company order by companyname";
-                                    $results = mysqli_query($conn,$query);
-                                    while ($rows = mysqli_fetch_assoc($results))
-                                    { 
-                                    ?>
-                                    <option value="<?php echo $rows['CompanyId']?>"><?php echo $rows['CompanyName']?></option>
-                                    <?php
-                                    } 
-                                    ?>
+                                    
+                                    <select name="companynm" id="companynm" class="form-control action" onChange="getCompany(this.value);">
+                                    <option value="" disabled selected>Select Company</option>
+                                    <?php echo $company; ?>
                                     </select>
+                  
                                     </div>
                                     <div class="form-actions form-group">
                                                 <button type="submit" 
@@ -95,20 +114,9 @@
                                     <div class="form-group">
                                 
                                     <label for="select" class=" form-control-label"></label>
-                                    <select name="contactNm"  class="form-control">
-                                    <?php
-                                    $param_companyid = 1000;//trim($_POST["companynm"]);
-                                    $param_companynm = trim($_POST["companynm"]);
-                                    //$query = "SELECT concat(lastname, ', ', firstname) as 'fullname',  companyuserID from companyuser where companyid = '" . $param_companynnm . "' ";
-                                    $query = "SELECT concat(lastname, ', ', firstname) as 'fullname',  companyuserID from companyuser";
-                                    $results = mysqli_query($conn,$query);
-                                    while ($rows = mysqli_fetch_assoc($results))
-                                    { 
-                                    ?>
-                                    <option value="<?php echo $rows['CompanyuserId']?>"> <?php echo $rows['fullname']?></option>
-                                    <?php
-                                    } 
-                                    ?>
+                                    <select name="contactNm" id="contact-Nm" class="form-control">
+                                    <option value="" disabled selected>Select Contact</option>
+                                    
                                     </select>
                                     </div>
                                     <div class="form-actions form-group">
@@ -138,6 +146,6 @@
             <!-- END MAIN CONTENT-->
         </div>
     </div>
-    
 
-    <?php require_once('layouts/footer.php'); ?>
+
+<?php require_once('layouts/footer.php'); ?>
