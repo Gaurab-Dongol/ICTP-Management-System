@@ -11,9 +11,36 @@
     require_once('layouts/header.php'); 
     $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
     $UID = $_GET['UID'];
+    $uname_err = "";
     
     if(isset($_POST['submit']))
     {
+        $sql = "SELECT userid FROM login WHERE username = ?";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+    
+            $param_username = trim($_POST["emailadd"]);
+    
+            if (mysqli_stmt_execute($stmt)) {
+    
+                mysqli_stmt_store_result($stmt);
+    
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    $uname_err = "This email -" . $param_username . "- is already registered.";
+                } else {
+                    $uname = trim($_POST["emailadd"]);
+                }
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }    
+
+            mysqli_stmt_close($stmt);
+        } 
+        
+        if (empty($uname_err)) {
+
         $sql = "INSERT INTO login (username, password, roleid) VALUES (?, ?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             
@@ -47,7 +74,7 @@
             }
             mysqli_stmt_close($stmt);
             }
-
+        }
         }
         
     ?>
@@ -106,7 +133,7 @@
                                 <div class="form-group">
                                     <label>EMAIL ADDRESS</label>
                                     <input class="au-input au-input--full" type="text" name="emailadd" placeholder="Email Address" required >
-                                    
+                                    <?php echo  "<p> <font color=red> $uname_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>

@@ -8,9 +8,64 @@
 	}		
 	require_once('inc/config.php');
     require_once('layouts/header.php'); 
+    
+    
     $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
     $UID = $_GET['UID'];
+    $uname_err = $sid_err = "";
+
     if (isset($_POST['submit'])) {
+        $sql = "SELECT userid FROM login WHERE username = ?";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+    
+            $param_username = trim($_POST["uname"]);
+    
+            if (mysqli_stmt_execute($stmt)) {
+    
+                mysqli_stmt_store_result($stmt);
+    
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    $uname_err = "This email -" . $param_username . "- is already registered.";
+                } else {
+                    $uname = trim($_POST["uname"]);
+                }
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+    
+    
+            mysqli_stmt_close($stmt);
+        } 
+        
+        $sql5 = "SELECT studentid FROM student WHERE studentid = ?";
+
+        if ($stmt = mysqli_prepare($conn, $sql5)) {
+       
+        mysqli_stmt_bind_param($stmt, "s", $param_sid );
+
+        $param_sid = trim($_POST["studentid"]);
+
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $sid_err = "This studentid -" . $param_sid . "- is already registered.";
+            } else {
+                $param_sid = trim($_POST["studentid"]);
+            }
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
+        }
+
+        mysqli_stmt_close($stmt);
+        }
+
+
+
+        if (empty($uname_err) && empty($sid_err)) {
 
         $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
 
@@ -52,7 +107,7 @@
             mysqli_stmt_close($stmt2);
             }
 
-}
+}}
     ?>
 
     <div class="page-wrapper">
@@ -80,6 +135,7 @@
                                 <div class="form-group">
                                     <label>STUDENT ID</label>
                                     <input class="au-input au-input--full" type="number" name="studentid" placeholder="STUDENT ID" required>
+                                    <?php echo  "<p> <font color=red> $sid_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>FIRST NAME</label>
@@ -92,6 +148,7 @@
                                 <div class="form-group">
                                     <label>UNIVERSITY EMAIL</label>
                                     <input class="au-input au-input--full" type="email" name="uname" placeholder="UNIVERSITY EMAIL"required>
+                                    <?php echo  "<p> <font color=red> $uname_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
