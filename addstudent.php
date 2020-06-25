@@ -407,6 +407,22 @@
             <!-- END MAIN CONTENT-->
         </div>
     </div>
-    
+        <script type="text/javascript">
+        var password = document.getElementById("password"),
+            repassword = document.getElementById("repassword");
+
+        function validatePassword() {
+            if (password.value != repassword.value) {
+                repassword.setCustomValidity("Passwords Don't Match");
+            } else {
+                repassword.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        repassword.onkeyup = validatePassword;
+        </script>
+        <!-- Jquery JS-->
+        <script src="vendor/jquery-3.2.1.min.js"></script>
 
     <?php require_once('layouts/footer.php'); ?>

@@ -7,13 +7,27 @@
 		exit;
 	}		
 
-    
     require_once('inc/config.php');
     require_once('layouts/header.php'); 
-
+    $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
     $UID = $_GET['UID'];
-	if(isset($_POST['submit']))
+    
+    if(isset($_POST['submit']))
     {
+        $sql = "INSERT INTO login (username, password, roleid) VALUES (?, ?,?)";
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            
+            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role);
+
+            // Set parameters
+            $param_username = trim($_POST["emailadd"]);
+            //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_password = trim($_POST["password"]);
+            $param_role = 4;  #company user
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        }
+        
         $sql2 = "INSERT INTO companyuser (firstname, lastname, role, emailaddress, contactno, companyid) VALUES (?,?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql2)) {
             mysqli_stmt_bind_param($stmt, "ssssss", $param_fname, $param_lname, $param_role, $param_emailadd, $param_cno, $param_cid);
@@ -27,8 +41,7 @@
             $param_cid = trim($_POST["companynm"]);
            
 
-            if (mysqli_stmt_execute($stmt)) {
-                // Redirect to login page
+            if (mysqli_stmt_execute($stmt)) {                
                 header("location: addinternship.php?UID=$UID");
             }else {
                 echo "Something went wrong. Please check that you have entered the correct details.";
@@ -64,7 +77,8 @@
  
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label">COMPANY NAME </label>
-                                    <select name="companynm" id="companynm" class="form-control" >
+                                    <select name="companynm" id="companynm" class="form-control" required>
+                                    <option value="" disabled selected>Select Company</option>
                                     <?php
                                     $query = "SELECT * from company order by companyname";
                                     $results = mysqli_query($conn,$query);
@@ -88,18 +102,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label>ROLE</label>
-                                    <input class="au-input au-input--full" type="text" name="role" placeholder="e.g Manager" >
+                                    <input class="au-input au-input--full" type="text" name="role" placeholder="e.g Manager" required>
                                 </div>
                                 <div class="form-group">
                                     <label>EMAIL ADDRESS</label>
-                                    <input class="au-input au-input--full" type="text" name="emailadd" placeholder="Email Address" >
+                                    <input class="au-input au-input--full" type="text" name="emailadd" placeholder="Email Address" required >
                                     
                                 </div>
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
-                                    <input class="au-input au-input--full" type="text" name="contactNo" placeholder="Contact Number" >
+                                    <input class="au-input au-input--full" type="text" name="contactNo" placeholder="Contact Number" required>
                                 </div>
                                 
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="au-input au-input--full" type="password" name="password" pattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$" id="password" placeholder="Password" required>
+                                    <?php echo  "<p> <font color=blue> <small> $pwd_format </small> </font> </p>"; ?>
+                                </div>
+                                <div class="form-group">
+                                    <label>Re Enter Password</label>
+                                    <input class="au-input au-input--full" type="password" name="repassword" pattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$" id="repassword" placeholder="Re Enter Password" required>
+                                </div>
+
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
                                 </form>
                         </div>
@@ -109,5 +133,22 @@
                         <!-- END MAIN CONTENT-->
                 </div>
             </div>
+        <script type="text/javascript">
+        var password = document.getElementById("password"),
+            repassword = document.getElementById("repassword");
+
+        function validatePassword() {
+            if (password.value != repassword.value) {
+                repassword.setCustomValidity("Passwords Don't Match");
+            } else {
+                repassword.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        repassword.onkeyup = validatePassword;
+        </script>
+        <!-- Jquery JS-->
+        <script src="vendor/jquery-3.2.1.min.js"></script>
             
     <?php require_once('layouts/footer.php'); ?>
