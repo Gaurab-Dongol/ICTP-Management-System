@@ -10,19 +10,20 @@
     require_once('layouts/header.php'); 
 
     if(isset($_POST["SubmitBtn"]))
+    {
+        $target = "report/";
+        $target = $target . basename($_FILES['file-input']['name']);
+        $ok = 1;
+        if (move_uploaded_file($_FILES['file-input']['tmp_name'], $target))
         {
-            $target = "report/";
-            $target = $target . basename($_FILES['uploaded']['name']);
-            $ok = 1;
-            if (move_uploaded_file($_FILES['uploaded']['tmp_name'], $target))
-            {
-                echo "The file " . basename($_FILES['uploaded']['name']) . " has been uploaded";
-            }
-            else
-            {
-                echo "Sorry, there was a problem uploading your file.";
-            }
+            $comment = $_POST["comment"];
+            $insert = $conn->query("INSERT into finalreport (InternshipId, StudentID, DateSubmitted, Filename, WeekNo, StudentComment) VALUES ('19513498','19513498','','".$fileName."','','$comment')");
         }
+        else
+        {
+            echo "Sorry, there was a problem uploading your file.";
+        }
+    }
 ?>
 <div class="page-wrapper">
     <!-- PAGE CONTAINER-->
@@ -47,7 +48,7 @@
                                 <label for="textarea-input" class=" form-control-label">Comment</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <textarea class="ckeditor" name="textarea-input" id="textarea-input" class="form-control"></textarea>
+                                <textarea class="ckeditor" name="comment" id="textarea-input" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="row form-group">

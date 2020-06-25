@@ -74,6 +74,18 @@
                     <div class="container-fluid">
                     <?php 
                     //only visible to admin 
+                    if($_SESSION['RoleId'] == 4){?>
+                    <div class="table-button" align="right">
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalWorkEx">
+                                <i class="fas fa-edit"></i>Edit</button>
+                        </div>
+                        <h2>Western Sydney University</h2>
+                        <h3>TGP Global</h3>
+                        <h4>www.westernsydney.edu.au</h4>
+                        <h4>+61458792158</h4>
+                    <?php } ?>
+                    <?php 
+                    //only visible to admin 
                     if($_SESSION['RoleId'] == 3){?>
                     <div class="row">
                             <div class="col-md-12">
