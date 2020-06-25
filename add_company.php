@@ -10,10 +10,34 @@
 
 	require_once('inc/config.php');
     require_once('layouts/header.php'); 
-
+    $err_msg = "";
     $UID = $_GET['UID'];
 	if(isset($_POST['submit']))
-    {
+    {   
+
+        $sql2a = "SELECT companyname FROM company WHERE companyname = ?";
+        if ($stmt = mysqli_prepare($conn, $sql2a)) {
+           
+            mysqli_stmt_bind_param($stmt, "s", $param_cname );
+    
+            $param_cname = trim($_POST["CompanyName"]);
+    
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_store_result($stmt);
+    
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    $err_msg = "This company name -" . $param_cname . "- is already registered.";
+                } else {
+                    $param_cname = trim($_POST["CompanyName"]);
+                }
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+    
+            mysqli_stmt_close($stmt);
+        }
+
+        if (empty($err_msg)) {
         $sql = "INSERT INTO company (companyname, industry, website, officeno) VALUES (?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             
@@ -32,6 +56,7 @@
             }
             mysqli_stmt_close($stmt);
             }
+        }
 
         }
         
@@ -60,7 +85,8 @@
                             <form action="add_company.php?UID=<?php echo $_GET['UID']?>" method="post">
                                 <div class="form-group">
                                     <label>COMPANY NAME</label>
-                                    <input class="au-input au-input--full" type="text" name="CompanyName" placeholder="Company Name" required>
+                                    <input class="au-input au-input--full" type="text" name="CompanyName" id="CompanyName" placeholder="Company Name" required>
+                                     <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>INDUSTRY</label>
@@ -84,5 +110,4 @@
                         <!-- END MAIN CONTENT-->
                 </div>
             </div>
-            
     <?php require_once('layouts/footer.php'); ?>
