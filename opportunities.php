@@ -46,6 +46,7 @@
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
+                                                <th>Reference_No</th>
                                                 <th>Position</th>
                                                 <th>Company</th>
                                                 <th>Website</th>
@@ -64,6 +65,7 @@
                                         ?> 
                                         <tbody>
                                             <tr class="tr-shadow">
+                                                <td><?php echo $row["InternshipId"]?></td>
                                                 <td><?php echo $row["JobRole"]?></td>
                                                 <td><?php echo $row["CompanyName"]?></td>
                                                 <td>
