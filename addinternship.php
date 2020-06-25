@@ -41,11 +41,6 @@ function getCompany(val) {
         if ($stmt = mysqli_prepare($conn, $sql)) {
             
             mysqli_stmt_bind_param($stmt, "ssssss", $param_companyid, $param_companyuid, $param_jobrole, $param_desc, $param_cdate, $param_loc);
-            //$param_cnid = trim($_POST["companyn"]);
-            //$sql3 = "select companyId from company where companyname = '" . $param_cnid . "'";
-            //$rs = mysqli_query($conn, $sql3);
-            //$row = mysqli_fetch_row($rs);
-            //$param_companyid = $row[0];
             $param_companyid =   trim($_POST["companynm"]);
             $param_companyuid = trim($_POST["contactNm"]);
             $param_jobrole = trim($_POST["JobRl"]); 
@@ -57,7 +52,6 @@ function getCompany(val) {
             $param_loc = trim($_POST["location"]);    
         
             if (mysqli_stmt_execute($stmt)) {
-                // Redirect to login page
                 header("location: opportunities.php?UID=$UID");
             }else {
                 echo "Something went wrong. Please check that you have entered the correct details.";

@@ -15,7 +15,6 @@
     {
         $sql = "INSERT INTO login (username, password, roleid) VALUES (?, ?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role);
 
             // Set parameters
@@ -42,7 +41,6 @@
             $param_uid = $row[0];
 
             if (mysqli_stmt_execute($stmt)) {
-                // Redirect to login page
                 header("location: staff.php?UID=$UID");
             }else {
                 echo "Something went wrong. Please check that you have entered the correct details.";

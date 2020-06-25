@@ -10,19 +10,14 @@
     require_once('layouts/header.php'); 
     $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
     $UID = $_GET['UID'];
-	// Check input errors before inserting in database
     if (isset($_POST['submit'])) {
 
-        // Prepare second insert statement
-        
         $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
-        // Prepare second insert statement
 
         if ($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
+           
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
 
-            // Set parameters
             $param_username = trim($_POST["uname"]);
             //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_password = trim($_POST["password"]);
@@ -33,10 +28,8 @@
 		$sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
 
         if ($stmt2 = mysqli_prepare($conn, $sql2)) {
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt2, "sssssssss", $param_sid, $param_fname, $param_lname, $param_cno, $param_spec, $param_yren, $param_natio, $param_email, $param_uid);
 
-            // Set parameters
             $param_sid = trim($_POST["studentid"]);
             $param_fname = trim($_POST["firstname"]);
             $param_lname = trim($_POST["lastname"]);
@@ -52,7 +45,6 @@
             $param_uid = $row[0];
             
             if (mysqli_stmt_execute($stmt2)) {
-                // Redirect to login page
                 header("location: dashboard.php?UID=$UID");
             }else {
                 echo "Something went wrong. Please check that you have entered the correct details.";

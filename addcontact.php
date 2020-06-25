@@ -19,7 +19,6 @@
             
             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role);
 
-            // Set parameters
             $param_username = trim($_POST["emailadd"]);
             //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_password = trim($_POST["password"]);
