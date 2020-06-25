@@ -100,6 +100,7 @@
                 </div>
             </div>
     
+            
     <div id="myModalProfile" class="modal fade" role="dialog">
               <div class="modal-dialog">
               <!-- Modal content-->
@@ -109,9 +110,8 @@
                   </div>
                   <div class="modal-body">
                     <div class="card">
-                        <div class="card-header">
-                        
-                            <strong>Weekly Diary</strong>
+                        <div class="card-header">   
+                          <strong>Weekly Diary</strong>
                           </div>
                           <form action="" method="POST">
                           <div class="card-body card-block">
