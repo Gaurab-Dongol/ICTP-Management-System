@@ -1,7 +1,7 @@
 <?php
 require_once('inc/config.php');
 
-$query = "SELECT concat(LastName, ', ', FirstName) as 'fullname',  companyuserID from companyuser where companyid = '".$_POST['cid']."' ";
+$query = "SELECT concat(LastName, ', ', FirstName) as 'fullname',  companyuserID from companyuser where companyid = '".$_POST['cid']."' order by lastname, firstname";
 //$query = " SELECT * from companyuser ";
 $result = mysqli_query($conn, $query);
 $output .= '<option value="" disabled selected>Select Contact</option>';
