@@ -12,7 +12,7 @@
                             if($_SESSION['RoleId'] == 1){?>
                         <li>
                             <a  href="#">
-                                <i class="fas fa-tachometer-alt"></i>Student</a>
+                                <i class="fas fa-users"></i>Student</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">Student List</a>
@@ -24,7 +24,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-tachometer-alt"></i>Internship</a>
+                                <i class="fas fa-desktop"></i>Internship</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">Internship List</a>
@@ -53,8 +53,8 @@
 		                if(($_SESSION['RoleId'] == 2)){
                         ?>
                         <li class="active has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Student</a>
+                            <a href="#">
+                                <i class="fas fa-users"></i>Student</a>
                         </li>
                         <li>
                             <a href="#">
@@ -68,15 +68,15 @@
                         {?>
                         <li>
                             <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-table"></i>Profile</a>
+                                <i class="fas fa-user"></i>Profile</a>
                         </li>
                         <li>
                             <a href="add_diary.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-map-marker-alt"></i>My Diary</a>
+                                <i class="fas fa-book"></i>My Diary</a>
                         </li>
                         <li>
                             <a href="internship.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-calendar-alt"></i>My Internship</a>
+                                <i class="fas fa-desktop"></i>My Internship</a>
                         </li>
                         <li>
                             <a href="studentreport.php?UID=<?php echo $_GET['UID']?>">
@@ -93,15 +93,15 @@
                         {?>
                         <li>
                             <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-table"></i>Profile</a>
+                                <i class="fas fa-user"></i>Profile</a>
                         </li>
                         <li>
                             <a href="studentprofile.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-table"></i>Student Profile</a>
+                                <i class="fas fa-users"></i>Student Profile</a>
                         </li>
                         <li>
                             <a href="weeklydiary.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-chart-bar"></i>Weekly Diary</a>
+                                <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
                     
                         <li>
