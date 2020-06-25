@@ -9,6 +9,16 @@
 
   require_once('inc/config.php');
   require_once('layouts/header.php'); 
+  
+  $UID = $_GET['UID'];
+  $company = "";
+  $query = "SELECT internshipID FROM internship where closingdate > date_sub(curdate(),interval 90 day) order by InternshipId";
+    $results = mysqli_query($conn,$query);
+    while ($rows = mysqli_fetch_array($results))
+    {
+     $company .= '<option value="'.$rows["internshipID"].'">'.$rows["internshipID"] .'</option>';
+    }
+  
   ?>
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
@@ -71,12 +81,39 @@
                           </div>
                           <form action="" method="POST">
                           <div class="card-body card-block">
-                            <div class="form-group">
-                              <label class=" form-control-label">Job Reference No</label>
-                              <input type="text" placeholder="Reference No" class="form-control" name="jrNo">
-                            </div>
                             
-                            
+
+
+                          <div class="card">
+                                    <div class="card-header">
+                                        <strong>Job Reference No</strong>
+                                        <!--<small> Form</small> -->
+                                    </div>
+                                    <div class="form-group">
+                                
+                                    <label for="select" class=" form-control-label"></label>
+                                    <select name="refno" id="ref-No" class="form-control action" onChange="getCompany(this.value);">
+                                    <option value="" disabled selected>Select Reference No</option>
+                                    <?php echo $company; ?>
+                                    </select>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                    <label class=" form-control-label">Company</label>
+                                    <input type="text" placeholder="Company" class="form-control" name="company" disabled>
+                                    </div>
+
+                                    <div class="form-actions form-group">
+                                                <button type="submit" 
+                                                class="btn au-btn-icon au-btn--green btn-sm">
+                                                <a href="add_internshipst.php?UID=<?php echo $_GET['UID']?>"> Add Internship</a></button>             
+                                    </div>
+                                </div>
+
+
+
+
+
 
                             <div class="form-group">
                                     <label for="textarea-input" class="form-control-label">Job Responsibility<small><i>(in bullet form)</i></small> </label>
