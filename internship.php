@@ -75,6 +75,9 @@
                               <label class=" form-control-label">Job Reference No</label>
                               <input type="text" placeholder="Reference No" class="form-control" name="jrNo">
                             </div>
+                            
+                            
+
                             <div class="form-group">
                                     <label for="textarea-input" class="form-control-label">Job Responsibility<small><i>(in bullet form)</i></small> </label>
                                     </div>
