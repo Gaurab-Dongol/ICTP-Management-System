@@ -6,21 +6,85 @@
 		header('location:login.php?lmsg=true');
 		exit;
 	}		
-
 	require_once('inc/config.php');
-	require_once('layouts/header.php'); 
+    require_once('layouts/header.php'); 
+    
+    
     $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
-    // Check input errors before inserting in database
-    if (isset($_POST['submit'])) {
+    $UID = $_GET['UID'];
+    $uname_err = $sid_err = "";
 
-        // Prepare second insert statement
-        $sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
+    if (isset($_POST['submit'])) {
+        $sql = "SELECT userid FROM login WHERE username = ?";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+    
+            $param_username = trim($_POST["uname"]);
+    
+            if (mysqli_stmt_execute($stmt)) {
+    
+                mysqli_stmt_store_result($stmt);
+    
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    $uname_err = "This email -" . $param_username . "- is already registered.";
+                } else {
+                    $uname = trim($_POST["uname"]);
+                }
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+    
+    
+            mysqli_stmt_close($stmt);
+        } 
+        
+        $sql5 = "SELECT studentid FROM student WHERE studentid = ?";
+
+        if ($stmt = mysqli_prepare($conn, $sql5)) {
+       
+        mysqli_stmt_bind_param($stmt, "s", $param_sid );
+
+        $param_sid = trim($_POST["studentid"]);
+
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $sid_err = "This studentid -" . $param_sid . "- is already registered.";
+            } else {
+                $param_sid = trim($_POST["studentid"]);
+            }
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
+        }
+
+        mysqli_stmt_close($stmt);
+        }
+
+
+
+        if (empty($uname_err) && empty($sid_err)) {
+
+        $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+           
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+
+            $param_username = trim($_POST["uname"]);
+            //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_password = trim($_POST["password"]);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+        }
+		
+		$sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
 
         if ($stmt2 = mysqli_prepare($conn, $sql2)) {
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt2, "sssssssss", $param_sid, $param_fname, $param_lname, $param_cno, $param_spec, $param_yren, $param_natio, $param_email, $param_uid);
 
-            // Set parameters
             $param_sid = trim($_POST["studentid"]);
             $param_fname = trim($_POST["firstname"]);
             $param_lname = trim($_POST["lastname"]);
@@ -28,17 +92,22 @@
             $param_spec = trim($_POST["specialisation"]);
             $param_yren = trim($_POST["yearenrolled"]);
             $param_natio = trim($_POST["nationality"]);
-            $param_email = trim($_POST["username"]);
-            $param_username = trim($_POST["username"]);
+            $param_email = trim($_POST["uname"]);
+            $param_username = trim($_POST["uname"]);
             $sql3 = "select userid from login where username = '" . $param_username . "'";
             $rs = mysqli_query($conn, $sql3);
             $row = mysqli_fetch_row($rs);
             $param_uid = $row[0];
+            
+            if (mysqli_stmt_execute($stmt2)) {
+                header("location: dashboard.php?UID=$UID");
+            }else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+            mysqli_stmt_close($stmt2);
+            }
 
-    }
-    // Close connection
-    mysqli_close($conn);
-}
+}}
     ?>
 
     <div class="page-wrapper">
@@ -61,10 +130,12 @@
                             <h3>
                                 <center>ADD STUDENT</center>
                             </h3>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                            <form action="addstudent.php?UID=<?php echo $_GET['UID']?>" method="post">
+
                                 <div class="form-group">
                                     <label>STUDENT ID</label>
                                     <input class="au-input au-input--full" type="number" name="studentid" placeholder="STUDENT ID" required>
+                                    <?php echo  "<p> <font color=red> $sid_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>FIRST NAME</label>
@@ -76,7 +147,8 @@
                                 </div
                                 <div class="form-group">
                                     <label>UNIVERSITY EMAIL</label>
-                                    <input class="au-input au-input--full" type="email" name="username" placeholder="UNIVERSITY EMAIL"required>
+                                    <input class="au-input au-input--full" type="email" name="uname" placeholder="UNIVERSITY EMAIL"required>
+                                    <?php echo  "<p> <font color=red> $uname_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>CONTACT NUMBER</label>
@@ -384,6 +456,22 @@
             <!-- END MAIN CONTENT-->
         </div>
     </div>
-    
+        <script type="text/javascript">
+        var password = document.getElementById("password"),
+            repassword = document.getElementById("repassword");
+
+        function validatePassword() {
+            if (password.value != repassword.value) {
+                repassword.setCustomValidity("Passwords Don't Match");
+            } else {
+                repassword.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        repassword.onkeyup = validatePassword;
+        </script>
+        <!-- Jquery JS-->
+        <script src="vendor/jquery-3.2.1.min.js"></script>
 
     <?php require_once('layouts/footer.php'); ?>

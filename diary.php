@@ -9,29 +9,20 @@ if(!isset($_SESSION['RoleId']))
 
 require_once('inc/config.php');
 require_once('layouts/header.php'); 
-
-
-// Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$fname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
  
+$error_msg = "";
 $UID = $_GET['UID'];
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+
+//if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_POST['submit'])){
+  // Check input error
+    if(empty($error_msg)){
         
-        // Prepare an insert statement
         $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc, Task_StartDate, Task_EndDate ) VALUES (?,?,?,?,?,?)";
 
         if($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ssssss", $param_InternshipId, $param_sid, $param_totalHour, $param_taskDesc, $param_start, $param_end);
             
-            // Set parameters
-            //$param_InternshipId = trim($_POST[""])
-            //$param_InternshipId = '888';
             $sql4 = "select studentid from student where USERID='".$UID."'";
             $rs = mysqli_query($conn, $sql4);
             $row = mysqli_fetch_row($rs);
@@ -57,8 +48,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_end = date("Y-m-d", $timestamp);
 
 
-            // Attempt to execute the prepared statement
-
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to add page
                 header("location: add_diary.php?UID=$UID");
@@ -66,13 +55,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 echo "not working";
             }
 
-            // Close statement
             mysqli_stmt_close($stmt);
         }
     }
-    
-    // Close connection
-    mysqli_close($conn);
 }
 ?>
     <div class="page-wrapper">

@@ -50,7 +50,8 @@
                                                 <th>Company</th>
                                                 <th>Website</th>
                                                 <th>Description</th>
-                                                <th>Closes</th>
+                                                <th>Location</th>
+                                                <th>Closing_Date</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -69,11 +70,22 @@
                                                     <span class="block-email"><?php echo $row["Website"]?></span>
                                                 </td>
                                                 <td class="desc"><?php echo $row["Description"]?></td>
-                                                <td>2020-06-17</td>
+                                                <td><?php echo $row["Location"]?></td>
+                                                <td><?php echo $row["ClosingDate"]?></td>
                                                 <td>
                                                     <div class="table-data-feature">
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                                                             <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                            <button class="item" data-toggle="modal" data-target="#myModalProfile" name="Edit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete" name="Delete">
+                                                            <i class="zmdi zmdi-delete"></i>
                                                         </button>
                                                     </div>
                                                 </td>

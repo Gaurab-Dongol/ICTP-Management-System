@@ -10,8 +10,8 @@
                     <?php 
 		                //only visible to admin 
                             if($_SESSION['RoleId'] == 1){?>
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="#">
+                        <li>
+                            <a  href="#">
                                 <i class="fas fa-tachometer-alt"></i>Student</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
@@ -22,8 +22,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="#">
+                        <li>
+                            <a href="#">
                                 <i class="fas fa-tachometer-alt"></i>Internship</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
@@ -34,7 +34,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="active has-sub">
+                        <li>
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Unit Coordinator</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
@@ -49,8 +49,8 @@
                         <?php } ?>
 
                         <?php 
-		                    //only visible to unit co-ordinator
-		                    if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 3)){
+		                //only visible to unit co-ordinator
+		                if(($_SESSION['RoleId'] == 2)){
                         ?>
                         <li class="active has-sub">
                             <a class="js-arrow" href="#">
@@ -64,7 +64,7 @@
 
                         <?php 
 		                    //only visible to student
-                        if(($_SESSION['RoleId'] != 1 && $_SESSION['RoleId'] != 2))
+                        if(($_SESSION['RoleId'] == 3))
                         {?>
                         <li>
                             <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">
@@ -85,6 +85,32 @@
                         <li>
                             <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="far fa-check-square"></i>Opportunities</a>
+                        </li>
+                        <?php } ?>
+
+                        <?php 
+                        if(($_SESSION['RoleId'] == 4))
+                        {?>
+                        <li>
+                            <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-table"></i>Profile</a>
+                        </li>
+                        <li>
+                            <a href="studentprofile.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-table"></i>Student Profile</a>
+                        </li>
+                        <li>
+                            <a href="weeklydiary.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-chart-bar"></i>Weekly Diary</a>
+                        </li>
+                    
+                        <li>
+                            <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-table"></i>Add Internship</a>
+                        </li>
+                        <li>
+                            <a href="feedback.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-table"></i>Add Feedback</a>
                         </li>
                         <?php } ?>
                     </ul>

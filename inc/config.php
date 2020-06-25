@@ -1,5 +1,5 @@
 <?php 
-	session_start(); // we will use it later  to store logged in user information such as username
+	//session_start(); // we will use it later  to store logged in user information such as username
 	define("HOST","localhost");
 	define("DB_USER","root");
 	define("DB_PASS","root");

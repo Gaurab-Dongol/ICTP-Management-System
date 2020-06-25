@@ -1,56 +1,46 @@
 <?php
-// Include config file
+// Include DB config file
 require_once('inc/config.php');
 
-// Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$fname_err = $email_err = $username_err = $sid_err = $password_err = $confirm_password_err = "";
+$uname = $pwd = $confirm_pwd = $fname_err = $email_err = $uname_err = $sid_err = $pwd_err = $confirm_pwd_err = "";
 $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
-// Processing form data when form is submitted
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Validate username
     
-    // Prepare a select statement
     $sql = "SELECT userid FROM login WHERE username = ?";
 
     if ($stmt = mysqli_prepare($conn, $sql)) {
-        // Bind variables to the prepared statement as parameters
+        
         mysqli_stmt_bind_param($stmt, "s", $param_username);
 
-        // Set parameters
         $param_username = trim($_POST["username"]);
 
-        // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
-            /* store result */
+
             mysqli_stmt_store_result($stmt);
 
             if (mysqli_stmt_num_rows($stmt) > 0) {
-                $username_err = "This email -" . $param_username . " is already registered.";
+                $uname_err = "This email -" . $param_username . " is already registered.";
             } else {
-                $username = trim($_POST["username"]);
+                $uname = trim($_POST["username"]);
             }
         } else {
             echo "Something went wrong. Please check that you have entered the correct details.";
         }
 
-        // Close statement
+
         mysqli_stmt_close($stmt);
     }
     
-        // Prepare a select statement
     $sql5 = "SELECT studentid FROM student WHERE studentid = ?";
 
     if ($stmt = mysqli_prepare($conn, $sql5)) {
-        // Bind variables to the prepared statement as parameters
+       
         mysqli_stmt_bind_param($stmt, "s", $param_sid );
 
-        // Set parameters
         $param_sid = trim($_POST["studentid"]);
 
-        // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
-            /* store result */
             mysqli_stmt_store_result($stmt);
 
             if (mysqli_stmt_num_rows($stmt) > 0) {
@@ -62,34 +52,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "Something went wrong. Please check that you have entered the correct details.";
         }
 
-        // Close statement
         mysqli_stmt_close($stmt);
     }
 
-    // Check input errors before inserting in database
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($sid_err)  ) {
+    if (empty($uname_err) && empty($pwd_err) && empty($confirm_pwd_err) && empty($sid_err)  ) {
 
-        // Prepare insert statement
         $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
-        // Prepare second insert statement
         $sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
 
         if ($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_pwd);
 
-            // Set parameters
             $param_username = trim($_POST["username"]);
-            //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            $param_password = trim($_POST["password"]);
+            //$param_pwd = password_hash($pwd, PASSWORD_DEFAULT); // Creates a password hash
+            $param_pwd = trim($_POST["password"]);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
         }
         if ($stmt2 = mysqli_prepare($conn, $sql2)) {
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt2, "sssssssss", $param_sid, $param_fname, $param_lname, $param_cno, $param_spec, $param_yren, $param_natio, $param_email, $param_uid);
 
-            // Set parameters
             $param_sid = trim($_POST["studentid"]);
             $param_fname = trim($_POST["firstname"]);
             $param_lname = trim($_POST["lastname"]);
@@ -105,18 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $row = mysqli_fetch_row($rs);
             $param_uid = $row[0];
 
-            // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt2)) {
-                // Redirect to login page
                 header("location: login.php");
             } else {
-                echo "Something went wrong. Please check that you have entered the correct details.";
+                echo "Please check that you have entered the correct details.";
             }
             mysqli_stmt_close($stmt2);
         }
     }
 
-    // Close connection
     mysqli_close($conn);
 }
 ?>
@@ -190,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-group">
                                     <label>Western Email Address</label>
                                     <input class="au-input au-input--full" type="email" name="username" placeholder="12345678@student.westernsydney.edu.au" required>
-                                    <?php echo  "<p> <font color=red> $username_err </font> </p>"; ?>
+                                    <?php echo  "<p> <font color=red> $uname_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Contact Number</label>

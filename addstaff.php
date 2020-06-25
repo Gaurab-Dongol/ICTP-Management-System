@@ -11,11 +11,65 @@
     require_once('layouts/header.php'); 
     $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
     $UID = $_GET['UID'];
-	if(isset($_POST['submit']))
+    $uname_err = $sid_err = "";
+
+    if(isset($_POST['submit']))
     {
+        
+        $sql = "SELECT userid FROM login WHERE username = ?";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+    
+            $param_username = trim($_POST["EMAIL"]);
+    
+            if (mysqli_stmt_execute($stmt)) {
+    
+                mysqli_stmt_store_result($stmt);
+    
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    $uname_err = "This email -" . $param_username . "- is already registered.";
+                } else {
+                    $uname = trim($_POST["EMAIL"]);
+                }
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+    
+    
+            mysqli_stmt_close($stmt);
+        } 
+        
+        $sql5 = "SELECT staffid FROM staff WHERE staffid = ?";
+
+        if ($stmt = mysqli_prepare($conn, $sql5)) {
+       
+        mysqli_stmt_bind_param($stmt, "s", $param_sid );
+
+        $param_sid = trim($_POST["STAFFID"]);
+
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $sid_err = "This staffid -" . $param_sid . "- is already registered.";
+            } else {
+                $param_sid = trim($_POST["STAFFID"]);
+            }
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
+        }
+
+        mysqli_stmt_close($stmt);
+        }
+
+
+
+        if (empty($uname_err) && empty($sid_err)) {
+        
         $sql = "INSERT INTO login (username, password, roleid) VALUES (?, ?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role);
 
             // Set parameters
@@ -28,22 +82,27 @@
         }
         $sql1 = "INSERT INTO staff (StaffID,FirstName,LastName,EmailAddress,ContactNo,Position,USERID) VALUES (?,?,?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql1)) {
-            mysqli_stmt_bind_param ($stmt, "sssssss",$staffid, $firstName, $lastname, $email, $contactnumber,$position,$UID);
+            mysqli_stmt_bind_param ($stmt, "sssssss",$staffid, $firstName, $lastname, $email, $contactnumber,$position,$param_uid);
             $staffid = $_POST['STAFFID'];
             $firstName = $_POST['FIRSTNAME'];
             $lastname = $_POST['LASTNAME'];
             $email = $_POST['EMAIL'];
             $contactnumber = $_POST['CONTACTNUMBER'];
             $position = $_POST['POSITION'];
-        
+            $param_username = trim($_POST["EMAIL"]);
+            $sql3 = "select userid from login where username = '" . $param_username . "'";
+            $rs = mysqli_query($conn, $sql3);
+            $row = mysqli_fetch_row($rs);
+            $param_uid = $row[0];
+
             if (mysqli_stmt_execute($stmt)) {
-                // Redirect to login page
                 header("location: staff.php?UID=$UID");
             }else {
                 echo "Something went wrong. Please check that you have entered the correct details.";
             }
             mysqli_stmt_close($stmt);
             }
+        }
 
         }
         
@@ -73,6 +132,7 @@
                                 <div class="form-group">
                                     <label>STAFF ID</label>
                                     <input class="au-input au-input--full" type="number" name="STAFFID" placeholder="STAFF ID" required>
+                                    <?php echo  "<p> <font color=red> $sid_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>FIRST NAME</label>
@@ -83,11 +143,12 @@
                                     <input class="au-input au-input--full" type="text" name="LASTNAME" placeholder="LAST NAME" required>
                                 </div
                                 <div class="form-group">
-                                    <label>CONTACT EMAIL</label>
+                                    <label>STAFF EMAIL</label>
                                     <input class="au-input au-input--full" type="email" name="EMAIL" placeholder="EMAIL"required>
+                                    <?php echo  "<p> <font color=red> $uname_err </font> </p>"; ?> 
                                 </div>
                                 <div class="form-group">
-                                    <label>CONTACT NUMBER</label>
+                                    <label>STAFF CONTACT NUMBER</label>
                                     <input class="au-input au-input--full" type="tel" name="CONTACTNUMBER" placeholder="+61XXXXXXXXX"required>
                                 </div>
                                 <div class="form-group">
@@ -112,5 +173,22 @@
                         <!-- END MAIN CONTENT-->
                 </div>
             </div>
+        <script type="text/javascript">
+        var password = document.getElementById("password"),
+            repassword = document.getElementById("repassword");
+
+        function validatePassword() {
+            if (password.value != repassword.value) {
+                repassword.setCustomValidity("Passwords Don't Match");
+            } else {
+                repassword.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        repassword.onkeyup = validatePassword;
+        </script>
+        <!-- Jquery JS-->
+        <script src="vendor/jquery-3.2.1.min.js"></script>
             
     <?php require_once('layouts/footer.php'); ?>
