@@ -79,6 +79,16 @@
                                                         </button>
                                                     </div>
                                                 </td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                            <button class="item" data-toggle="modal" data-target="#myModalProfile" name="Edit">
+                                                            <i class="zmdi zmdi-edit"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete" name="Delete">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                                 <?php } ?>

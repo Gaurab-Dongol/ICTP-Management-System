@@ -88,11 +88,11 @@
                                     <input class="au-input au-input--full" type="text" name="LASTNAME" placeholder="LAST NAME" required>
                                 </div
                                 <div class="form-group">
-                                    <label>CONTACT EMAIL</label>
+                                    <label>STAFF EMAIL</label>
                                     <input class="au-input au-input--full" type="email" name="EMAIL" placeholder="EMAIL"required>
                                 </div>
                                 <div class="form-group">
-                                    <label>CONTACT NUMBER</label>
+                                    <label>STAFF CONTACT NUMBER</label>
                                     <input class="au-input au-input--full" type="tel" name="CONTACTNUMBER" placeholder="+61XXXXXXXXX"required>
                                 </div>
                                 <div class="form-group">
