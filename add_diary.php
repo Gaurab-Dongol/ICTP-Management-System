@@ -100,6 +100,7 @@
                 </div>
             </div>
     
+            
     <div id="myModalProfile" class="modal fade" role="dialog">
               <div class="modal-dialog">
               <!-- Modal content-->
@@ -109,37 +110,29 @@
                   </div>
                   <div class="modal-body">
                     <div class="card">
-                        <div class="card-header">
-                        
-                            <strong>Profile</strong>
+                        <div class="card-header">   
+                          <strong>Weekly Diary</strong>
                           </div>
                           <form action="" method="POST">
                           <div class="card-body card-block">
-                            <div class="form-group">
-                              <label class=" form-control-label">First Name</label>
-                              <input type="text" value="<?php echo $r["FirstName"];?>"class="form-control" name="firstname">
-                            </div>
-                            <div class="form-group">
-                              <label class=" form-control-label">Last Name</label>
-                              <input type="text" value="<?php echo $r["LastName"];?>" class="form-control" name="lastName">
-                            </div>
-                            <div class="form-group">
-                              <label class=" form-control-label">Specialisation</label>
-                              <input type="text" value="<?php echo $r["Specialisation"];?>" class="form-control" name="Specialisation">
-                            </div>
-                            <div class="form-group">
-                              <label class=" form-control-label">Email</label>
-                              <input type="text" value="<?php echo $r["EmailAddress"];?>" class="form-control" name="Email">
-                            </div>
-                            <div class="form-group">
-                             <label class=" form-control-label">Contact No</label>
-                             <input type="text" value="<?php echo $r["ContactNo"];?>" class="form-control" name="ContactNo">
-                            </div>
-                            
-                            <div class="form-group">
-                             <label class=" form-control-label">Nationality</label>
-                             <input type="text" value="<?php echo $r["Nationality"];?>" class="form-control" name="Nationality">
-                            </div>
+                          <div class="form-group">
+                          <label for="textarea-input" class="form-control-label">Completed Task <small><i>(in bullet form)</i></small> </label>
+                          </div>
+                          <div class="form-group">
+                          <textarea class="ckeditor" name="TaskDesc"></textarea>
+                           </div>
+                           <div class="form-group">
+                           <label>Numbers of Hour</label>
+                          <input class="au-input au-input--full" type="number" name="NoHours" required>
+                          </div>
+                          <div class="form-group">
+                          <label>Start Date:</label>
+                          <input class="au-input au-input--full" type="date" name="start" required>
+                          </div>
+                          <div class="form-group">
+                          <label>End Date:</label>
+                          <input class="au-input au-input--full" type="date" name="end" required>
+                           </div>   
                           </div>
                       </div>
                   </div>

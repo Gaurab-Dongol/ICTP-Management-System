@@ -32,7 +32,7 @@
                                             <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfile">
                                                 Add Internship</button>
                                         </div>
-                                        <h3>My Internships</h3>
+                                        <h3>My Internship Detail</h3>
                                     </div>
                                     <hr>
                                     <div>
@@ -67,26 +67,23 @@
                     <div class="card">
                         <div class="card-header">
                         
-                            <strong>Add New Internship</strong>
+                            <strong>Add My Internship</strong>
                           </div>
                           <form action="" method="POST">
                           <div class="card-body card-block">
                             <div class="form-group">
-                              <label class=" form-control-label">Position</label>
-                              <input type="text" placeholder="position" class="form-control" name="position">
+                              <label class=" form-control-label">Job Reference No</label>
+                              <input type="text" placeholder="Reference No" class="form-control" name="jrNo">
                             </div>
+                            
+                            
+
                             <div class="form-group">
-                              <label class=" form-control-label">Organisation</label>
-                              <input type="text" placeholder="organisation" class="form-control" name="organisation">
-                            </div>
-                            <div class="form-group">
-                              <label class=" form-control-label">Location</label>
-                              <input type="text" placeholder="location" class="form-control" name="Specialisation">
-                            </div>
-                            <div class="form-group">
-                              <label class=" form-control-label">Description</label>
-                              <textarea class="au-input au-input--full" rows="5" placeholder="Internship Description (optional)"></textarea>
-                            </div>
+                                    <label for="textarea-input" class="form-control-label">Job Responsibility<small><i>(in bullet form)</i></small> </label>
+                                    </div>
+                                    <div class="form-group">
+                                    <textarea class="ckeditor" name="JobRes"></textarea>
+                                    </div>
                           </div>
                       </div>
                   </div>
