@@ -1,25 +1,83 @@
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script>
+function getCom(val) {
+	$.ajax({
+	type: "POST",
+	url: "fetch_b.php",
+	data:'cid='+val,
+	success: function(data){
+		$("#company-Nm").html(data);
+	}
+	});
+}
+
+function getComa(val) {
+	$.ajax({
+	type: "POST",
+	url: "fetch_c.php",
+	data:'cid='+val,
+	success: function(data){
+		$("#contact-Nm").html(data);
+	}
+	});
+}
+</script>   
+
 <?php 
-  //session_start();
+  session_start();
   
-  //if(!isset($_SESSION['RoleId']))
-  //{
-  //  header('location:login.php?lmsg=true');
-  //  exit;
- // }   
+  if(!isset($_SESSION['RoleId']))
+  {
+    header('location:login.php?lmsg=true');
+    exit;
+  }   
 
   require_once('inc/config.php');
   require_once('layouts/header.php'); 
   
   $UID = $_GET['UID'];
+  $error_msg ="";
   $company = "";
   $query = "SELECT internshipID FROM internship where closingdate > date_sub(curdate(),interval 90 day) order by InternshipId";
     $results = mysqli_query($conn,$query);
     while ($rows = mysqli_fetch_array($results))
     {
      $company .= '<option value="'.$rows["internshipID"].'">'.$rows["internshipID"] .'</option>';
-    }
-  
-  ?>
+    }  
+    if(isset($_POST['Submit'])){
+        // Check input error
+         // if(empty($error_msg)){
+              
+              //$sql = "INSERT INTO student_intern (InternshipId, StudentID, UnitCID, Semester, JobResponsibility) VALUES (?,?,?,?,?)";
+              $sql = "INSERT INTO test (name) values (?)";
+              if($stmt = mysqli_prepare($conn, $sql)) {
+                  //mysqli_stmt_bind_param($stmt, "sssss", $param_InternshipId, $param_sid, $param_ucid, $param_semester, $param_responsibility); 
+                  mysqli_stmt_bind_param($stmt,"s",$param_responsibility); 
+                  //$sql4 = "select studentid from student where USERID='".$UID."'";
+                  //$rs = mysqli_query($conn, $sql4);
+                  //$row = mysqli_fetch_row($rs);
+                  //$param_sid = $row[0];
+                  //$param_sid = "19493145";
+                  //$param_InternshipId = trim($_POST["refno"]);
+                  //$param_UCID = trim($_POST["refno"]);
+                  //$param_semester = trim($_POST["sem"]);
+                  //$param_UCID = "9876123";
+                  //$param_semester = "tes";
+                  $param_responsibility =  trim($_POST["JobRes"]);
+                  if(mysqli_stmt_execute($stmt)){
+                      
+                      header("location: login.php?UID=$UID");
+                  } else{
+                      echo "not working";
+                  }
+      
+                  mysqli_stmt_close($stmt);  
+   
+                
+              }
+            }    
+
+?>
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
         <div class="page-container">
@@ -67,7 +125,7 @@
             <!-- END MAIN CONTENT-->
     
             <div id="myModalProfile" class="modal fade" role="dialog">
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-lg">
               <!-- Modal content-->
                 <div class="modal-content">
                   <div class="modal-header">
@@ -79,11 +137,9 @@
                         
                             <strong>Add My Internship</strong>
                           </div>
-                          <form action="" method="POST">
+                          <form action="internship.php?UID=<?php echo $_GET['UID']?>" method="POST">
                           <div class="card-body card-block">
                             
-
-
                           <div class="card">
                                     <div class="card-header">
                                         <strong>Job Reference No</strong>
@@ -92,30 +148,41 @@
                                     <div class="form-group">
                                 
                                     <label for="select" class=" form-control-label"></label>
-                                    <select name="refno" id="ref-No" class="form-control action" onChange="getCompany(this.value);">
+                                    <select name="refno" id="ref-No" class="form-control action" onChange="getCom(this.value); getComa(this.value);"
+                                    
+                                    >
                                     <option value="" disabled selected>Select Reference No</option>
                                     <?php echo $company; ?>
                                     </select>
                                     </div>
-                                   
                                     <div class="form-group">
-                                    <label class=" form-control-label">Company</label>
-                                    <input type="text" placeholder="Company" class="form-control" name="company" disabled>
+                                    <label for="select" class=" form-control-label">Company - Job Role</label>
+                                    <select name="companyNm" id="company-Nm" class="form-control"  disabled>
+                                    <option value="" disabled selected>Company - Job Role</option> 
+                                    </select>
                                     </div>
-
+                                    <div class="form-group">
+                                    <label for="select" class=" form-control-label">Contact Name</label>
+                                    <select name="ContactNm" id="contact-Nm" class="form-control"  disabled>
+                                    <option value="" disabled selected>Contact Name</option> 
+                                    </select>
+                                    </div>
                                     <div class="form-actions form-group">
                                                 <button type="submit" 
                                                 class="btn au-btn-icon au-btn--green btn-sm">
                                                 <a href="add_internshipst.php?UID=<?php echo $_GET['UID']?>"> Add Internship</a></button>             
                                     </div>
-                                </div>
+                                    </div>
 
+                                    <div class="form-group">
+                                    <label for="select" class=" form-control-label">Semester</label>
+                                    <select name="sem" id="sem" class="form-control" >
+                                    <option value="" selected>Semester</option> 
+                                    </select>
+                                    </div>
+                                    </div>
 
-
-
-
-
-                            <div class="form-group">
+                                    <div class="form-group">
                                     <label for="textarea-input" class="form-control-label">Job Responsibility<small><i>(in bullet form)</i></small> </label>
                                     </div>
                                     <div class="form-group">
@@ -125,8 +192,8 @@
                       </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-default" name="Update">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-default au-btn--green" name="submit">Submit</button>
+                    <button type="button" class="btn btn-default au-btn--blue" data-dismiss="modal">Close</button>
 
                   </div>
                 </div>
