@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- Required meta tags-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="au theme template">
+        <meta name="author" content="Hau Nguyen">
+        <meta name="keywords" content="au theme template">
+    
+        <!-- Title Page-->
+        <title>ICT Practicum</title>
+    
+        <!-- Fontfaces CSS-->
+        <link href="css/font-face.css" rel="stylesheet" media="all">
+        <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+        <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+        <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    
+        <!-- Bootstrap CSS-->
+        <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    
+        <!-- Vendor CSS-->
+        <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+        <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+        <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+        <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+        <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+        <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+        <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    
+        <!-- FullCalendar -->
+        <link href='vendor/fullcalendar-3.10.0/fullcalendar.css' rel='stylesheet' media="all" />
+    
+        <!-- Main CSS-->
+        <link href="css/theme.css" rel="stylesheet" media="all">
+    </head>
+<body>
+
+    <aside class="menu-sidebar d-none d-lg-block">
+        <div class="logo">
+            <a href="#">
+                <!--<img src="images/456.png" alt="ICTP" />-->
+                <h1>ICT Practicum</h1>
+            </a>
+        </div>
+        <div class="menu-sidebar__content js-scrollbar1">
+            <nav class="navbar-sidebar">
+                <ul class="list-unstyled navbar__list">
+                    <li>
+                        <a  href="companyprofile.html">
+                            <i class="fas fa-table"></i>Profile</a>
+                    </li>
+                    <li class="active has-sub">
+                        <a class="js-arrow" href="studentprofile.html">
+                            <i class="fas fa-table"></i>Student Profile</a>
+                    </li>
+                    <li>
+                        <a href="weeklydiary.html">
+                            <i class="fas fa-chart-bar"></i>Weekly Diary</a>
+                    </li>
+                   
+                    <li>
+                        <a href="addinternship.html">
+                            <i class="fas fa-table"></i>Add Internship</a>
+                    </li>
+                    <li>
+                        <a href="feedback.html">
+                            <i class="fas fa-table"></i>Add Feedback</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+</aside>
+<header class="header-desktop">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="header-wrap">
+                <form class="form-header" action="" method="POST">
+                    <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                    <button class="au-btn--submit" type="submit">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
+                </form>
+                <div class="header-button">
+                    <div class="account-wrap">
+                        <div class="account-item clearfix js-item-menu">
+                            <div class="image">
+                                <img src="" alt="" />
+                            </div>
+                            <div class="content">
+                                <a class="js-acc-btn" href="#">Company</a>
+                            </div>
+                            <div class="account-dropdown js-dropdown">
+                                <div class="info clearfix">
+                                    <div class="image">
+                                        <a href="#">
+                                            <img src="" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h5 class="name">
+                                            <a href="#">Company</a>
+                                        </h5>
+                                        <span class="email">company@example.com</span>
+                                    </div>
+                                </div>
+                                <div class="account-dropdown__body">
+                                    <div class="account-dropdown__item">
+                                        <a href="#">
+                                            <i class="zmdi zmdi-account"></i>Account</a>
+                                    </div>
+                                    <div class="account-dropdown__item">
+                                        <a href="#">
+                                            <i class="zmdi zmdi-settings"></i>Setting</a>
+                                    </div>
+                                </div>
+                                <div class="account-dropdown__footer">
+                                    <a href="login.php?logout=true">
+                                        <i class="zmdi zmdi-power"></i>Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- HEADER DESKTOP-->
+<div class="page-wrapper">
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        
+       
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="title-1 m-b-25">
+            <center>Add  Feedback</center>
+        </h2>
+
+
+        <div class="login-wrap">
+        <div class="login-content">
+            <div class="login-form">
+                <div class="diary-form">
+                <form action="" method="post">
+                   <!-- <div class="form-group">
+                        <label for="textarea-input" class="form-control-label">Feedback  </label>
+                     </div>-->
+                     <h1>ICT Practicum</h1>
+                     <div class="form-group">
+                        <label>EMPLOYER NAME</label>
+                        <input class="au-input au-input--full" type="empname" name="username" placeholder="EMPLOYER NAME"required>
+                    </div>
+                    <div class="form-group">
+                        <label>ORGANISATION NAME</label>
+                        <input class="au-input au-input--full" type="orgname" name="username" placeholder="ORGANISATION NAME"required>
+                    </div>
+                     <div class="form-group">
+                        <label>EMAIL</label>
+                        <input class="au-input au-input--full" type="email" name="username" placeholder="COMPANY EMAIL"required>
+                    </div>
+                    <div class="form-group">
+                        <label>PHONE</label>
+                        <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61XXXXXXXXX"required>
+                    </div>
+                    <div class="form-group">
+                        <label>STUDENT NAME</label>
+                        <input class="au-input au-input--full" type="stname" name="username" placeholder="STUDENT NAME"required>
+                    </div>
+                    <div class="form-group">
+                        <label>STUDENT NUMBER</label>
+                        <input class="au-input au-input--full" type="stnumber" name="username" placeholder="STUDENT NUMBER"required>
+                    </div>
+                    <div class="form-group">
+                        <label>POSITION OR ASSIGNMENT</label>
+                        <input class="au-input au-input--full" type="empname" name="username" >
+                    </div>
+                    <div class="form-group">
+                        <label>Start Date:</label>
+                        <input class="au-input au-input--full" type="date" name="start" required>
+                         </div>
+                        
+                        <div class="form-group">
+                        <label>End Date:</label>
+                        <input class="au-input au-input--full" type="date" name="end" required>
+                         </div>
+                       
+                    <div class="form-group">
+                        <label for="select" class=" form-control-label">PLEASE COMPLETE THIS EVALUATION AT THE END OF THE STUDENT’S WORK PERIOD.  YOU ARE ENCOURAGED TO DISCUSS THE COMPLETED FORM WITH THE STUDENT TO AID IN THEIR PROFESSIONAL DEVELOPMENT. PLEASE USE THE SCALE BELOW TO EVALUATE YOUR STUDENT’S PERFORMANCE:</label>
+                        <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1. NEEDS MORE TRAINING OR EDUCATION">1. NEEDS MORE TRAINING OR EDUCATION</option>
+                            <option value="2. PERFORMING BELOW EXPECTATIONS">2. PERFORMING BELOW EXPECTATIONS</option>
+                            <option value="3. ACCEPTABLE PERFORMANCE">3. ACCEPTABLE PERFORMANCE</option>
+                            <option value="4. ABOVE AVERAGE PERFORMANCE">4. ABOVE AVERAGE PERFORMANCE</option>
+                            <option value="5. SUPERIOR PERFORMANCE">5. SUPERIOR PERFORMANCE</option>
+                            <option value="6. NOT OBSERVED">6. NOT OBSERVED</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label >1. GENERAL WORKPLACE PERFORMANCE</label>
+                            <label for="select" class=" form-control-label">ATTENDANCE</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">PUNTUALITY</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ATTITUDE</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ACCEPTANCE CRITICISM</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ASKS APPROPRIATE QUESTIONS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">SELF MOTIVATED</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">PRACICES ETHICAL BEHAVIOR</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label >2. SPECIFIC JOB ASSIGNMENT PERFORMANCE</label>
+                            <label for="select" class=" form-control-label">SUFFICIENT KNOWLEDGE TO PERFORM TASKS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">VERBAL COMMUNICATION SKILLS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">WRITTEN COMMUNICATION SKILLS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ANALYTICAL SKILLS – ANALYSES PROBLEMS AND TAKES APPROPRIATE ACTION</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">USES TECHNICAL SKILLS REQUIRED FOR THE POSITION</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">MEETS DEADLINES</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">TAKES INITIATIVE TO GET A JOB DONE, INCLUDING OVERCOMING OBSTACLES</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">SETS PRIORITIES</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                    </div>
+                    <div class="form">
+                        <label> HOW WOULD YOU ASSESS THE STUDENT’S OVERALL PERFORMANCE?</label>
+                        <input type="radio" id="OUTSTANDING" name="PERFORMANCE" value="OUTSTANDING" aria-label="OUTSTANDING">
+                        <label for="OUTSTANDING">OUTSTANDING</label><br>
+                        <input type="radio" id="ABOVE AVERAGE" name="PERFORMANCE" value="ABOVE AVERAGE">
+                        <label for="ABOVE AVERAGE">ABOVE AVERAGE</label><br>
+                        <input type="radio" id="SATISFACTORY" name="PERFORMANCE" value="SATISFACTORY">
+                        <label for="SATISFACTORY">SATISFACTORY</label><br>
+                        <input type="radio" id="BELOW AVERAGE" name="PERFORMANCE" value="BELOW AVERAGE">
+                        <label for="BELOW AVERAGE">BELOW AVERAGE</label><br>
+                        <input type="radio" id="UNSATISFACTORY" name="PERFORMANCE" value="UNSATISFACTORY">
+                        <label for="UNSATISFACTORY">UNSATISFACTORY</label>
+                    </div>                 
+                    <div class="form-group">
+                        <label for="textarea-input" class="form-control-label">WHAT DO YOU CONSIDER THE MAJOR STRENGTHS OF THIS STUDENT? </label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                    </div>
+                    <div class="form-group">
+                            <label for="textarea-input" class="form-control-label">WHAT AREAS NEED IMPROVEMENT?</label>
+                    </div>
+                    <div class="form-group">
+                            <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="textarea-input" class="form-control-label">WHAT WOULD YOU RECOMMEND TO MAKE THIS STUDENT BETTER PREPARED FOR THE WORKPLACE? (E.G. COURSES, ACTIVITIES, SKILLS ACQUISITION, PROGRAMS)?</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="textarea-input" class="form-control-label">OTHER COMMENTS, COMMENDATIONS, OR RECOMMENDATIONS:</label>
+                </div>
+                <div class="form-group">
+                        <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>THANK YOU FOR YOUR TIME IN COMPLETING THIS EVALUATION!</label>
+                </div>
+                <div align="right" class="form">
+                    <label>Signature</label>
+                    <input type="signature" class="au-input au-input--full">
+                </div>
+                <div align="right" >
+                    <label>Date</label>
+                    <input type="text" class="au-input au-input--full">
+                </div>
+                    <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
+</div>
+</form>
+
+
+    </div>
+</div>
+</div>
+</div>
+<!-- END MAIN CONTENT-->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</body>
+</html>
