@@ -75,7 +75,7 @@ function getComa(val) {
                   $param_ucid = trim($_POST["staff"]);
                   $param_semester = trim($_POST["sem"]);
                   $param_responsibility =  trim($_POST["JobRes"]);
-                  $param_stat =  trim("On-Going");
+                  $param_stat =  trim("Pending");
                   if(mysqli_stmt_execute($stmt)){
                       
                       header("location: internship.php?UID=$UID");
@@ -120,7 +120,7 @@ function getComa(val) {
                                          <?php
                                             //Display Student List
                                             $param_userid = $UID;
-                                            $query="select a.status, b.internshipid, b.jobrole, d.CompanyName, b.Location, b.Description, a.JobResponsibility, concat (e.LastName, ', ' , e.FirstName) as fullname, e.ContactNo, e.EmailAddress  from student_intern a inner join internship b on a.InternshipId = b.InternshipId inner join student c on a.StudentID = c.StudentID inner JOIN company d on b.CompanyID = d.CompanyId inner join companyuser e on b.CompanyUserId = e.CompanyUserId  where  a.StudentID = (select StudentID from student where userid = '" . $param_userid . "')";
+                                            $query="select a.status, b.internshipid, b.jobrole, d.CompanyName, b.Location, b.Description, a.JobResponsibility, concat (e.LastName, ', ' , e.FirstName) as fullname, e.ContactNo, e.EmailAddress  from student_intern a inner join internship b on a.InternshipId = b.InternshipId inner join student c on a.StudentID = c.StudentID inner JOIN company d on b.CompanyID = d.CompanyId inner join companyuser e on b.CompanyUserId = e.CompanyUserId  where a.status not in ('cancelled', 'rejected')  and  a.StudentID = (select StudentID from student where userid = '" . $param_userid . "')";
                                             $rs = mysqli_query($conn,$query);
                                             $count = 0;
                                                 foreach($rs as $row){
