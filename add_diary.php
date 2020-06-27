@@ -39,7 +39,7 @@
                                 <!-- DATA TABLE -->
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
-                                <h3 class="title-5 m-b-35">My Diary</h3>
+                                <h3 class="title-5 m-b-35">My Weekly Diary</h3>
                                     </div>
                                     <div class="table-data__tool-right">
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">

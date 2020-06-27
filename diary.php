@@ -10,14 +10,39 @@ if(!isset($_SESSION['RoleId']))
 require_once('inc/config.php');
 require_once('layouts/header.php'); 
  
-$error_msg = "";
+$err_msg = "";
+$m ="";
 $UID = $_GET['UID'];
 
 //if($_SERVER["REQUEST_METHOD"] == "POST"){
 if(isset($_POST['submit'])){
-  // Check input error
-    if(empty($error_msg)){
+  // Check input error     
+     $sql2a = "SELECT status FROM student_intern WHERE status not in ('cancelled', 'rejected', 'pending','marked') and studentid = (select studentid from student where USERID= ? )";
+     if ($stmt = mysqli_prepare($conn, $sql2a)) {
         
+         mysqli_stmt_bind_param($stmt, "s", $UID );
+ 
+         if (mysqli_stmt_execute($stmt)) {
+             mysqli_stmt_store_result($stmt);
+ 
+             if (mysqli_stmt_num_rows($stmt) != 1) {
+                 $err_msg = "There is no approved or on-going internship. Please have your internship approved first";
+             } else {
+                 $m ="";
+
+             }
+         } else {
+             echo "Something went wrong. Please check that you have entered the correct details.";
+         }
+ 
+         mysqli_stmt_close($stmt);
+     }
+
+
+
+    if(empty($err_msg)){
+    
+
         $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc, Task_StartDate, Task_EndDate ) VALUES (?,?,?,?,?,?)";
 
         if($stmt = mysqli_prepare($conn, $sql)) {
@@ -82,6 +107,7 @@ if(isset($_POST['submit'])){
                         </div>-->
                         <div class="diary-form">
                         <h3><center>Weekly Diary</center></h3>
+                        <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
                             <form action="" method="POST">
                                     <div class="form-group">
                                     <label for="textarea-input" class="form-control-label">Completed Task <small><i>(in bullet form)</i></small> </label>
