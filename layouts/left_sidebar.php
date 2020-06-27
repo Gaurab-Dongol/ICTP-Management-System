@@ -106,7 +106,7 @@
                     
                         <li>
                             <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-table"></i>Add Internship</a>
+                                <i class="fas fa-desktop"></i>Add Internship</a>
                         </li>
                         <li>
                             <a href="feedback.php?UID=<?php echo $_GET['UID']?>">

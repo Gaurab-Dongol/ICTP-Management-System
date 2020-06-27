@@ -84,6 +84,7 @@
                         <h4>www.westernsydney.edu.au</h4>
                         <h4>+61458792158</h4>
                     <?php } ?>
+                    
                     <?php 
                     //only visible to admin 
                     if($_SESSION['RoleId'] == 3){?>

@@ -1,11 +1,11 @@
 <?php 
-  //session_start();
+  session_start();
   
-  //if(!isset($_SESSION['RoleId']))
-  //{
-  //  header('location:login.php?lmsg=true');
-  //  exit;
- // }   
+  if(!isset($_SESSION['RoleId']))
+  {
+    header('location:login.php?lmsg=true');
+   exit;
+  }   
 
   require_once('inc/config.php');
   require_once('layouts/header.php'); 
