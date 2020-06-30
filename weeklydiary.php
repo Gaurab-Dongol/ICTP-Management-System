@@ -39,6 +39,7 @@
                         <th>Completed Task</th>
                         <th>Status</th>
                         <th>Manager Remarks</th>
+                        <th>Update</th>
                         
                     </tr>
                 </thead>
@@ -55,17 +56,22 @@
                         <td><?php echo $row["Task_EndDate"]?></td>
                         <td><?php echo $row["TaskDesc"]?></td>
                         <td>
-                            <select name="selectstatus" id="selectyears" class="form-control">
-                            
-                                <option value="1">Pending</option>
-                                <option value="2">Rejected</option>
-                                <option value="3">Confirmed</option>
+                            <select name="selectstatus" id="selectstatus" class="form-control" style="width: 120px;">
+                                
+                                <option <?php if ($row["status"]=='Pending')echo ' selected="selected"'?>>Pending</option>
+                                <option style = 'color:green;' <?php if ($row["status"]=='Approved')echo ' selected="selected"'?>> Approved </option>
+                                <option <?php if ($row["status"]=='Rejected')echo ' selected="selected"'?>>Rejected</option>
                               </select>
                         </td>
                         <td>
-                            <input type="text" id="rmarks" placeholder="Enter your Remarks" class="form-control">
+                            <input type="text" id="rmarks" placeholder="Enter your Remarks" class="form-control" style="width: 200px;">
 
                         </td>
+                        <td>   <div class="form-actions form-group">
+                                                <button type="submit" 
+                                                class="btn au-btn-icon au-btn--green btn-sm">
+                                                <a href="addcontact.php?UID=<?php echo $_GET['UID']?>"> UPDATE</a></button>             
+                                    </div>  </td>
                     </tr>
 
                     <?php }?> 
