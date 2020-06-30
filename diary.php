@@ -43,10 +43,10 @@ if(isset($_POST['submit'])){
     if(empty($err_msg)){
     
 
-        $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc, Task_StartDate, Task_EndDate ) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO diary (InternshipId, StudentID, TotalHours, TaskDesc, Task_StartDate, Task_EndDate, WeekNo ) VALUES (?,?,?,?,?,?,?)";
 
         if($stmt = mysqli_prepare($conn, $sql)) {
-            mysqli_stmt_bind_param($stmt, "ssssss", $param_InternshipId, $param_sid, $param_totalHour, $param_taskDesc, $param_start, $param_end);
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_InternshipId, $param_sid, $param_totalHour, $param_taskDesc, $param_start, $param_end, $param_weekno);
             
             $sql4 = "select studentid from student where USERID='".$UID."'";
             $rs = mysqli_query($conn, $sql4);
@@ -71,7 +71,7 @@ if(isset($_POST['submit'])){
             
             $timestamp = strtotime($_POST["end"]);
             $param_end = date("Y-m-d", $timestamp);
-
+            $param_weekno = trim($_POST["weekno"]);
 
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to add page
@@ -110,23 +110,27 @@ if(isset($_POST['submit'])){
                         <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
                             <form action="" method="POST">
                                     <div class="form-group">
+                                    <label>Week No:</label>
+                                    <input class="au-input au-input--full" type="number" name="weekno" required>
+                                    </div>
+                                    <div class="form-group">
+                                    <label>Enter Start Date:</label>
+                                    <input class="au-input au-input--full" type="date" name="start" required>
+                                    </div>
+                                    <div class="form-group">
+                                    <label>Enter End Date:</label>
+                                    <input class="au-input au-input--full" type="date" name="end" required>
+                                     </div>
+                                    <div class="form-group">
                                     <label for="textarea-input" class="form-control-label">Completed Task <small><i>(in bullet form)</i></small> </label>
                                     </div>
                                     <div class="form-group">
-                                    <textarea class="ckeditor" name="TaskDesc"></textarea>
+                                    <textarea class="ckeditor" name="TaskDesc" required></textarea>
                                     </div>
                                     <div class="form-group">
                                     <label>Enter Numbers of Hour</label>
                                     <input class="au-input au-input--full" type="number" name="NoHours" required>
                                     </div>
-                                    <div class="form-group">
-                                    <label>Enter start Date:</label>
-                                    <input class="au-input au-input--full" type="date" name="start" required>
-                                    </div>
-                                    <div class="form-group">
-                                    <label>Enter end Date:</label>
-                                    <input class="au-input au-input--full" type="date" name="end" required>
-                                     </div>
                                 <!-- <div class="form-group">
                                     <label>Manager Remarks</label>
                                     <input class="au-input au-input--full" type="text" name="manager remarks" required>
