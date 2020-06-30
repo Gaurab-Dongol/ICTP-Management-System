@@ -54,9 +54,9 @@
             mysqli_stmt_close($stmt);
         }
         
-        $sql2 = "INSERT INTO companyuser (firstname, lastname, role, emailaddress, contactno, companyid) VALUES (?,?,?,?,?,?)";
+        $sql2 = "INSERT INTO companyuser (firstname, lastname, role, emailaddress, contactno, companyid, USERID) VALUES (?,?,?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql2)) {
-            mysqli_stmt_bind_param($stmt, "ssssss", $param_fname, $param_lname, $param_role, $param_emailadd, $param_cno, $param_cid);
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_fname, $param_lname, $param_role, $param_emailadd, $param_cno, $param_cid, $param_uid);
             
            
             $param_fname = trim($_POST["firstName"]);
@@ -65,7 +65,10 @@
             $param_emailadd = trim($_POST["emailadd"]);
             $param_cno = trim($_POST["contactNo"]);
             $param_cid = trim($_POST["companynm"]);
-           
+            $sql3 = "select userid from login where username = '" . $param_emailadd . "'";
+            $rs = mysqli_query($conn, $sql3);
+            $row = mysqli_fetch_row($rs);
+            $param_uid = $row[0];
 
             if (mysqli_stmt_execute($stmt)) {                
                 header("location: addinternship.php?UID=$UID");

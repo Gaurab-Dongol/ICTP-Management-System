@@ -11,7 +11,7 @@
 		                //only visible to admin 
                             if($_SESSION['RoleId'] == 1){?>
                         <li>
-                            <a  href="#">
+                            <a  class="js-arrow" href="#">
                                 <i class="fas fa-users"></i>Student</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
@@ -23,8 +23,9 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-desktop"></i>Internship</a>
+                                <!-- <i class="fas fa-tachometer-alt"></i>Internship</a> -->
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">Internship List</a>
@@ -45,6 +46,10 @@
                                     <a href="addstaff.php?UID=<?php echo $_GET['UID']?>">Add Staff</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="weeklydiary.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
                         <?php } ?>
 
@@ -105,8 +110,17 @@
                         </li>
                     
                         <li>
-                            <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-table"></i>Add Internship</a>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Internship</a>
+                                <!-- <i class="fas fa-tachometer-alt"></i>Internship</a> -->
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">Internship List</a>
+                                </li>
+                                <li>
+                                    <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">Add Internship</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="feedback.php?UID=<?php echo $_GET['UID']?>">
