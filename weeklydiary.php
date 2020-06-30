@@ -7,7 +7,10 @@
 		exit;
 	}		
 	require_once('inc/config.php');
-    require_once('layouts/header.php'); 
+    require_once('layouts/header.php');
+    
+    
+
 ?>
 
 <div class="page-wrapper">
@@ -40,11 +43,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid";
+                   $rs = mysqli_query($conn,$query);
+                   $count = 0;
+                       foreach($rs as $row){
+                ?>   
                     <tr>
-                        <td>Krupali Valand</td>
-                        <td>05/05/2020</td>
-                        <td>07/05/2020</td>
-                        <td>Admin Dashboard</td>
+                        <td><?php echo $row["fullname"]?></td>
+                        <td><?php echo $row["Task_StartDate"]?></td>
+                        <td><?php echo $row["Task_EndDate"]?></td>
+                        <td><?php echo $row["TaskDesc"]?></td>
                         <td>
                             <select name="selectstatus" id="selectyears" class="form-control">
                             
@@ -58,97 +67,8 @@
 
                         </td>
                     </tr>
-                    <tr>
-                        <td>John Remos</td>
-                        <td>10/05/2020</td>
-                        <td>15/05/2020</td>
-                        <td>Student Dashboard</td>
-                        <td>
-                            <select name="selectstatus" id="selectyears" class="form-control">
-                            
-                                <option value="1">Pending</option>
-                                <option value="2">Rejected</option>
-                                <option value="3">Confirmed</option>
-                              </select>
-                        </td>
-                        <td>
-                            <input type="text" id="rmarks" placeholder="Enter your Remarks" class="form-control">
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lian Steve</td>
-                        <td>11/05/2020</td>
-                        <td>15/05/2020</td>
-                        <td>Company Dashboard</td>
-                        <td>
-                            <select name="selectstatus" id="selectyears" class="form-control">
-                            
-                                <option value="1">Pending</option>
-                                <option value="2">Rejected</option>
-                                <option value="3">Confirmed</option>
-                              </select>
-                        </td>
-                        <td>
-                            <input type="text" id="rmarks" placeholder="Enter your Remarks" class="form-control">
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Steve Max</td>
-                        <td>09/05/2020</td>
-                        <td>11/05/2020</td>
-                        <td>Registration Page</td>
-                        <td>
-                            <select name="selectstatus" id="selectyears" class="form-control">
-                            
-                                <option value="1">Pending</option>
-                                <option value="2">Rejected</option>
-                                <option value="3">Confirmed</option>
-                              </select>
-                        </td>
-                        <td>
-                            <input type="text" id="rmarks" placeholder="Enter your Remarks" class="form-control">
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Sonal Rana</td>
-                        <td>30/05/2020</td>
-                        <td>05/06/2020</td>
-                        <td>Internship</td>
-                        <td>
-                            <select name="selectstatus" id="selectyears" class="form-control">
-                            
-                                <option value="1">Pending</option>
-                                <option value="2">Rejected</option>
-                                <option value="3">Confirmed</option>
-                              </select>
-                        </td>
-                        <td>
-                            <input type="text" id="rmarks" placeholder="Enter your Remarks" class="form-control">
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Rajni Pithva</td>
-                        <td>15/05/2020</td>
-                        <td>25/05/2020</td>
-                        <td>Admin and Staff</td>
-                        <td>
-                            <select name="selectstatus" id="selectyears" class="form-control">
-                            
-                                <option value="1">Pending</option>
-                                <option value="2">Rejected</option>
-                                <option value="3">Confirmed</option>
-                              </select>
-                        </td>
-                        <td>
-                            <input type="text" id="rmarks" placeholder="Enter your Remarks" class="form-control">
-
-                        </td>
-                    </tr>
-                    
+                    <?php }?> 
                 </tbody>
              </table>
         </div>       
