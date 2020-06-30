@@ -62,6 +62,7 @@
                     <tr>
                         <th>StudentID</th>
                         <th>Student Name</th>
+                        <th>Semester</th>
                         <th>Job Role</th>
                         <th>Company</th>
                         <th>Website</th>
@@ -78,7 +79,7 @@
                 <tbody>
                 <?php
                    //$query="select concat(a.internshipid , '', a.studentid) as 'siid', a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', c.JobRole, d.companyname, d.website, concat(e.FirstName , ' ', e.LastName) as 'supervisor', c.location, e.emailaddress, a.status, a.jobresponsibility from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status = 'Pending' ";
-                   $query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', d.website, c.location, c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status = 'Pending' ";
+                   $query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', d.website, c.location, c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility, a.semester from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status = 'Pending' ";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
@@ -86,6 +87,7 @@
                     <tr>
                         <td><?php echo $row["studentid"]?></td>
                         <td><?php echo $row["fullname"]?></td>
+                        <td><?php echo $row["semester"]?></td>
                         <td><?php echo $row["JobRole"]?></td>
                         <td><?php echo $row["companyname"]?></td>
                         <td><?php echo $row["website"]?></td>
@@ -136,6 +138,7 @@
                     <tr>
                         <th>StudentID</th>
                         <th>Student Name</th>
+                        <th>Semester</th>
                         <th>Job Role</th>
                         <th>Company</th>
                         <th>Website</th>
@@ -152,7 +155,7 @@
                 <tbody>
                 <?php
                    //$query="select concat(a.internshipid , '', a.studentid) as 'siid', a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', d.website, c.location, e.emailaddress, a.status, a.jobresponsibility from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status = 'Pending' ";
-                   $query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', c.JobRole,  d.website, c.location, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' ";
+                   $query="select a.internshipid , a.studentid, a.semester, concat(b.FirstName , ' ', b.LastName) as 'fullname', c.JobRole,  d.website, c.location, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' ";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
@@ -160,6 +163,7 @@
                     <tr>
                         <td><?php echo $row["studentid"]?></td>
                         <td><?php echo $row["fullname"]?></td>
+                        <td><?php echo $row["semester"]?></td>
                         <td><?php echo $row["JobRole"]?></td>
                         <td><?php echo $row["companyname"]?></td>
                         <td><?php echo $row["website"]?></td>
