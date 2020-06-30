@@ -135,7 +135,7 @@
                                     <a href="studentprofile.php?UID=<?php echo $_GET['UID']?>">Student List</a>
                                 </li>
                                 <li>
-                                    <a href="studentintern.php?UID=<?php echo $_GET['UID']?>">Student Internship Record</a>
+                                    <a href="studentintern_com.php?UID=<?php echo $_GET['UID']?>">Student Internship Record</a>
                                 </li>
                             </ul>
                         </li>
