@@ -72,18 +72,40 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+                    
                     <?php 
-                    //only visible to admin 
                     if($_SESSION['RoleId'] == 4){?>
-                    <div class="table-button" align="right">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalWorkEx">
-                                <i class="fas fa-edit"></i>Edit</button>
-                        </div>
-                        <h2>Western Sydney University</h2>
-                        <h3>TGP Global</h3>
-                        <h4>www.westernsydney.edu.au</h4>
-                        <h4>+61458792158</h4>
-                    <?php } ?>
+                      <div class="row">
+                              <div class="col-md-12">
+                                  <div class="au-card">
+                                      <div>
+                                          <div class="table-button" align="right">
+                                              <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfile">
+                                                  <i class="fas fa-edit"></i>Edit</button>
+                                          </div>
+                                          <?php
+                                              //Display Student List
+                                              $UID = $_GET['UID'];
+                                              $query="select a.*, b.companyname from companyuser a inner join company b on a.companyid = b.companyid where a.USERID=$UID";
+                                              $rs = mysqli_query($conn,$query);
+                                              //$count = 0;
+                                                  foreach($rs as $row){
+                                          ?> 
+                                          <h2><?php echo $row["FirstName"]." ".$row["LastName"]?></h2>
+                                          <h4><?php echo $row["companyname"]?></h4>
+                                          <h4><?php echo $row["Role"]?></h4>
+                                          <h4><?php echo $row["EmailAddress"]?></h4>
+                                          <h4><?php echo $row["ContactNo"]?></h4>
+                                         
+                                                  <?php } ?>
+                                      </div>
+                                       
+                              </div>
+                              </div>
+                          </div>
+                      </div>
+                      <?php } ?>
+                    
                     <?php 
                     //only visible to admin 
                     if($_SESSION['RoleId'] == 3){?>
