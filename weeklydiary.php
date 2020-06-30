@@ -54,7 +54,7 @@
     <div class="col-lg-12">
         <h2 class="title-1 m-b-25">Weekly Diary</h2>
        
-        
+        <h3> Pending   </h3>
         <div class="table-responsive table--no-card m-b-40">
             <table class="table table-borderless table-striped table-earning">
             <thead>
@@ -71,7 +71,7 @@
                 </thead>
                 <tbody>
                 <?php
-                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks, a.id from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid";
+                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks, a.id from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status = 'Pending' ";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
@@ -113,6 +113,71 @@
                     <?php }?> 
                 </tbody>
              </table>
+        </div> 
+             <h1>    </h1>
+             <h3> Approved/Rejected   </h3>
+             <!-- Approved -->
+             <div class="table-responsive table--no-card m-b-40">
+            <table class="table table-borderless table-striped table-earning">
+            <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Completed Task</th>
+                        <th>Status</th>
+                        <th>Manager Remarks</th>
+                        <th>Update</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks, a.id from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status != 'Pending'";
+                   $rs = mysqli_query($conn,$query);
+                
+                       foreach($rs as $row){
+                ?>   
+                    <tr>
+                        <td><?php echo $row["fullname"]?></td>
+                        <td><?php echo $row["Task_StartDate"]?></td>
+                        <td><?php echo $row["Task_EndDate"]?></td>
+                        <td><?php echo $row["TaskDesc"]?></td>
+                        <form action="" method="POST">  
+                        <td>
+                            <select name="selectstatus" id="selectstatus" class="form-control" style="width: 120px;">
+                                
+                                <option <?php if ($row["status"]=='Pending')echo ' selected="selected"'?>>Pending</option>
+                                <option style = 'color:green;' <?php if ($row["status"]=='Approved')echo ' selected="selected"'?>> Approved </option>
+                                <option <?php if ($row["status"]=='Rejected')echo ' selected="selected"'?>>Rejected</option>
+                              </select>
+                        </td>
+                        <td> 
+                        
+                            <input class="form-control" type="text" name="rmarks" placeholder="Enter your Remarks" style="width: 200px;">
+                          
+            
+                        </td>
+
+                        <td> 
+                    
+                        <div class="form-actions form-group">
+                        <input type="hidden" name="diaryid" id="diaryid" value="<?php echo $row["id"]; ?>"> 
+                                                <button type="submit" name="submit" 
+                                                class="btn au-btn-icon au-btn--green btn-sm">
+                                                  submit</button>             
+                                    </div>  
+                                    
+                                </td>
+                                </form>        
+                    </tr>
+
+                    <?php }?> 
+                </tbody>
+             </table>
+
+
+
         </div>   
                      
     </div>
