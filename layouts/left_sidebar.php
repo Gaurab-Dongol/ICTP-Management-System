@@ -18,6 +18,9 @@
                                     <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">Student List</a>
                                 </li>
                                 <li>
+                                    <a href="studentintern.php?UID=<?php echo $_GET['UID']?>">Student Internship Record</a>
+                                </li>
+                                <li>
                                     <a href="addstudent.php?UID=<?php echo $_GET['UID']?>">Add Student</a>
                                 </li>
                             </ul>
@@ -48,7 +51,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="weeklydiary.php?UID=<?php echo $_GET['UID']?>">
+                            <a href="weeklydiary_admin.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
                         <?php } ?>
@@ -57,13 +60,37 @@
 		                //only visible to unit co-ordinator
 		                if(($_SESSION['RoleId'] == 2)){
                         ?>
-                        <li class="active has-sub">
-                            <a href="#">
+                          <li>
+                            <a  class="js-arrow" href="#">
                                 <i class="fas fa-users"></i>Student</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="dashboard.php?UID=<?php echo $_GET['UID']?>">Student List</a>
+                                </li>
+                                <li>
+                                    <a href="studentintern.php?UID=<?php echo $_GET['UID']?>">Student Internship Record</a>
+                                </li>
+                                <li>
+                                    <a href="addstudent.php?UID=<?php echo $_GET['UID']?>">Add Student</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-chart-bar"></i>Internship</a>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>Internship</a>
+                                <!-- <i class="fas fa-tachometer-alt"></i>Internship</a> -->
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">Internship List</a>
+                                </li>
+                                <li>
+                                    <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">Add Internship</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="weeklydiary_admin.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
                         <?php } ?>
 
@@ -76,20 +103,20 @@
                                 <i class="fas fa-user"></i>Profile</a>
                         </li>
                         <li>
-                            <a href="add_diary.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-book"></i>My Diary</a>
+                            <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="far fa-check-square"></i>Opportunities</a>
                         </li>
                         <li>
                             <a href="internship.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-desktop"></i>My Internship</a>
                         </li>
                         <li>
-                            <a href="studentreport.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-folder-open"></i>My Report</a>
+                            <a href="add_diary.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-book"></i>My Diary</a>
                         </li>
                         <li>
-                            <a href="opportunities.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="far fa-check-square"></i>Opportunities</a>
+                            <a href="studentreport.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-folder-open"></i>My Report</a>
                         </li>
                         <?php } ?>
 
@@ -102,7 +129,7 @@
                         </li>
                         <li>
                             <a href="studentprofile.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-users"></i>Student Profile</a>
+                                <i class="fas fa-users"></i>Student List</a>
                         </li>
                         <li>
                             <a href="weeklydiary.php?UID=<?php echo $_GET['UID']?>">

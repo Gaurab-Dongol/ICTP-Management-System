@@ -51,6 +51,7 @@
                                                 <th>Company</th>
                                                 <th>Website</th>
                                                 <th>Description</th>
+                                                <th></th>
                                                 <th>Location</th>
                                                 <th>Closing_Date</th>
                                                 <th></th>
@@ -65,13 +66,14 @@
                                         ?> 
                                         <tbody>
                                             <tr class="tr-shadow">
-                                                <td><?php echo $row["InternshipId"]?></td>
+                                                <td class="desc"><?php echo $row["InternshipId"]?></td>
                                                 <td><?php echo $row["JobRole"]?></td>
                                                 <td><?php echo $row["CompanyName"]?></td>
                                                 <td>
-                                                    <span class="block-email"><?php echo $row["Website"]?></span>
+                                                    <!-- <span class="block-email"><?php echo $row["Website"]?></span> -->
+                                                    <?php echo $row["Website"]?>
                                                 </td>
-                                                <td class="desc"><?php echo $row["Description"]?></td>
+                                                <td  colspan="2"><?php echo $row["Description"]?></td>
                                                 <td><?php echo $row["Location"]?></td>
                                                 <td><?php echo $row["ClosingDate"]?></td>
                                                 <td>

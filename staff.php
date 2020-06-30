@@ -37,13 +37,14 @@
                                             <th>Last Name</th>
                                             <th>Email</th>
                                             <th>Contact</th>
-                                            <th>position</th>
+                                            <th>Position</th>
+                                            <th>Site Admin</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             //Display Student List
-                                            $query="select * from staff";
+                                            $query="select * from staff inner join login on staff.userid = login.userid";
                                             $rs = mysqli_query($conn,$query);
                                             $count = 0;
                                                 foreach($rs as $row){
@@ -55,6 +56,13 @@
                                             <td><?php echo $row["EmailAddress"];?></td>
                                             <td><?php echo $row["ContactNo"];?></td>
                                             <td><?php echo $row["Position"];?></td>
+                                            <td><?php 
+                                                     if ($row["RoleId"]  == 1) {
+                                                        echo "Yes";
+                                                      } else {
+                                                        echo "No";
+                                                      }  
+                                            ;?></td>
                                         </tr>
                                         <?php }?>
                                     </tbody>

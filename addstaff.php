@@ -76,7 +76,8 @@
             $param_username = trim($_POST["EMAIL"]);
             //$param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_password = trim($_POST["password"]);
-            $param_role = 2;  #staff coordinator
+            //$param_role = 2;  #staff coordinator
+            $param_role = trim($_POST["selectprivilege"]);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
         }
@@ -154,6 +155,14 @@
                                 <div class="form-group">
                                     <label>POSITION</label>
                                     <input class="au-input au-input--full" type="text" name="POSITION" placeholder="POSITION" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Privilege</label>
+                                    <select name="selectprivilege" id="selectprivilege" class="form-control">
+                                     <option value="2"> Staff </option>
+                                     <option value="1"> Admin </option>
+                                     </select>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>

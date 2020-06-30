@@ -66,7 +66,7 @@
                                             <tr>
                                                 <th>Week No</th>
                                                 <th>Total hours</th>
-                                                <th>Task Description</th>
+                                                <th>Task Completed</th>
                                                 <th>Status</th>
                                                 <th>Manager Remarks</th>
                                                 <th>Unit Coordinator Remarks</th>
