@@ -52,7 +52,7 @@
                 <div class="container-fluid">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="title-1 m-b-25">Weekly Diary</h2>
+        <h1 class="title-1 m-b-25">Weekly Diary</h1>
        
         <h3> Pending   </h3>
         <div class="table-responsive table--no-card m-b-40">
@@ -92,8 +92,8 @@
                         </td>
                         <td> 
                         
-                            <input class="form-control" type="text" name="rmarks" placeholder="Enter your Remarks" style="width: 200px;">
-                          
+                            <input class="form-control" type="text" name="rmarks" placeholder="Enter your Remarks" style="width: 300px;"> 
+                           
             
                         </td>
 
@@ -153,9 +153,8 @@
                               </select>
                         </td>
                         <td> 
-                        
-                            <input class="form-control" type="text" name="rmarks" placeholder="Enter your Remarks" style="width: 200px;">
-                          
+                        <!-- <input class="form-control" type="text" name="rmarks" placeholder="Enter your Remarks" style="width: 500px;"> -->
+                        <?php echo $row["ManagerRemarks"]?>
             
                         </td>
 
