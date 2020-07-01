@@ -132,7 +132,7 @@
                                 <i class="fas fa-users"></i>Student</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="studentprofile.php?UID=<?php echo $_GET['UID']?>">Student List</a>
+                                    <a href="studentprofile_com.php?UID=<?php echo $_GET['UID']?>">Student List</a>
                                 </li>
                                 <li>
                                     <a href="studentintern_com.php?UID=<?php echo $_GET['UID']?>">Student Internship Record</a>
