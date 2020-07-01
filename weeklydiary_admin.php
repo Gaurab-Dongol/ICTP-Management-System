@@ -62,6 +62,7 @@
                         <th>Student Name</th>
                         <th>WeekNo</th>
                         <th>Start Date</th>
+                        <th>Total Hours</th>
                         <th>Completed Task</th>
                         <th>Status</th>
                         <th>Manager Remarks</th>
@@ -72,7 +73,7 @@
                 </thead>
                 <tbody>
                 <?php
-                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks, a.id, a.weekno, a.UCRemarks from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join companyuser d on d.companyuserid =c.CompanyUserId where a.status = 'Pending' order by fullname, weekno";
+                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.totalhours , a.status, a.ManagerRemarks, a.id, a.weekno, a.UCRemarks from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join companyuser d on d.companyuserid =c.CompanyUserId where a.status = 'Pending' order by fullname, weekno";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
@@ -81,6 +82,7 @@
                         <td><?php echo $row["fullname"]?></td>
                         <td><?php echo $row["weekno"]?></td>
                         <td><?php echo $row["Task_StartDate"]?></td>
+                        <td><?php echo $row["totalhours"]?></td>
                         <td><?php echo $row["TaskDesc"]?></td>
                         <form action="" method="POST">  
                         <td>
@@ -124,6 +126,7 @@
                         <th>Student Name</th>
                         <th>Week No</th>
                         <th>Start Date</th>
+                        <th>Total Hours</th>
                         <th>Completed Task</th>
                         <th>Status</th>
                         <th>Manager Remarks</th>
@@ -134,7 +137,7 @@
                 </thead>
                 <tbody>
                 <?php
-                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks, a.id, a.weekno, a.UCRemarks from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status != 'Pending'";
+                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.totalhours, a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks, a.id, a.weekno, a.UCRemarks from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status != 'Pending'";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
@@ -143,6 +146,7 @@
                         <td><?php echo $row["fullname"]?></td>
                         <td><?php echo $row["weekno"]?></td>
                         <td><?php echo $row["Task_StartDate"]?></td>
+                        <td><?php echo $row["totalhours"]?></td>
                         <td><?php echo $row["TaskDesc"]?></td>
                         <form action="" method="POST">  
                         <td>
