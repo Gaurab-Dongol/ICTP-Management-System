@@ -146,6 +146,7 @@
                         <th>Supervisor</th>
                         <th>Supervisor's email</th>
                         <th>Job Responsibility</th>
+                       <!-- <th>Total Hours Rendered</th> -->
                         <th>Status</th>
                         <th>Mark</th>
                         <th>Update</th>
@@ -171,6 +172,7 @@
                         <td><?php echo $row["supervisor"]?></td>
                         <td><?php echo $row["emailaddress"]?></td>
                         <td><?php echo $row["jobresponsibility"]?></td>
+                        <!-- <td><?php echo $row["totalapprovedhours"]?></td> -->
                         <form action="" method="POST">  
                         <td>
                             <select name="selectstatus" id="selectstatus" class="form-control" style="width: 120px;">
