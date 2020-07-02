@@ -124,31 +124,46 @@
             <thead>
                     <tr>
                         <th>Student Name</th>
+                        <th>Week No</th>
+                        <th>Start Date</th>
                         <th>Total Hours</th>
                         <th>Completed Task</th>
                         <th>Status</th>
+                        <th>Manager Remarks</th>
+                        <th>Unit Coordinator Remarks</th>
                         <th>Update</th>
                         
                     </tr>
                 </thead>
                 <tbody>
                 <?php
-                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', sum(a.totalhours) as totalhours,  a.status,      GROUP_CONCAT( concat (concat (  '<b>WEEK</b>', '',  concat (a.weekno, ' ',a.TaskDesc)), 'Manager Remarks: ',a.ManagerRemarks ) SEPARATOR '<p></p>') as Task, GROUP_CONCAT(a.Weekno SEPARATOR '//') as Weekno from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status = 'Approved' group by a.studentid, a.internshipid, a.status";
+                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', a.totalhours, a.Task_StartDate, a.Task_EndDate, a.TaskDesc, a.status, a.ManagerRemarks, a.id, a.weekno, a.UCRemarks from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status != 'Pending'";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
                 ?>   
                     <tr>
                         <td><?php echo $row["fullname"]?></td>
+                        <td><?php echo $row["weekno"]?></td>
+                        <td><?php echo $row["Task_StartDate"]?></td>
                         <td><?php echo $row["totalhours"]?></td>
-
-                        <td><?php echo $row["Task"]?></td>
+                        <td><?php echo $row["TaskDesc"]?></td>
                         <form action="" method="POST">  
-                        <td> 
-                            <input class="form-control" type="text" name="status" placeholder= "<?php echo $row['status']?>"  style="width: 100px;">   
+                        <td>
+                            <select name="selectstatus" id="selectstatus" class="form-control" style="width: 120px;">
+                                
+                                <option <?php if ($row["status"]=='Pending')echo ' selected="selected"'?>>Pending</option>
+                                <option style = 'color:green;' <?php if ($row["status"]=='Approved')echo ' selected="selected"'?>> Approved </option>
+                                <option <?php if ($row["status"]=='Rejected')echo ' selected="selected"'?>>Rejected</option>
+                              </select>
                         </td>
-                      
-                       
+                        <td> 
+                        <!-- <input class="form-control" type="text" name="rmarks" placeholder="Enter your Remarks" style="width: 500px;"> -->
+                        <?php echo $row["ManagerRemarks"]?>
+                        </td>
+                        <td> 
+                            <input class="form-control" type="text" name="ucmarks" placeholder= "<?php echo $row['UCRemarks']?>"  style="width: 300px;">   
+                        </td>
                         <td> 
                     
                         <div class="form-actions form-group">
