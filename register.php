@@ -374,7 +374,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <option value="Papua New Guinea">Papua New Guinea</option>
                                         <option value="Paraguay">Paraguay</option>
                                         <option value="Peru">Peru</option>
-                                        <option value="Phillipines">Philippines</option>
+                                        <option value="Philippines">Philippines</option>
                                         <option value="Pitcairn Island">Pitcairn Island</option>
                                         <option value="Poland">Poland</option>
                                         <option value="Portugal">Portugal</option>
