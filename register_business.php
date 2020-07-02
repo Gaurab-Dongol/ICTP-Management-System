@@ -2,11 +2,15 @@
 // Include DB config file
 require_once('inc/config.php');
 
-$cname = $uname = $pwd = $confirm_pwd = $fname_err = $email_err = $uname_err = $sid_err = $pwd_err = $confirm_pwd_err = "";
+$cname = $uname = $pwd = $confirm_pwd = $fname_err = $email_err = $uname_err = $sid_err = $pwd_err = $confirm_pwd_err = $err_msg = "";
 $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+//if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if(isset($_POST['submitmain']))  { 
+    if (empty (trim($_POST["companynm"]))) {
+        $err_msg = "Please set a valid company name";
+    }
+
     $sql = "SELECT userid FROM login WHERE username = ?";
 
     if ($stmt = mysqli_prepare($conn, $sql)) {
@@ -32,33 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         mysqli_stmt_close($stmt);
     }
     
-    $sql5 = "SELECT studentid FROM student WHERE studentid = ?";
-
-    if ($stmt = mysqli_prepare($conn, $sql5)) {
-       
-        mysqli_stmt_bind_param($stmt, "s", $param_sid );
-
-        $param_sid = trim($_POST["studentid"]);
-
-        if (mysqli_stmt_execute($stmt)) {
-            mysqli_stmt_store_result($stmt);
-
-            if (mysqli_stmt_num_rows($stmt) > 0) {
-                $sid_err = "This studentid -" . $param_sid . " is already registered.";
-            } else {
-                $param_sid = trim($_POST["studentid"]);
-            }
-        } else {
-            echo "Something went wrong. Please check that you have entered the correct details.";
-        }
-
-        mysqli_stmt_close($stmt);
-    }
-
-    if (empty($uname_err) && empty($pwd_err) && empty($confirm_pwd_err) && empty($sid_err)  ) {
+    if (empty($uname_err) && empty($pwd_err) && empty($confirm_pwd_err) && empty($sid_err) && empty($err_msg)  ) {
 
         $sql = "INSERT INTO login (username, password) VALUES (?, ?)";
-        $sql2 = "INSERT INTO student (studentid, firstname, lastname, contactNo, specialisation, YearEnrolled, Nationality, EmailAddress, Userid ) VALUES (?,?,?,?,?,?,?,?,?)";
+        $sql2 = "INSERT INTO companyuser (firstname, lastname, contactNo, EmailAddress, role, Userid, companyid ) VALUES (?,?,?,?,?,?,?)";
 
         if ($stmt = mysqli_prepare($conn, $sql)) {
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_pwd);
@@ -70,22 +51,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mysqli_stmt_close($stmt);
         }
         if ($stmt2 = mysqli_prepare($conn, $sql2)) {
-            mysqli_stmt_bind_param($stmt2, "sssssssss", $param_sid, $param_fname, $param_lname, $param_cno, $param_spec, $param_yren, $param_natio, $param_email, $param_uid);
+            mysqli_stmt_bind_param($stmt2, "sssssss", $param_fname, $param_lname, $param_cno, $param_email, $param_role, $param_uid, $param_cid);
 
-            $param_sid = trim($_POST["studentid"]);
             $param_fname = trim($_POST["firstname"]);
             $param_lname = trim($_POST["lastname"]);
             $param_cno = trim($_POST["contactno"]);
-
-            $param_spec = trim($_POST["specialisation"]);
-            $param_yren = trim($_POST["yearenrolled"]);
-            $param_natio = trim($_POST["nationality"]);
             $param_email = trim($_POST["username"]);
             $param_username = trim($_POST["username"]);
+            $param_role = trim($_POST["role"]);
             $sql3 = "select userid from login where username = '" . $param_username . "'";
             $rs = mysqli_query($conn, $sql3);
             $row = mysqli_fetch_row($rs);
             $param_uid = $row[0];
+            $param_cid = trim($_POST["companynm"]); 
 
             if (mysqli_stmt_execute($stmt2)) {
                 header("location: login.php");
@@ -98,6 +76,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     mysqli_close($conn);
 }
+
+
+if(isset($_POST['submit'])){
+    // Check input error
+    $sql = "SELECT companyname FROM company where companyname = ? ";
+
+    if ($stmt = mysqli_prepare($conn, $sql)) {  
+        mysqli_stmt_bind_param($stmt, "s", $param_cname );
+
+        $param_cname  = trim($_POST["CompanyName"]); 
+
+        if (mysqli_stmt_execute($stmt)) {
+
+            mysqli_stmt_store_result($stmt);
+            if (mysqli_stmt_num_rows($stmt) > 0) {
+                $err_msg = "This compnay name - " . $param_cname . " already exists.";
+            } else {
+                $err_msg = "";
+            }
+        } else {
+            echo "Something went wrong. Please check that you have entered the correct details.";
+        }
+        mysqli_stmt_close($stmt);
+    }
+
+    if (empty($err_msg)) {
+        $sql = "INSERT INTO company (companyname, industry, website, officeno) VALUES (?,?,?,?)";
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            
+            mysqli_stmt_bind_param($stmt, "ssss", $param_companyname, $param_industry, $param_website, $param_officeno);
+
+            $param_companyname = trim($_POST["CompanyName"]);
+            $param_industry =  trim($_POST["Industry"]);
+            $param_website = trim($_POST["Website"]);
+            $param_officeno = trim($_POST["OfficeNo"]);
+        
+            if (mysqli_stmt_execute($stmt)) {
+                // Redirect to login page
+                header("location: register_business.php");
+            }else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+            mysqli_stmt_close($stmt);
+            }
+        }
+        }    
+
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </h4>
                             <br>
                             <br>
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <form action="" method="POST">
                                 
                             <div class="card">
                             <?php
@@ -165,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               $results = mysqli_query($conn,$query2);
                               while ($rows = mysqli_fetch_array($results))
                               {
-                               $cname .= '<option value="'.$rows["companyname"].'">'.$rows["companyname"] .'</option>';
+                               $cname .= '<option value="'.$rows["companyid"].'">'.$rows["companyname"] .'</option>';
                               } 
                              ?>        
                                     <p> </p>
@@ -175,17 +200,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label"></label>
                                     
-                                    <select name="companynm" id="companynm" class="form-control action" require>
+                                    <select name="companynm" id="companynm" class="form-control action" required>
                                     <option value="" disabled selected>Select Company</option>
                                     <?php echo $cname; ?>
                                     </select>
                   
                                     </div>
+                                    <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
                                     <div class="form-actions form-group">
                                                 <button type="submit" 
-                                                class="btn au-btn-icon au-btn--green btn-sm">
-                                                <a href="add_company.php?UID=<?php echo $_GET['UID']?>"> Add New Company</a></button>             
+                                                class="btn au-btn-icon au-btn--green btn-sm" data-toggle="modal" data-target="#myModalCompany">
+                                                Add New Company></button>             
                                     </div>
+
                             </div>
                                 
                                 
@@ -198,40 +225,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <input class="au-input au-input--full" type="text" name="lastname" placeholder="Doe" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Western Email Address</label>
+                                    <label>Role</label>
+                                    <input class="au-input au-input--full" type="text" name="role" placeholder="e.g. Test Lead" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
                                     <input class="au-input au-input--full" type="email" name="username" placeholder="12345678@student.westernsydney.edu.au" required>
                                     <?php echo  "<p> <font color=red> $uname_err </font> </p>"; ?>
                                 </div>
                                 <div class="form-group">
                                     <label>Contact Number</label>
-                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61436XXXXXX">
+                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61436XXXXXX" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="select" class=" form-control-label">Specialisation</label>
-                                    <select name="specialisation" id="specialisation" class="form-control">
-                                        <option value="0">Please select</option>
-                                        <option value="Networking">Networking</option>
-                                        <option value="Distributed Computing">Distributed Computing</option>
-                                        <option value="Management">Management</option>
-                                        <option value="Web and Mobile Computing">Web and Mobile Computing</option>
-                                        <option value="Health Informatics">Health Informatics</option>
-                                        <option value="Data Analytics">Data Analytics</option>
-                                        <option value="Digital Futures">Digital Futures</option>
-                                        <option value="Innovation and Entrepreneurship">Innovation and Entrepreneurship</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="select" class=" form-control-label">Year Enrolled</label>
-                                    <select name="yearenrolled" id="yearenrolled" class="form-control">
-                                        <option value="0">Please select</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                    </select>
-                                </div>
+                                
                                 
                                 <div class="form-group">
                                     <label>Password</label>
@@ -248,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </label>
 
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit">Register</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submitmain">Register</button>
 
                             </form>
                             <div class="register-link">
@@ -264,21 +270,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
     </div>
-    <script type="text/javascript">
-        var password = document.getElementById("password"),
-            repassword = document.getElementById("repassword");
-
-        function validatePassword() {
-            if (password.value != repassword.value) {
-                repassword.setCustomValidity("Passwords Don't Match");
-            } else {
-                repassword.setCustomValidity('');
-            }
-        }
-
-        password.onchange = validatePassword;
-        repassword.onkeyup = validatePassword;
-    </script>
+    
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
@@ -299,11 +291,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script src="vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="vendor/select2/select2.min.js">
     </script>
-
     <!-- Main JS-->
     <script src="js/main.js"></script>
 
 </body>
 
 </html>
-<!-- end document-->
+
+<div id="myModalCompany" class="modal fade" role="dialog">
+              <div class="modal-dialog modal-lg">
+              <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                        
+                            <strong>Add New Company</strong>
+                          </div>
+                          <form action="" method="POST">
+                                <div class="form-group">
+                                    <label>COMPANY NAME</label>
+                                    <input class="au-input au-input--full" type="text" name="CompanyName" id="CompanyName" placeholder="Company Name" required>
+                                     <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
+                                </div>
+                                <div class="form-group">
+                                    <label>INDUSTRY</label>
+                                    <input class="au-input au-input--full" type="text" name="Industry" placeholder="Industry" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>WEBSITE</label>
+                                    <input class="au-input au-input--full" type="text" name="Website" placeholder="Website" >
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label>OFFICE NUMBER</label>
+                                    <input class="au-input au-input--full" type="text" name="OfficeNo" placeholder="Office Number" required>
+                                </div>
+
+                  <div class="modal-footer">
+                    </div>
+                  </div>
+                  <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Modal Code Finish-->
