@@ -187,7 +187,7 @@ if(isset($_POST['submit'])){
                                 <center>ICT Practicum</center>
                             </h2>
                             <h4>
-                                <center>Company Registration</center>
+                                <center>Company Contact Registration</center>
                             </h4>
                             <br>
                             <br>
