@@ -100,7 +100,7 @@ function getCompany(val) {
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label"></label>
                                     
-                                    <select name="companynm" id="companynm" class="form-control action" onChange="getCompany(this.value);" require>
+                                    <select name="companynm" id="companynm" class="form-control action" onChange="getCompany(this.value);" required>
                                     <option value="" disabled selected>Select Company</option>
                                     <?php echo $company; ?>
                                     </select>
@@ -121,7 +121,7 @@ function getCompany(val) {
                                     <div class="form-group">
                                 
                                     <label for="select" class=" form-control-label"></label>
-                                    <select name="contactNm" id="contact-Nm" class="form-control" require>
+                                    <select name="contactNm" id="contact-Nm" class="form-control" required>
                                     <option value="" disabled selected>Select Contact</option>
                                     
                                     </select>

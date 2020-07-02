@@ -225,7 +225,7 @@ function getComa(val) {
                                     <div class="form-group">
                                 
                                     <label for="select" class=" form-control-label"></label>
-                                    <select name="refno" id="ref-No" class="form-control action" onChange="getCom(this.value); getComa(this.value);">
+                                    <select name="refno" id="ref-No" class="form-control action" onChange="getCom(this.value); getComa(this.value);", required>
                                     <option value="" disabled selected>Select Reference No</option>
                                     <?php echo $company; ?>
                                     </select>
@@ -251,7 +251,7 @@ function getComa(val) {
                                     
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label">Unit Coordinator</label>
-                                    <select name="staff" id="staff" class="form-control" >
+                                    <select name="staff" id="staff" class="form-control" required >
                                     <option value="" disabled selected>Select Unit Coordinator</option>
                                     <?php echo $staff; ?>
                                     </select>
@@ -260,7 +260,7 @@ function getComa(val) {
 
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label">Semester</label>
-                                    <select name="sem" id="sem" class="form-control" >
+                                    <select name="sem" id="sem" class="form-control" required>
                                     <option value="" disabled selected>Semester</option>
                                     <?php echo $semester; ?>
                                     </select>
@@ -270,7 +270,7 @@ function getComa(val) {
                                     <label for="textarea-input" class="form-control-label">Job Responsibility<small><i>(in bullet form)</i></small> </label>
                                     </div>
                                     <div class="form-group">
-                                    <textarea class="ckeditor" name="JobRes"></textarea>
+                                    <textarea class="ckeditor" name="JobRes" required></textarea>
                                     </div>
                           </div>
                 
