@@ -40,7 +40,20 @@
                         </li>
                         <li>
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-tachometer-alt"></i>Unit Coordinator</a>
+                                <i class="far fa-building"></i>Business Partner</a>
+                                <!-- <i class="fas fa-tachometer-alt"></i>Internship</a> -->
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="companylist.php?UID=<?php echo $_GET['UID']?>">Company List</a>
+                                </li>
+                                <li>
+                                    <a href="contactlist.php?UID=<?php echo $_GET['UID']?>">Contact List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-chalkboard-teacher"></i>Unit Coordinator</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="staff.php?UID=<?php echo $_GET['UID']?>">UC List</a>
