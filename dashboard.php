@@ -211,6 +211,11 @@
               <div class="modal-dialog">
               <!-- Modal content-->
                 <div class="modal-content">
+                <?php
+                          $query=" SELECT * from student where userid =  $UID ";
+                          $student = mysqli_query($conn,$query);
+                          $rs = mysqli_fetch_array($student);
+                  ?> 
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                   </div>
@@ -224,28 +229,28 @@
                           <div class="card-body card-block">
                             <div class="form-group">
                               <label class=" form-control-label">First Name</label>
-                              <input type="text" value="<?php echo $rstudent["FirstName"]?>"class="form-control" name="firstname">
+                              <input type="text" value="<?php echo $rs["FirstName"]?>"class="form-control" name="firstname">
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Last Name</label>
-                              <input type="text" value="<?php echo $rstudent["LastName"]?>" class="form-control" name="lastName">
+                              <input type="text" value="<?php echo $rs["LastName"]?>" class="form-control" name="lastName">
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Specialisation</label>
-                              <input type="text" value="<?php echo $rstudent["Specialisation"]?>" class="form-control" name="Specialisation">
+                              <input type="text" value="<?php echo $rs["Specialisation"]?>" class="form-control" name="Specialisation">
                             </div>
                             <div class="form-group">
                               <label class=" form-control-label">Email</label>
-                              <input type="text" value="<?php echo $rstudent["EmailAddress"]?>" class="form-control" name="Email">
+                              <input type="text" value="<?php echo $rs["EmailAddress"]?>" class="form-control" name="Email">
                             </div>
                             <div class="form-group">
                              <label class=" form-control-label">Contact No</label>
-                             <input type="text" value="<?php echo $rstudent["ContactNo"]?>" class="form-control" name="ContactNo">
+                             <input type="text" value="<?php echo $rs["ContactNo"]?>" class="form-control" name="ContactNo">
                             </div>
                             
                             <div class="form-group">
                              <label class=" form-control-label">Nationality</label>
-                             <input type="text" value="<?php echo $rstudent["Nationality"]?>" class="form-control" name="Nationality">
+                             <input type="text" value="<?php echo $rs["Nationality"]?>" class="form-control" name="Nationality">
                             </div>
                           </div>
                       </div>
@@ -255,6 +260,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
+              
               </div>
             </div>
             </form>
