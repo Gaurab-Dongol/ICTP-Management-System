@@ -5,6 +5,15 @@ require_once('inc/config.php');
 $cname = $uname = $pwd = $confirm_pwd = $fname_err = $email_err = $uname_err = $sid_err = $pwd_err = $confirm_pwd_err = $err_msg = "";
 $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
 
+
+$query12 = "SELECT companyid,companyname FROM company";
+$results = mysqli_query($conn,$query12);
+while ($rows = mysqli_fetch_array($results))
+{
+ $cname .= '<option value="'.$rows["companyid"].'">'.$rows["companyname"] .'</option>';
+} 
+ 
+
 //if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if(isset($_POST['submitmain']))  { 
     if (empty (trim($_POST["companynm"]))) {
@@ -185,14 +194,6 @@ if(isset($_POST['submit'])){
                             <form action="" method="POST">
                                 
                             <div class="card">
-                            <?php
-                              $query2 = "SELECT companyid,companyname FROM company";
-                              $results = mysqli_query($conn,$query2);
-                              while ($rows = mysqli_fetch_array($results))
-                              {
-                               $cname .= '<option value="'.$rows["companyid"].'">'.$rows["companyname"] .'</option>';
-                              } 
-                             ?>        
                                     <p> </p>
                                     <div class="card-header">
                                         <strong>Company Name</strong>
@@ -212,7 +213,7 @@ if(isset($_POST['submit'])){
                                                 class="btn au-btn-icon au-btn--green btn-sm" data-toggle="modal" data-target="#myModalCompany">
                                                 Add New Company></button>             
                                     </div>
-
+                                   
                             </div>
                                 
                                 
