@@ -91,6 +91,8 @@ function getCompany(val) {
                                 <center>ADD INTERNSHIP</center>
                               
                             </h3>
+                            <br>
+                            <br>
                             <small> <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?> </small>
                             <form action="addinternship.php?UID=<?php echo $_GET['UID']?>" method="POST">                                
                                 <div class="card">
