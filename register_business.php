@@ -211,7 +211,7 @@ if(isset($_POST['submit'])){
                                     <div class="form-actions form-group">
                                                 <button type="submit" 
                                                 class="btn au-btn-icon au-btn--green btn-sm" data-toggle="modal" data-target="#myModalCompany">
-                                                Add New Company></button>             
+                                                Add New Company</button>             
                                     </div>
                                    
                             </div>
