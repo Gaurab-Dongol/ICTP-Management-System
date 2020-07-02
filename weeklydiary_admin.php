@@ -133,7 +133,7 @@
                 </thead>
                 <tbody>
                 <?php
-                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', sum(a.totalhours) as totalhours,  a.status,      GROUP_CONCAT( concat (concat (  '<b>WEEK</b>', '',  concat (a.weekno, ' ',a.TaskDesc)), 'Manager Remarks: ',a.ManagerRemarks ) SEPARATOR '<p></p>') as Task, GROUP_CONCAT(a.Weekno SEPARATOR '//') as Weekno from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status = 'Approved' group by a.studentid, a.internshipid, a.status";
+                   $query="select concat(b.FirstName , ' ', b.LastName) as 'fullname', sum(a.totalhours) as totalhours,  a.status,      GROUP_CONCAT( concat (concat (concat('<h4>WEEK','' ,concat(a.weekno,'','</h4>')), ' ',a.TaskDesc), 'Manager Remarks: ',a.ManagerRemarks ) SEPARATOR '<p></p>') as Task, GROUP_CONCAT(a.Weekno SEPARATOR '//') as Weekno from diary a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid where a.status = 'Approved' group by a.studentid, a.internshipid, a.status";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
