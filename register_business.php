@@ -155,12 +155,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <h4>
                                 <center>Company Registration</center>
                             </h4>
+                            <br>
+                            <br>
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                                <div class="form-group">
-                                    <label>Student ID</label>
-                                    <input class="au-input au-input--full" type="number" name="studentid" placeholder="12345678" required>
-                                    <?php echo  "<p> <font color=red> $sid_err </font> </p>"; ?>
-                                </div>
+                                
+                            <div class="card">
+                                    <p> </p>
+                                    <div class="card-header">
+                                        <strong>Company Name</strong>
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="select" class=" form-control-label"></label>
+                                    
+                                    <select name="companynm" id="companynm" class="form-control action" onChange="getCompany(this.value);" require>
+                                    <option value="" disabled selected>Select Company</option>
+                                    <?php echo $company; ?>
+                                    </select>
+                  
+                                    </div>
+                                    <div class="form-actions form-group">
+                                                <button type="submit" 
+                                                class="btn au-btn-icon au-btn--green btn-sm">
+                                                <a href="add_company.php?UID=<?php echo $_GET['UID']?>"> Add New Company</a></button>             
+                                    </div>
+                            </div>
+                                
+                                
                                 <div class="form-group">
                                     <label>First Name</label>
                                     <input class="au-input au-input--full" type="text" name="firstname" placeholder="John" required>

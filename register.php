@@ -155,6 +155,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <h4>
                                 <center>Student Registration</center>
                             </h4>
+                            <br>
+                            
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <div class="form-group">
                                     <label>Student ID</label>
