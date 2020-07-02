@@ -149,11 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </a>
                         </div>
                         <div class="login-form">
-                            <h2>
+                        <h2>
                                 <center>ICT Practicum</center>
                             </h2>
                             <h4>
-                                <center>Student Registration</center>
+                                <center>Company Registration</center>
                             </h4>
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <div class="form-group">

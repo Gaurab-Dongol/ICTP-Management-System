@@ -74,10 +74,9 @@ if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
                                 
                             </form>
                             <div class="register-link">
-                                <p>
-                                    Don't you have account?
-                                    <a href="register.php">Sign Up Here</a>
-                                </p>
+                                <p>Don't you have account? </p>
+                                <p>Sign up as </p>
+                                <p>    <a style="color:green" href="register.php">STUDENT</a>  <a style="color:blue" href="register_business.php">BUSINESS</a>  </p>
                             </div>
                         </div>
                     </div>
