@@ -53,7 +53,7 @@
                         </li>
                         <li>
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-chalkboard-teacher"></i>Unit Coordinator</a>
+                                <i class="fas fa-address-card"></i>Unit Coordinator</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="staff.php?UID=<?php echo $_GET['UID']?>">UC List</a>
