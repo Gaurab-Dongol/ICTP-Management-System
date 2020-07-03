@@ -1,6 +1,7 @@
 <?php 
 	session_start();
-	
+    
+    
 	if(!isset($_SESSION['RoleId']))
 	{
 		header('location:login.php?lmsg=true');
