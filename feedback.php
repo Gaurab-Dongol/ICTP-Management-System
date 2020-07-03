@@ -26,23 +26,279 @@
                 <div class="container-fluid">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="title-1 m-b-25">
-            <center>Add  Feedback</center>
-        </h2>
-
-
-        <div class="login-wrap">
-        <div class="login-content">
-            <div class="login-form">
-                <div class="diary-form">
+    <h2 class="title-1 m-b-25">ADD FEEDBACK</h2>
+                <div class="card">
+                    <div class="card-body card-block">
                 <form action="" method="post">
-                   <!-- <div class="form-group">
-                        <label for="textarea-input" class="form-control-label">Feedback  </label>
-                     </div>-->
-                     <div>
-                        <textarea name="feedback" id="textarea-input" rows="8" placeholder=" add feedback " class="form-control"></textarea>
+                    <div class="row">
+                        <div class="col-lg-6">
+                        <label>EMPLOYER NAME</label>
+                        <input class="au-input au-input--full" type="empname" name="username" placeholder="EMPLOYER NAME"required>
                         </div>
-                    
+                        <div class="col-lg-6">
+                        <label>ORGANISATION NAME</label>
+                        <input class="au-input au-input--full" type="orgname" name="username" placeholder="ORGANISATION NAME"required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-lg-6">
+                        <label>EMAIL</label>
+                        <input class="au-input au-input--full" type="email" name="username" placeholder="COMPANY EMAIL"required>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>PHONE</label>
+                        <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61XXXXXXXXX"required>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-lg-6">
+                        <label>STUDENT NAME</label>
+                        <input class="au-input au-input--full" type="stname" name="username" placeholder="STUDENT NAME"required>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>STUDENT NUMBER</label>
+                        <input class="au-input au-input--full" type="stnumber" name="username" placeholder="STUDENT NUMBER"required>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-lg-4">
+                        <label>POSITION OR ASSIGNMENT</label>
+                        <input class="au-input au-input--full" type="empname" name="username" >
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Start Date:</label>
+                        <input class="au-input au-input--full" type="date" name="start" required>
+                    </div>
+                    <div class="col-lg-4">   
+                        <label>End Date:</label>
+                        <input class="au-input au-input--full" type="date" name="end" required>
+                    </div>
+                    </div>
+                
+                    <div class="row">
+                    <div class="col-lg-12">
+                        <label for="select" class=" form-control-label">PLEASE COMPLETE THIS EVALUATION AT THE END OF THE STUDENT’S WORK PERIOD.  YOU ARE ENCOURAGED TO DISCUSS THE COMPLETED FORM WITH THE STUDENT TO AID IN THEIR PROFESSIONAL DEVELOPMENT. PLEASE USE THE SCALE BELOW TO EVALUATE YOUR STUDENT’S PERFORMANCE:</label>
+                        <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1. NEEDS MORE TRAINING OR EDUCATION">1. NEEDS MORE TRAINING OR EDUCATION</option>
+                            <option value="2. PERFORMING BELOW EXPECTATIONS">2. PERFORMING BELOW EXPECTATIONS</option>
+                            <option value="3. ACCEPTABLE PERFORMANCE">3. ACCEPTABLE PERFORMANCE</option>
+                            <option value="4. ABOVE AVERAGE PERFORMANCE">4. ABOVE AVERAGE PERFORMANCE</option>
+                            <option value="5. SUPERIOR PERFORMANCE">5. SUPERIOR PERFORMANCE</option>
+                            <option value="6. NOT OBSERVED">6. NOT OBSERVED</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    <div class="row">
+                    <div class="col-lg-6">
+                        <label >1. GENERAL WORKPLACE PERFORMANCE</label>
+                            <label for="select" class=" form-control-label">ATTENDANCE</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">PUNTUALITY</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ATTITUDE</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ACCEPTANCE CRITICISM</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ASKS APPROPRIATE QUESTIONS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">SELF MOTIVATED</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">PRACICES ETHICAL BEHAVIOR</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label >2. SPECIFIC JOB ASSIGNMENT PERFORMANCE</label>
+                            <label for="select" class=" form-control-label">SUFFICIENT KNOWLEDGE TO PERFORM TASKS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">VERBAL COMMUNICATION SKILLS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">WRITTEN COMMUNICATION SKILLS</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">ANALYTICAL SKILLS – ANALYSES PROBLEMS AND TAKES APPROPRIATE ACTION</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">USES TECHNICAL SKILLS REQUIRED FOR THE POSITION</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">MEETS DEADLINES</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">TAKES INITIATIVE TO GET A JOB DONE, INCLUDING OVERCOMING OBSTACLES</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                            <label for="select" class=" form-control-label">SETS PRIORITIES</label>
+                            <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            </select>
+                    </div>
+                    </div>
+                    <div class="form">
+                        <label> HOW WOULD YOU ASSESS THE STUDENT’S OVERALL PERFORMANCE?</label>
+                        <input type="radio" id="OUTSTANDING" name="PERFORMANCE" value="OUTSTANDING" aria-label="OUTSTANDING">
+                        <label for="OUTSTANDING">OUTSTANDING</label><br>
+                        <input type="radio" id="ABOVE AVERAGE" name="PERFORMANCE" value="ABOVE AVERAGE">
+                        <label for="ABOVE AVERAGE">ABOVE AVERAGE</label><br>
+                        <input type="radio" id="SATISFACTORY" name="PERFORMANCE" value="SATISFACTORY">
+                        <label for="SATISFACTORY">SATISFACTORY</label><br>
+                        <input type="radio" id="BELOW AVERAGE" name="PERFORMANCE" value="BELOW AVERAGE">
+                        <label for="BELOW AVERAGE">BELOW AVERAGE</label><br>
+                        <input type="radio" id="UNSATISFACTORY" name="PERFORMANCE" value="UNSATISFACTORY">
+                        <label for="UNSATISFACTORY">UNSATISFACTORY</label>
+                    </div>                 
+                    <div class="form-group">
+                        <label for="textarea-input" class="form-control-label">WHAT DO YOU CONSIDER THE MAJOR STRENGTHS OF THIS STUDENT? </label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                    </div>
+                    <div class="form-group">
+                            <label for="textarea-input" class="form-control-label">WHAT AREAS NEED IMPROVEMENT?</label>
+                    </div>
+                    <div class="form-group">
+                            <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="textarea-input" class="form-control-label">WHAT WOULD YOU RECOMMEND TO MAKE THIS STUDENT BETTER PREPARED FOR THE WORKPLACE? (E.G. COURSES, ACTIVITIES, SKILLS ACQUISITION, PROGRAMS)?</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="textarea-input" class="form-control-label">OTHER COMMENTS, COMMENDATIONS, OR RECOMMENDATIONS:</label>
+                </div>
+                <div class="form-group">
+                        <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>THANK YOU FOR YOUR TIME IN COMPLETING THIS EVALUATION!</label>
+                </div>
+                <div align="right" class="form">
+                    <label>Signature</label>
+                    <input type="signature" class="au-input au-input--full">
+                </div>
+                <div align="right" >
+                    <label>Date</label>
+                    <input type="text" class="au-input au-input--full">
+                </div>
                     <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
 </div>
 </form>
