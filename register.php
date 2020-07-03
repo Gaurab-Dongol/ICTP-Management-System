@@ -149,9 +149,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </a>
                         </div>
                         <div class="login-form">
-                            <h3>
+                            <h2>
                                 <center>ICT Practicum</center>
-                            </h3>
+                            </h2>
+                            <h4>
+                                <center>Student Registration</center>
+                            </h4>
+                            <br>
+                            
                             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                 <div class="form-group">
                                     <label>Student ID</label>
@@ -173,11 +178,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="form-group">
                                     <label>Contact Number</label>
-                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61436XXXXXX">
+                                    <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61436XXXXXX" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Specialisation</label>
-                                    <select name="specialisation" id="specialisation" class="form-control">
+                                    <select name="specialisation" id="specialisation" class="form-control" required>
                                         <option value="0">Please select</option>
                                         <option value="Networking">Networking</option>
                                         <option value="Distributed Computing">Distributed Computing</option>
@@ -191,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Year Enrolled</label>
-                                    <select name="yearenrolled" id="yearenrolled" class="form-control">
+                                    <select name="yearenrolled" id="yearenrolled" class="form-control" required>
                                         <option value="0">Please select</option>
                                         <option value="2018">2018</option>
                                         <option value="2019">2019</option>
@@ -374,7 +379,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <option value="Papua New Guinea">Papua New Guinea</option>
                                         <option value="Paraguay">Paraguay</option>
                                         <option value="Peru">Peru</option>
-                                        <option value="Phillipines">Philippines</option>
+                                        <option value="Philippines">Philippines</option>
                                         <option value="Pitcairn Island">Pitcairn Island</option>
                                         <option value="Poland">Poland</option>
                                         <option value="Portugal">Portugal</option>

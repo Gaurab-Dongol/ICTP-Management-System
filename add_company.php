@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>INDUSTRY</label>
-                                    <input class="au-input au-input--full" type="text" name="Industry" placeholder="Industry" >
+                                    <input class="au-input au-input--full" type="text" name="Industry" placeholder="Industry" required>
                                 </div>
                                 <div class="form-group">
                                     <label>WEBSITE</label>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>OFFICE NUMBER</label>
-                                    <input class="au-input au-input--full" type="text" name="OfficeNo" placeholder="Office Number" >
+                                    <input class="au-input au-input--full" type="text" name="OfficeNo" placeholder="Office Number" required>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
                                 </form>

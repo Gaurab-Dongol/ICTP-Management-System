@@ -34,9 +34,16 @@ function getCompany(val) {
      $company .= '<option value="'.$rows["companyid"].'">'.$rows["CompanyName"] .'</option>';
     }
      
+    $err_msg = "";
 
     if(isset($_POST['submit']))
     {
+        if (empty (trim($_POST["companynm"])) || empty (trim($_POST["contactNm"]))) {
+
+            $err_msg = "Please set a valid company name and contact name.";
+        }
+
+        if(empty($err_msg)){
         $sql = "INSERT INTO internship (companyid, companyuserid, jobrole, description, closingdate, location) VALUES (?,?,?,?,?,?)";
         if ($stmt = mysqli_prepare($conn, $sql)) {
             
@@ -58,7 +65,7 @@ function getCompany(val) {
             }
             mysqli_stmt_close($stmt);
             }
-
+        }
         }
         
     ?>
@@ -82,7 +89,11 @@ function getCompany(val) {
                         <div class="login-form">
                             <h3>
                                 <center>ADD INTERNSHIP</center>
+                              
                             </h3>
+                            <br>
+                            <br>
+                            <small> <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?> </small>
                             <form action="addinternship.php?UID=<?php echo $_GET['UID']?>" method="POST">                                
                                 <div class="card">
                                     <div class="card-header">
@@ -91,7 +102,7 @@ function getCompany(val) {
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label"></label>
                                     
-                                    <select name="companynm" id="companynm" class="form-control action" onChange="getCompany(this.value);">
+                                    <select name="companynm" id="companynm" class="form-control action" onChange="getCompany(this.value);" required>
                                     <option value="" disabled selected>Select Company</option>
                                     <?php echo $company; ?>
                                     </select>
@@ -112,7 +123,7 @@ function getCompany(val) {
                                     <div class="form-group">
                                 
                                     <label for="select" class=" form-control-label"></label>
-                                    <select name="contactNm" id="contact-Nm" class="form-control">
+                                    <select name="contactNm" id="contact-Nm" class="form-control" required>
                                     <option value="" disabled selected>Select Contact</option>
                                     
                                     </select>

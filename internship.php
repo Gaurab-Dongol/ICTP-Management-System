@@ -61,7 +61,54 @@ function getComa(val) {
 
   if(isset($_POST['submit'])){
         // Check input error
-         // if(empty($error_msg)){
+        $sql = "SELECT internshipid, studentid FROM student_intern where studentid = (select studentid from student where userid = ?) and internshipid = ? ";
+
+        if ($stmt = mysqli_prepare($conn, $sql)) {
+            
+            mysqli_stmt_bind_param($stmt, "ss", $UID, $param_InternshipId );
+            $param_InternshipId = trim($_POST["refno"]); 
+            $param_cn = trim($_POST["companyNm"]); 
+            if (mysqli_stmt_execute($stmt)) {
+    
+                mysqli_stmt_store_result($stmt);
+    
+                if (mysqli_stmt_num_rows($stmt) > 0) {
+                    $error_msg = "You have already an existing internship record for this - " . $param_InternshipId . ".";
+                } else {
+                    $error_msg = "";
+                }
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+    
+    
+            mysqli_stmt_close($stmt);
+        }
+
+        $sql2a = "SELECT status FROM student_intern WHERE status in ('Approved', 'On-Going') and studentid = (select studentid from student where USERID= ? )";
+        if ($stmt = mysqli_prepare($conn, $sql2a)) {
+           
+            mysqli_stmt_bind_param($stmt, "s", $UID );
+    
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_store_result($stmt);
+    
+                if (mysqli_stmt_num_rows($stmt) != 0 ) {
+                    $error_msg = "There is already an approved or on-going internship under your name.";
+                } else {
+                    $error_msg  ="";
+   
+                }
+            } else {
+                echo "Something went wrong. Please check that you have entered the correct details.";
+            }
+    
+            mysqli_stmt_close($stmt);
+        }
+   
+
+
+         if(empty($error_msg)){
               
               $sql = "INSERT INTO student_intern (InternshipId, StudentID, UnitCID, Semester, JobResponsibility, Status) VALUES (?,?,?,?,?,?)";
               
@@ -84,7 +131,7 @@ function getComa(val) {
                   }
       
                   mysqli_stmt_close($stmt);  
-   
+                }
                 
               }
             }    
@@ -113,6 +160,7 @@ function getComa(val) {
                                                 Add Internship</button>
                                         </div>
                                         <h3>My Internship Detail</h3>
+                                        <?php echo  "<p> <font color=red> $error_msg </font> </p>"; ?>
                                     </div>
                                     <hr>
                                     <div>
@@ -177,7 +225,7 @@ function getComa(val) {
                                     <div class="form-group">
                                 
                                     <label for="select" class=" form-control-label"></label>
-                                    <select name="refno" id="ref-No" class="form-control action" onChange="getCom(this.value); getComa(this.value);">
+                                    <select name="refno" id="ref-No" class="form-control action" onChange="getCom(this.value); getComa(this.value);", required>
                                     <option value="" disabled selected>Select Reference No</option>
                                     <?php echo $company; ?>
                                     </select>
@@ -194,16 +242,16 @@ function getComa(val) {
                                     <option value="" disabled selected>Contact Name</option> 
                                     </select>
                                     </div>
-                                    <div class="form-actions form-group">
+                                   <!-- <div class="form-actions form-group">
                                                 <button type="submit" 
                                                 class="btn au-btn-icon au-btn--green btn-sm">
                                                 <a href="add_internshipst.php?UID=<?php echo $_GET['UID']?>"> Add Internship</a></button>             
-                                    </div>
+                                    </div> -->
                                     </div>
                                     
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label">Unit Coordinator</label>
-                                    <select name="staff" id="staff" class="form-control" >
+                                    <select name="staff" id="staff" class="form-control" required >
                                     <option value="" disabled selected>Select Unit Coordinator</option>
                                     <?php echo $staff; ?>
                                     </select>
@@ -212,7 +260,7 @@ function getComa(val) {
 
                                     <div class="form-group">
                                     <label for="select" class=" form-control-label">Semester</label>
-                                    <select name="sem" id="sem" class="form-control" >
+                                    <select name="sem" id="sem" class="form-control" required>
                                     <option value="" disabled selected>Semester</option>
                                     <?php echo $semester; ?>
                                     </select>
@@ -222,7 +270,7 @@ function getComa(val) {
                                     <label for="textarea-input" class="form-control-label">Job Responsibility<small><i>(in bullet form)</i></small> </label>
                                     </div>
                                     <div class="form-group">
-                                    <textarea class="ckeditor" name="JobRes"></textarea>
+                                    <textarea class="ckeditor" name="JobRes" required></textarea>
                                     </div>
                           </div>
                 

@@ -19,6 +19,19 @@
     $fetch = "SELECT * FROM login AS A LEFT OUTER JOIN student AS B ON A.USERID = B.USERID LEFT OUTER JOIN staff AS C ON B.USERID = C.USERID LEFT OUTER JOIN companyuser AS D ON C.USERID = D.UserId WHERE A.USERID = '".$UID."'";
     $s = mysqli_query($conn, $fetch);
     $r = mysqli_fetch_array($s);
+     
+    $param_total = "0";
+    
+    $query2="SELECT sum(TotalHours) as totalhr from diary where studentid = (select studentid from student where userid = '$UID') and status in ('on-going','approved') group by InternshipId, StudentID"; 
+    $results = mysqli_query($conn,$query2);
+    while ($rows = mysqli_fetch_array($results))
+    {
+        $param_total = $rows["totalhr"];
+    } 
+
+    $agg_msg = "This is your total approved hours - " . $param_total . ".";
+
+
 ?>
     <div class="page-wrapper">
         <!-- PAGE CONTAINER-->
@@ -51,21 +64,20 @@
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
-                                                <th>Version No</th>
+                                                <th>Week No</th>
                                                 <th>Total hours</th>
-                                                <th>Task Description</th>
-                                                <th>Date submitted</th>
+                                                <th>Task Completed</th>
+                                                <th>Status</th>
+                                                <th>Manager Remarks</th>
+                                                <th>Unit Coordinator Remarks</th>
                                                 <th>Edit/Delete</th>
-                                                <!--<th>Manager Remarks</th>
-                                                <th>status</th>
-                                                <th>price</th>
-                                                <th></th>-->
+                                                
                                             </tr>
                                         </thead>
                                         <?php
                                             //Display Student List
                                             $UID = $_GET['UID'];
-                                            $query= "SELECT student.StudentID, Diary.* FROM student INNER JOIN Diary ON student.StudentID=Diary.StudentID WHERE student.USERID='$UID'";
+                                            $query= "SELECT student.StudentID, Diary.* FROM student INNER JOIN Diary ON student.StudentID=Diary.StudentID WHERE student.USERID='$UID' order by weekno";
                                             //$query='select * from diary';
                                             $rs = mysqli_query($conn,$query);
                                             $count = 1;
@@ -73,12 +85,14 @@
                                         ?> 
                                         <tbody>
                                             <tr class="tr-shadow">
-                                                <td><?php echo $count?></td>
+                                                <td class="desc"><?php echo $row["WeekNo"]?></td>
                                                 <td>
                                                     <span class="block-email"><?php echo $row["TotalHours"]?></span>
                                                 </td>
                                                 <td class="desc"><?php echo $row["TaskDesc"]?></td>
-                                                <td class="desc"><?php echo $row["DateSubmitted"]?></td>
+                                                <td class="desc"><?php echo $row["status"]?></td>
+                                                <td class="desc"><?php echo $row["ManagerRemarks"]?></td>
+                                                <td class="desc"><?php echo $row["UCRemarks"]?></td>
                                                 <td>
                                                     <div class="table-data-feature">
                                                             <button class="item" data-toggle="modal" data-target="#myModalProfile" name="Edit">
@@ -94,6 +108,7 @@
                                         <?php } ?>
                                     </table>
                                 </div>
+                                <large> <?php echo  "<p> <font color=blue> $agg_msg </font> </p>"; ?> </large>
                                 <!-- END DATA TABLE -->
                             </div> 
                     </div>
