@@ -24,7 +24,16 @@
             echo "Sorry, there was a problem uploading your file.";
         }
     }
+    
+    $UID = $_GET['UID'];
+    $file= "SELECT f.Filename,f.StudentComment FROM finalreport f INNER JOIN student s ON f.StudentID = s.StudentID where s.USERID=$UID";
+    $f = mysqli_query($conn, $file);
+    $ms = mysqli_fetch_array($f);
+    $word = $ms["Filename"];
+    $comment = $ms["Studentcomment"];
+    $file1 = 'report/'.$word;
 ?>
+
 <div class="page-wrapper">
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -38,7 +47,7 @@
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
     <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-6">
         <h2 class="title-1 m-b-25">Final Report</h2>
             <div class="card">
                 <div class="card-body card-block">
@@ -48,7 +57,7 @@
                                 <label for="textarea-input" class=" form-control-label">Comment</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <textarea class="ckeditor" name="comment" id="textarea-input" class="form-control"></textarea>
+                                <textarea class="ckeditor" name="comment" id="textarea-input" class="form-control"><?php echo $comment?></textarea>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -60,16 +69,18 @@
                             </div>
                         </div>
                 </div>
-                <div class="card-footer">
+                    <div class="card-footer">
                     <button type="submit" class="btn btn-primary btn-sm" name="SubmitBtn">
                         <i class="fa fa-dot-circle-o"></i> Submit
                     </button>
-                </div>     
-                
-                </form> 
-            </div>
-        </div>      
-    </div>
-    </div>
+                    </form> 
+                </div>
+            </div>      
+        </div>
 
+    <div class="col-lg-6">
+    <iframe src='<?php echo $file1;?>' width='500px' height='800px'></iframe>
+    </div>
+    </div>
+ 
 <?php require_once('layouts/footer.php'); ?>

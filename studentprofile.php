@@ -60,7 +60,7 @@
                                         ?>  
                                         <tr>
                                             <td><?php echo ++$count;?> </td>
-                                            <td><?php echo $row["StudentID"]?></td>
+                                            <td><?php echo $row["StudentID"];?></td>
                                             <td><?php echo $row["FirstName"];?></td>
                                             <td><?php echo $row["LastName"];?></td>
                                             <td><?php echo $row["EmailAddress"];?></td>

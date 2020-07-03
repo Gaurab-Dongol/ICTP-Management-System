@@ -11,7 +11,7 @@
 		                //only visible to admin 
                             if($_SESSION['RoleId'] == 1){?>
                         <li>
-                            <a  href="#">
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-users"></i>Student</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
@@ -23,7 +23,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a class="js-arrow" href="#">
                                 <i class="fas fa-desktop"></i>Internship</a>
                                 <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>

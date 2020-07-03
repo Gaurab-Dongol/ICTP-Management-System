@@ -29,11 +29,7 @@ function getComa(val) {
   if(!isset($_SESSION['RoleId']))
   {
     header('location:login.php?lmsg=true');
-<<<<<<< HEAD
    exit;
-=======
-    exit;
->>>>>>> ae726cbc4828baedb0a09047045a4f1d2716f964
   }   
 
   require_once('inc/config.php');
