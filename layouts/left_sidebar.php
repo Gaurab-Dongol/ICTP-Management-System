@@ -67,6 +67,10 @@
                             <a href="weeklydiary_admin.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
+                        <li>
+                            <a href="basetable.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="far fa-edit"></i>Edit Base Table</a>
+                        </li>
                         <?php } ?>
 
                         <?php 
@@ -98,6 +102,19 @@
                                 </li>
                                 <li>
                                     <a href="addinternship.php?UID=<?php echo $_GET['UID']?>">Add Internship</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="far fa-building"></i>Business Partner</a>
+                                <!-- <i class="fas fa-tachometer-alt"></i>Internship</a> -->
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="companylist.php?UID=<?php echo $_GET['UID']?>">Company List</a>
+                                </li>
+                                <li>
+                                    <a href="contactlist.php?UID=<?php echo $_GET['UID']?>">Contact List</a>
                                 </li>
                             </ul>
                         </li>
