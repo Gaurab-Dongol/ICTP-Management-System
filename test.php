@@ -1,16 +1,16 @@
 <?php
     require_once('inc/config.php');
     
-    $file= "SELECT * from finalreport where weekno='4'";
+    $file= "SELECT f.DateSubmitted,f.StudentComment FROM finalreport f INNER JOIN student s ON f.StudentID = s.StudentID where s.USERID='12'";
     $f = mysqli_query($conn, $file);
     $ms = mysqli_fetch_array($f);
-    $word = $ms["Filename"];
-    $file1 = 'report/'.$word; 
+    //$word = $ms["Filename"];
+    $comment = $ms["StudentComment"];
+    $getdate = $ms["DateSubmitted"]; 
 
 echo '<h1>Here is the Document information</h1>';
-echo '<strong>Created Date : </strong>'.$file1;
-echo '<strong>File Name : </strong>'.$word;
+echo '<strong>Created Date : </strong>'.$comment;
+echo '<strong>File Name : </strong>'.$getdate;
 
   
 ?>
-<iframe src='<?php echo $file1;?>' frameborder='0'></iframe>
