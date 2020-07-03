@@ -161,7 +161,7 @@ if(isset($_POST['submitSpec'])){
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#addModalSem">
                                 <i class="fas fa-edit"></i>Add</button>
                         </div>
-                            <h2 class="title-1 m-b-25">Semeter List</h2>
+                            <h2 class="title-1 m-b-25">Semester List</h2>
                             <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
                             <div class="table-responsive table--no-card m-b-40">
                                 <table class="table table-borderless table-striped table-earning">
