@@ -31,7 +31,73 @@
 <div class="row">
     <div class="col-lg-12">
     <h2 class="title-1 m-b-25">FEEDBACK FORM</h2>
-                <div class="card">
+                                       <div class="table-button" align="right">
+                                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfile">
+                                                Add Feedback</button>
+                                        </div>
+
+</div>
+
+<div class="col-lg-12">
+        <h1 class="title-1 m-b-25">Feedback on Intern</h1>
+       
+        <div class="table-responsive table--no-card m-b-40">
+            <table class="table table-borderless table-striped table-earning">
+            <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Job Role</th>
+                        <th>Feedback Status</th>
+                        <th>Button</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                   //$query="select concat(a.internshipid , '', a.studentid) as 'siid', a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', c.JobRole, d.companyname, d.website, concat(e.FirstName , ' ', e.LastName) as 'supervisor', c.location, e.emailaddress, a.status, a.jobresponsibility, b.emailaddress from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' ";
+                   $query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', d.website, c.location, c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility, a.semester, b.emailaddress as 'semailadd' from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' and  c.companyuserid = (select companyuserid from companyuser where userid =  $UID  )  order by semester, fullname ";
+                   $rs = mysqli_query($conn,$query);
+                
+                       foreach($rs as $row){
+                ?>   
+                    <tr>
+                        <td><?php echo $row["fullname"]?></td>
+                        <td><?php echo $row["JobRole"]?></td>
+                        <td></td>
+                        <form action="" method="POST">  
+                        <td>
+                        <?php echo $row["status"]?>
+                       
+                               
+                    </tr>
+
+                    <?php }?> 
+                </tbody>
+             </table>
+        </div> 
+             <h1>    </h1>
+                     
+    </div>
+
+
+
+
+</div>
+</div>
+</div>
+
+
+
+<div id="myModalProfile" class="modal fade" role="dialog">
+              <div class="modal-dialog modal-lg">
+              <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+
+
+                  <div class="card">
                     <div class="card-body card-block">
                 <form action="" method="post">
                     
@@ -105,8 +171,8 @@
                     </div>
                     </div>
                     <br>
-                    <div class="row">
-                    <div class="col-lg-6">
+                    <div class="row">                       
+                    <div class="col-lg-12">
                         <label >1. GENERAL WORKPLACE PERFORMANCE</label>
                             <br>
                             <label for="select" class=" form-control-label">ATTENDANCE</label>
@@ -179,8 +245,11 @@
                             <option value="5">5</option>
                             <option value="6">6</option>
                             </select>
+                            <br>
                     </div>
-                    <div class="col-lg-6">
+                    <br>
+                    <br>
+                    <div class="col-lg-12">
                         <label >2. SPECIFIC JOB ASSIGNMENT PERFORMANCE</label>
                             <br>
                             <label for="select" class=" form-control-label">SUFFICIENT KNOWLEDGE TO PERFORM TASKS</label>
@@ -265,10 +334,9 @@
                             </select>
                     </div>
                     </div>
-                    <br>
                     <div class="form">
+                    <br>
                         <label>3. HOW WOULD YOU ASSESS THE STUDENT’S OVERALL PERFORMANCE?</label>
-                        <br>
                         <input type="radio" id="OUTSTANDING" name="PERFORMANCE" value="OUTSTANDING" aria-label="OUTSTANDING">
                         <label for="OUTSTANDING">OUTSTANDING</label><br>
                         <input type="radio" id="ABOVE AVERAGE" name="PERFORMANCE" value="ABOVE AVERAGE">
@@ -320,7 +388,24 @@
 </div>
 </form>
 </div>
-</div>
-</div>
-</div>
+
+
+
+                
+                  <div class="modal-footer">
+                    <button type="submit" class="btn au-btn-icon au-btn--green" name="submit">Submit</button>
+                    <button type="button" class="btn btn-default au-btn--blue" data-dismiss="modal">Close</button>
+                   
+                    </div>
+
+
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Modal Code Finish-->
+
 <?php require_once('layouts/footer.php'); ?>
