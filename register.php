@@ -210,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Nationality</label>
                                     <select name="nationality" id="nationality" class="form-control">
+                                        <option value="" disabled selected>Please select</option>
                                         <option value="Afganistan">Afghanistan</option>
                                         <option value="Albania">Albania</option>
                                         <option value="Algeria">Algeria</option>
