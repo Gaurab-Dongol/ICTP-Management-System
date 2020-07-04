@@ -69,8 +69,12 @@
                         </li>
                         <li>
                             <a href="basetable.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="far fa-edit"></i>Edit Base Table</a>
+                                <i class="far fa-edit"></i>Edit DropDown</a>
                         </li>
+                        <!--<li>
+                            <a href="resetpassword.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-key"></i>Reset Password</a>
+                        </li> -->
                         <?php } ?>
 
                         <?php 
