@@ -26,7 +26,7 @@
                 <div class="container-fluid">
 <div class="row">
     <div class="col-lg-12">
-    <h2 class="title-1 m-b-25">ADD FEEDBACK</h2>
+    <h2 class="title-1 m-b-25">FEEDBACK FORM</h2>
                 <div class="card">
                     <div class="card-body card-block">
                 <form action="" method="post">
@@ -77,22 +77,20 @@
                         <input class="au-input au-input--full" type="date" name="end" required>
                     </div>
                     </div>
-                
+                    <br>
                     <div class="row">
                     <div class="col-lg-12">
-                        <label for="select" class=" form-control-label">PLEASE COMPLETE THIS EVALUATION AT THE END OF THE STUDENT’S WORK PERIOD.  YOU ARE ENCOURAGED TO DISCUSS THE COMPLETED FORM WITH THE STUDENT TO AID IN THEIR PROFESSIONAL DEVELOPMENT. PLEASE USE THE SCALE BELOW TO EVALUATE YOUR STUDENT’S PERFORMANCE:</label>
-                        <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
-                            <option value="0">Please select</option>
-                            <option value="1. NEEDS MORE TRAINING OR EDUCATION">1. NEEDS MORE TRAINING OR EDUCATION</option>
-                            <option value="2. PERFORMING BELOW EXPECTATIONS">2. PERFORMING BELOW EXPECTATIONS</option>
-                            <option value="3. ACCEPTABLE PERFORMANCE">3. ACCEPTABLE PERFORMANCE</option>
-                            <option value="4. ABOVE AVERAGE PERFORMANCE">4. ABOVE AVERAGE PERFORMANCE</option>
-                            <option value="5. SUPERIOR PERFORMANCE">5. SUPERIOR PERFORMANCE</option>
-                            <option value="6. NOT OBSERVED">6. NOT OBSERVED</option>
-                        </select>
+                        <p>PLEASE COMPLETE THIS EVALUATION AT THE END OF THE STUDENT’S WORK PERIOD.  YOU ARE ENCOURAGED TO DISCUSS THE COMPLETED FORM WITH THE STUDENT TO AID IN THEIR PROFESSIONAL DEVELOPMENT. PLEASE USE THE SCALE BELOW TO EVALUATE YOUR STUDENT’S PERFORMANCE:</p> 
+                            <p style="margin-left: 40px">        <tab>1. NEEDS MORE TRAINING OR EDUCATION</tab></p>
+                            <p style="margin-left: 40px">        2. PERFORMING BELOW EXPECTATIONS</p>
+                            <p style="margin-left: 40px">        3. ACCEPTABLE PERFORMANCE</p>
+                            <p style="margin-left: 40px">        4. ABOVE AVERAGE PERFORMANCE</p>
+                            <p style="margin-left: 40px">        5. SUPERIOR PERFORMANCE</p>
+                            <p style="margin-left: 40px">        6. NOT OBSERVED</p>
+                        
                     </div>
                     </div>
-
+                    <br>
                     <div class="row">
                     <div class="col-lg-6">
                         <label >1. GENERAL WORKPLACE PERFORMANCE</label>
