@@ -8,6 +8,10 @@
 	}		
 	require_once('inc/config.php');
     require_once('layouts/header.php'); 
+
+    $err_msg = "";
+    $UID = $_GET['UID'];
+
 ?>
 
 <!-- HEADER DESKTOP-->
@@ -30,27 +34,37 @@
                 <div class="card">
                     <div class="card-body card-block">
                 <form action="" method="post">
+                    
+                    <?php
+                     //Display 
+                     $UID = $_GET['UID'];
+                     $query="select * from v_comp_user where userid=$UID";
+                     $rs = mysqli_query($conn,$query);
+                         foreach($rs as $row){
+                     ?> 
                     <div class="row">
                         <div class="col-lg-6">
                         <label>EMPLOYER NAME</label>
-                        <input class="au-input au-input--full" type="empname" name="username" placeholder="EMPLOYER NAME"required>
+                        <input class="au-input au-input--full" style="font-weight: bold;" type="text" name="emp" value="<?php echo $row["employer"]?>" readonly required>
                         </div>
                         <div class="col-lg-6">
                         <label>ORGANISATION NAME</label>
-                        <input class="au-input au-input--full" type="orgname" name="username" placeholder="ORGANISATION NAME"required>
+                        <input class="au-input au-input--full" style="font-weight: bold;" type="text" name="orgname" value="<?php echo $row["companyname"]?>" readonly required>
                         </div>
                     </div>
 
                     <div class="row">
                     <div class="col-lg-6">
                         <label>EMAIL</label>
-                        <input class="au-input au-input--full" type="email" name="username" placeholder="COMPANY EMAIL"required>
+                        <input class="au-input au-input--full"  type="text" name="email" value="<?php echo $row["emailaddress"]?>" readonly required>
                     </div>
                     <div class="col-lg-6">
                         <label>PHONE</label>
-                        <input class="au-input au-input--full" type="tel" name="contactno" placeholder="+61XXXXXXXXX"required>
+                        <input class="au-input au-input--full" type="text" name="contactno" value="<?php echo $row["contactno"]?>" readonly required>
                     </div>
                     </div>
+                    <?php } ?>
+
 
                     <div class="row">
                     <div class="col-lg-6">
@@ -94,6 +108,7 @@
                     <div class="row">
                     <div class="col-lg-6">
                         <label >1. GENERAL WORKPLACE PERFORMANCE</label>
+                            <br>
                             <label for="select" class=" form-control-label">ATTENDANCE</label>
                             <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
                             <option value="0">Please select</option>
@@ -167,6 +182,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label >2. SPECIFIC JOB ASSIGNMENT PERFORMANCE</label>
+                            <br>
                             <label for="select" class=" form-control-label">SUFFICIENT KNOWLEDGE TO PERFORM TASKS</label>
                             <select name="criteria" id="PERFORMANCE SCALE" class="form-control">
                             <option value="0">Please select</option>
@@ -249,8 +265,10 @@
                             </select>
                     </div>
                     </div>
+                    <br>
                     <div class="form">
-                        <label> HOW WOULD YOU ASSESS THE STUDENT’S OVERALL PERFORMANCE?</label>
+                        <label>3. HOW WOULD YOU ASSESS THE STUDENT’S OVERALL PERFORMANCE?</label>
+                        <br>
                         <input type="radio" id="OUTSTANDING" name="PERFORMANCE" value="OUTSTANDING" aria-label="OUTSTANDING">
                         <label for="OUTSTANDING">OUTSTANDING</label><br>
                         <input type="radio" id="ABOVE AVERAGE" name="PERFORMANCE" value="ABOVE AVERAGE">
@@ -261,27 +279,28 @@
                         <label for="BELOW AVERAGE">BELOW AVERAGE</label><br>
                         <input type="radio" id="UNSATISFACTORY" name="PERFORMANCE" value="UNSATISFACTORY">
                         <label for="UNSATISFACTORY">UNSATISFACTORY</label>
-                    </div>                 
+                    </div>
+                    <br>                 
                     <div class="form-group">
-                        <label for="textarea-input" class="form-control-label">WHAT DO YOU CONSIDER THE MAJOR STRENGTHS OF THIS STUDENT? </label>
+                        <label for="textarea-input" class="form-control-label">4. WHAT DO YOU CONSIDER THE MAJOR STRENGTHS OF THIS STUDENT? </label>
                     </div>
                     <div class="form-group">
                         <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
                     </div>
                     <div class="form-group">
-                            <label for="textarea-input" class="form-control-label">WHAT AREAS NEED IMPROVEMENT?</label>
+                            <label for="textarea-input" class="form-control-label">5. WHAT AREAS NEED IMPROVEMENT?</label>
                     </div>
                     <div class="form-group">
                             <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="textarea-input" class="form-control-label">WHAT WOULD YOU RECOMMEND TO MAKE THIS STUDENT BETTER PREPARED FOR THE WORKPLACE? (E.G. COURSES, ACTIVITIES, SKILLS ACQUISITION, PROGRAMS)?</label>
+                        <label for="textarea-input" class="form-control-label">6. WHAT WOULD YOU RECOMMEND TO MAKE THIS STUDENT BETTER PREPARED FOR THE WORKPLACE? (E.G. COURSES, ACTIVITIES, SKILLS ACQUISITION, PROGRAMS)?</label>
                     </div>
                     <div class="form-group">
                         <textarea class="au-input au-input--full" name="TaskDesc"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="textarea-input" class="form-control-label">OTHER COMMENTS, COMMENDATIONS, OR RECOMMENDATIONS:</label>
+                        <label for="textarea-input" class="form-control-label">7. OTHER COMMENTS, COMMENDATIONS, OR RECOMMENDATIONS:</label>
                 </div>
                 <div class="form-group">
                         <textarea class="au-input au-input--full" name="TaskDesc"></textarea>

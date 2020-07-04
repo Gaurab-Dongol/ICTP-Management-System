@@ -84,7 +84,7 @@
                                                   <i class="fas fa-edit"></i>Edit</button>
                                           </div>
                                           <?php
-                                              //Display Student List
+                                              //Display 
                                               $UID = $_GET['UID'];
                                               $query="select a.*, b.companyname from companyuser a inner join company b on a.companyid = b.companyid where a.USERID=$UID";
                                               $rs = mysqli_query($conn,$query);
@@ -97,7 +97,7 @@
                                           <h4><?php echo $row["EmailAddress"]?></h4>
                                           <h4><?php echo $row["ContactNo"]?></h4>
                                          
-                                                  <?php } ?>
+                                          <?php } ?>
                                       </div>
                                        
                               </div>
