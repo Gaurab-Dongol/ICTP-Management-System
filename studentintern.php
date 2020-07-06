@@ -130,7 +130,7 @@
              </table>
         </div> 
              <h1>    </h1>
-             <h3> Non-Pending  </h3>
+             <h3> Approved  </h3>
              <!-- Approved -->
              <div class="table-responsive table--no-card m-b-40">
             <table class="table table-borderless table-striped table-earning">
