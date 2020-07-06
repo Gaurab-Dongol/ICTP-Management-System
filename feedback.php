@@ -1,50 +1,49 @@
 <?php 
-	session_start();
-	
-	if(!isset($_SESSION['RoleId']))
-	{
-		header('location:login.php?lmsg=true');
-		exit;
-	}		
-	require_once('inc/config.php');
-    require_once('layouts/header.php'); 
+  session_start();
+  
+  if(!isset($_SESSION['RoleId']))
+  {
+    header('location:login.php?lmsg=true');
+   exit;
+  }   
 
-    $err_msg = "";
-    $UID = $_GET['UID'];
+  require_once('inc/config.php');
+  require_once('layouts/header.php'); 
+  
+  $UID = $_GET['UID'];
+  $err_msg ="bgy";
+  $pr = "ab";
+  if(isset($_POST['submit']))
+    {
+    $pr =  trim($_POST["sidn"]);
+    
+    }
+  //$pr =290;
 
 ?>
-
-<!-- HEADER DESKTOP-->
-<div class="page-wrapper">
-    <!-- PAGE CONTAINER-->
-    <div class="page-container">
-        <!-- LEFT SIDEBAR-->
-        <?php 
+    <div class="page-wrapper">
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            
+            <!-- LEFT SIDEBAR-->
+            <?php 
             require_once('layouts/left_sidebar.php'); 
             require_once('layouts/usersetting.php'); 
             ?>
             
-        <!-- MAIN CONTENT-->
-        <div class="main-content">
-            <div class="section__content section__content--p30">
-                <div class="container-fluid">
-<div class="row">
-    <div class="col-lg-12">
-    <h2 class="title-1 m-b-25">FEEDBACK FORM</h2>
-                                       <div class="table-button" align="right">
-                                            <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfile">
-                                                Add Feedback</button>
-                                        </div>
-
-</div>
-
-<div class="col-lg-12">
-        <h1 class="title-1 m-b-25">Feedback on Intern</h1>
-       
-        <div class="table-responsive table--no-card m-b-40">
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                      <div class="row">
+                            <div class="col-md-12">
+                                <div class="au-card">
+                                  <div>
+                                       <div class="table-responsive table--no-card m-b-40">
             <table class="table table-borderless table-striped table-earning">
             <thead>
                     <tr>
+                        <th>SID</th>
                         <th>Student Name</th>
                         <th>Job Role</th>
                         <th>Feedback Status</th>
@@ -53,41 +52,61 @@
                 </thead>
                 <tbody>
                 <?php
-                   //$query="select concat(a.internshipid , '', a.studentid) as 'siid', a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', c.JobRole, d.companyname, d.website, concat(e.FirstName , ' ', e.LastName) as 'supervisor', c.location, e.emailaddress, a.status, a.jobresponsibility, b.emailaddress from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' ";
+
+                   
                    $query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', d.website, c.location, c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility, a.semester, b.emailaddress as 'semailadd' from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' and  c.companyuserid = (select companyuserid from companyuser where userid =  $UID  )  order by semester, fullname ";
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
                 ?>   
                     <tr>
+                   
+                        <td><?php echo $row["studentid"]?></td>
                         <td><?php echo $row["fullname"]?></td>
                         <td><?php echo $row["JobRole"]?></td>
-                        <td></td>
-                        <form action="" method="POST">  
+                        <td>Pending</td>
+                        <form action="" method="POST">                    
                         <td>
-                        <?php echo $row["status"]?>
-                       
+                            
+                        <div class="form-actions form-group">
+                        <!--<input type="hidden" name="diaryid" id="diaryid" value="<?php echo $row["id"]; ?>">  -->
+                        <input type="hidden" name="sidn" id="sidn" value="<?php echo $row["studentid"]; ?>">
+                        <?php echo  "<p> <font color=red> $pr </font> </p>"; ?>
+                        <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
+                        <input type="hidden" name="internshipid" id="internshipid" value="<?php echo $row["internshipid"]; ?>">
+                        <input type="hidden" name="stat" id="stat" value="<?php echo $row["status"]; ?>">
+                 
+                       <button type="submit" name="submit" 
+                        class="btn au-btn-icon au-btn--green btn-sm"  > <a href="f.php?UID=<?php echo $_GET['UID']?>">
+                        Fill out</button>
+                        </div>  
+                    </form>
+                 
+                           
+                        </td>
                                
                     </tr>
-
+                     
                     <?php }?> 
+                       
                 </tbody>
              </table>
-        </div> 
-             <h1>    </h1>
-                     
+        </div>
+                                        
+                                    </div>
+                                    <hr>
+   
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+          </div>
     </div>
-
-
-
-
-</div>
-</div>
-</div>
-
-
-
-<div id="myModalProfile" class="modal fade" role="dialog">
+            <!-- END MAIN CONTENT-->
+    
+<div id="myModalFeedback" class="modal fade" role="dialog">
               <div class="modal-dialog modal-lg">
               <!-- Modal content-->
                 <div class="modal-content">
@@ -95,19 +114,21 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                   </div>
                   <div class="modal-body">
-
-
+ 
                   <div class="card">
+                
                     <div class="card-body card-block">
-                <form action="" method="post">
+              
                     
                     <?php
-                     //Display 
-                     $UID = $_GET['UID'];
-                     $query="select * from v_comp_user where userid=$UID";
+                     //Display
+                  
+                
+                     $query="select * from v_feedback_info where userid=$UID and studentid = '19493145' ";
                      $rs = mysqli_query($conn,$query);
-                         foreach($rs as $row){
+                         foreach($rs as $row){  
                      ?> 
+                     
                     <div class="row">
                         <div class="col-lg-6">
                         <label>EMPLOYER NAME</label>
@@ -129,17 +150,17 @@
                         <input class="au-input au-input--full" type="text" name="contactno" value="<?php echo $row["contactno"]?>" readonly required>
                     </div>
                     </div>
-                    <?php } ?>
-
-
+    
                     <div class="row">
                     <div class="col-lg-6">
                         <label>STUDENT NAME</label>
-                        <input class="au-input au-input--full" type="stname" name="username" placeholder="STUDENT NAME"required>
+                        <input class="au-input au-input--full" type="text" name="studentname" value="<?php echo $row["student"]?>" readonly  required>
+                        <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
                     </div>
                     <div class="col-lg-6">
                         <label>STUDENT NUMBER</label>
-                        <input class="au-input au-input--full" type="stnumber" name="username" placeholder="STUDENT NUMBER"required>
+                        <input class="au-input au-input--full" type="text" name="studentid" value="<?php echo $row["studentid"]?>" readonly required>
+                        <?php echo  "<p> <font color=red> $UID </font> </p>"; ?>
                     </div>
                     </div>
 
@@ -147,7 +168,11 @@
                     <div class="col-lg-4">
                         <label>POSITION OR ASSIGNMENT</label>
                         <input class="au-input au-input--full" type="empname" name="username" >
+                        
+                        <?php echo  "<p> <font color=red> $param_sid </font> </p>"; ?>
                     </div>
+                    <?php } ?>
+
                     <div class="col-lg-4">
                         <label>Start Date:</label>
                         <input class="au-input au-input--full" type="date" name="start" required>
@@ -384,28 +409,36 @@
                     <label>Date</label>
                     <input type="text" class="au-input au-input--full">
                 </div>
-                    <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="submit">Submit</button>
+                    <button class="au-btn au-btn--block au-btn--green m-b-20" action="#" type="submit" name="fin">Submit</button>
 </div>
-</form>
+                        
+                         
+
+
 </div>
 
 
 
                 
-                  <div class="modal-footer">
-                    <button type="submit" class="btn au-btn-icon au-btn--green" name="submit">Submit</button>
-                    <button type="button" class="btn btn-default au-btn--blue" data-dismiss="modal">Close</button>
-                   
-                    </div>
+                 
 
 
                   </div>
-
+                
                   </div>
                 </div>
+              </div>
+				
+				
+				
+             
+
+
+				
               </div>
             </div>
             
             <!-- Modal Code Finish-->
 
-<?php require_once('layouts/footer.php'); ?>
+            
+    <?php require_once('layouts/footer.php'); ?>
