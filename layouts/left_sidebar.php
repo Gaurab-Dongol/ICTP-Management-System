@@ -193,7 +193,7 @@
                         </li>
                         <li>
                             <a href="feedback.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="fas fa-table"></i>Add Feedback</a>
+                                <i class="fas fa-table"></i>Feedback</a>
                         </li>
                         <?php } ?>
                     </ul>

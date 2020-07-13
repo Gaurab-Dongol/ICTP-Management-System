@@ -32,6 +32,8 @@
                     <div class="container-fluid">
                       <div class="row">
                             <div class="col-md-12">
+                            <h1 class="title-1 m-b-25">FEEDBACK FORM</h1>
+                            <h3> Pending   </h3>
                                 <div class="au-card">
                                   <div>
                                        <div class="table-responsive table--no-card m-b-40">
@@ -49,7 +51,9 @@
                 <?php
 
                    
-                   $query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', d.website, c.location, c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility, a.semester, b.emailaddress as 'semailadd' from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' and  c.companyuserid = (select companyuserid from companyuser where userid =  $UID  )  order by semester, fullname ";
+                   #$query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', d.website, c.location, c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility, a.semester, b.emailaddress as 'semailadd' from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' and  c.companyuserid = (select companyuserid from companyuser where userid =  $UID  )  order by semester, fullname ";
+                   $query = "select * from v_feedback_info where status in ('Completed','On-Going','Approved') and userid =  $UID  and studentid not in (select studentid from feedback where status = 'completed') order by student";
+
                    $rs = mysqli_query($conn,$query);
                 
                        foreach($rs as $row){
@@ -57,8 +61,8 @@
                     <tr>
                    
                         <td><?php echo $row["studentid"]?></td>
-                        <td><?php echo $row["fullname"]?></td>
-                        <td><?php echo $row["JobRole"]?></td>
+                        <td><?php echo $row["student"]?></td>
+                        <td><?php echo $row["jobrole"]?></td>
                         <td>Pending</td>
                         <form action="" method="POST">                    
                         <td>
