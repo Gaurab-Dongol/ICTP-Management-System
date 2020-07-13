@@ -129,7 +129,7 @@
                         <input type="hidden" name="internshipid" id="internshipid" value="<?php echo $row["internshipid"]; ?>">
                         <input type="hidden" name="stat" id="stat" value="<?php echo $row["status"]; ?>">
           
-                        <a href="f.php?UID=<?php echo $_GET["UID"]?>?abcau=<?php echo $row['studentid']?>">OPEN</a>
+                        <a href="feedback_form.php?UID=<?php echo $_GET["UID"]?>?abcau=<?php echo $row['id']?>">OPEN</a>
                         </div>  
              
                         </td>
@@ -141,8 +141,6 @@
                 </tbody>
              </table>
         </div>
-
-
                             </div>
                         </div>
                       </div>
@@ -151,7 +149,8 @@
           </div>
     </div>
             <!-- END MAIN CONTENT-->
-    </div>
+
+        </div>
             </div>
             
             <!-- Modal Code Finish-->
