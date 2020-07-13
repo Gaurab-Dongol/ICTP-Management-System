@@ -37,7 +37,34 @@
 		}
 		}
     }
-    
+
+    if(isset($_POST["submitEX"]))
+    {
+      $sql = "INSERT INTO studentexperience (studentid, role, company, location, duration, description) VALUES (?,?,?,?,?,?)";
+      if ($stmt = mysqli_prepare($conn, $sql)) {
+      
+      mysqli_stmt_bind_param($stmt, "ssssss", $param_sid, $param_role, $param_cname, $param_location, $param_duration, $param_desc );
+
+        $UID = $_GET['UID'];
+        $sql3 = "select studentid from student where userid = '" . $UID . "'";
+        $rs = mysqli_query($conn, $sql3);
+        $row = mysqli_fetch_row($rs);
+        $param_sid = $row[0];
+        $param_role = $_POST['role'];
+        $param_cname = $_POST['cname'];
+        $param_location = $_POST['location'];
+        $param_duration = $_POST['duration'];
+        $param_desc = $_POST['description'];
+ 
+        if (mysqli_stmt_execute($stmt)) {
+          header("location: dashboard.php?UID=$UID");
+      } else {
+          echo "Please check that you have entered the correct details.";
+      }
+      mysqli_stmt_close($stmt);
+    }
+  }
+
     if(isset($_POST["Update"]))
     {
         $UID = $_GET['UID'];
@@ -119,7 +146,7 @@
                       <?php } ?>
                     
                     <?php 
-                    //only visible to admin 
+                 
                     if($_SESSION['RoleId'] == 3){?>
                     <div class="row">
                             <div class="col-md-12">
@@ -148,20 +175,54 @@
                                     <div>
                                         <div class="table-button" align="right">
                                             <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalWorkEx">
-                                                <i class="fas fa-edit"></i>Edit</button>
+                                                <i class="fas fa-edit"></i>ADD</button>
                                         </div>
+                                       
+                                       
                                         <h2>Work Experience</h2>
-                                        <h3>Software Developer</h3>
-                                        <h3>TGP Global</h3>
-                                        <h4>Sydney NSW</h4>
-                                        <h4>December 2019 to Current</h4>
-                                        <p>Worked with team towards developing PHP Applications and Building Websites using PHP, JavaScript, AJAX, JSON. Involved in architecting internal CRM Dashboard using various tools like Trello, Slack and Git Web application was implemented using Bootstrap, PHP, Node.js and MongoDB. Developed dynamic and interactive UI and UX for various responsive websites. REST API Testing and Documentation using Postman.r</p>
-                                    </div>    
-                            </div>
-                            </div>
+                                      
+        <table class="table table-borderless table-striped table-earning">
+            <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Duration</th>
+                        <th>Open Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                   $query="select a.* from studentexperience a inner join student b on a.studentid = b.studentid  where b.USERID=$UID";
+                   $rs = mysqli_query($conn,$query);
+                      foreach($rs as $row){
+                ?>   
+                    <tr>                
+                        <td><?php echo $row["Role"]?></td>
+                        <td><?php echo $row["Company"]?></td>
+                        <td><?php echo $row["Location"]?></td>
+                        <td><?php echo $row["Duration"]?></td>
+                        <form action="" method="POST">                    
+                        <td>
+                            
+                        <div class="form-actions form-group">
+                        <input type="hidden" name="exid" id="exid" value="<?php echo $row["id"]; ?>"> 
+                        <a href="workex.php?UID=<?php echo $_GET["UID"]?>?abcau=<?php echo $row['id']?>">VIEW</a>
+                                             
+                        </div>  
+             
+                        </td>
+                               
+                    </tr>
+                    <?php } ?>
+                    <?php }?> 
+                       
+                </tbody>
+             </table>
+          
+                            
                         </div>
                     </div>
-                    <?php } ?>
                     <!-- Mdal Code Start -->
            	
             <!-- Modal Code Finish-->
@@ -334,6 +395,8 @@
             </form>
             <!-- Modal Code Finish-->
 
+
+
             <!-- Mdal Code Start -->
             <div id="myModalWorkEx" class="modal fade" role="dialog">
               <div class="modal-dialog">
@@ -347,61 +410,33 @@
                         <div class="card-header">
                             <strong>Work Experience</strong>
                           </div>
+                          <form action="" method="POST">
                           <div class="card-body card-block">
                             <div class="form-group">
                               <label for="designation" class=" form-control-label">Designation</label>
-                              <input type="text" id="designation" placeholder="Enter your Designation" class="form-control">
+                              <input type="text" id="role" name="role" placeholder="Enter your Designation" class="form-control">
                             </div>
                             <div class="form-group">
-                              <label for="email" class=" form-control-label">Employer</label>
-                              <input type="text" id="email" placeholder="Company Name" class="form-control">
+                              <label for="company" class=" form-control-label">Company</label>
+                              <input type="text" id="cname" name="cname" placeholder="Company Name" class="form-control">
                             </div>
                             <div class="form-group">
                              <label for="location" class=" form-control-label">Location</label>
-                             <input type="text" id="location" placeholder="Enter Location" class="form-control">
+                             <input type="text" id="location" name="location" placeholder="Enter Location" class="form-control">
                             </div>
-
                             <div class="form-group">
                              <label for="duration" class=" form-control-label">Duration</label>
-                                <div class="col col-md-3">
-                                <label for="select" class=" form-control-label">Years</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                  <select name="selectYears" id="selectYears" class="form-control">
-                                    <option value="0">Less then one year</option>
-                                    <option value="1">1 Year</option>
-                                    <option value="2">2 Years</option>
-                                    <option value="3">3 Years</option>
-                                  </select>
-                                </div>
+                             <input type="text" id="duration" name="duration" placeholder="e.g Jan 2018 - June 2020" class="form-control">
                             </div>
-
-                            <div class="form-group">
-                             <label for="duration" class=" form-control-label">Duration</label>
-                                <div class="col col-md-3">
-                                <label for="select" class=" form-control-label">Years</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                  <select name="selectYears" id="selectYears" class="form-control">
-                                    <option value="0">Less then one year</option>
-                                    <option value="1">1 Year</option>
-                                    <option value="2">2 Years</option>
-                                    <option value="3">3 Years</option>
-                                  </select>
-                                </div>
-                            </div>
-
                             <div class="form-group">
                              <label for="discription" class=" form-control-label">Description</label>
-                             <textarea rows="4" cols="50" id="discription" placeholder="Description" class="form-control"> </textarea>
+                             <textarea rows="4" cols="50" id="description" name="description" placeholder="Description" class="form-control"> </textarea>
                             </div>
-
-
                           </div>
                       </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <button type="submit" class="btn btn-default" name="submitEX">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
                 </div>
