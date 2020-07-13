@@ -68,6 +68,10 @@
                                 <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
                         <li>
+                            <a href="feedback_admin.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-table"></i>Feedback</a>
+                        </li>
+                        <li>
                             <a href="basetable.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="far fa-edit"></i>Edit DropDown</a>
                         </li>
@@ -125,6 +129,10 @@
                         <li>
                             <a href="weeklydiary_admin.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-book"></i>Weekly Diary</a>
+                        </li>
+                        <li>
+                            <a href="feedback_admin.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-table"></i>Feedback</a>
                         </li>
                         <?php } ?>
 

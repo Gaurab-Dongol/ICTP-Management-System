@@ -51,6 +51,18 @@
         mysqli_query($conn, $update);
     }
 
+    if(isset($_POST["UpdateCom"]))
+    {
+        $UID = $_GET['UID'];
+        $firstname = $_POST['firstname'];
+        $lastName = $_POST['lastName'];
+        $role = $_POST['role'];
+        $Email = $_POST['Email'];
+        $ContactNo = $_POST['ContactNo'];
+        $update = "UPDATE companyuser SET Role = '$role', FirstName='$firstname',LastName='$lastName',EmailAddress='$Email',ContactNo='$ContactNo' where USERID='".$UID."'";
+        mysqli_query($conn, $update);
+    }
+
     //Fetch data of student from database for input type
     $UID = $_GET['UID'];
     $fetch = "SELECT * from student";
@@ -80,7 +92,7 @@
                                   <div class="au-card">
                                       <div>
                                           <div class="table-button" align="right">
-                                              <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfile">
+                                              <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#myModalProfileCom">
                                                   <i class="fas fa-edit"></i>Edit</button>
                                           </div>
                                           <?php
@@ -206,7 +218,63 @@
                 </div>
             </div>
             <!-- END MAIN CONTENT-->
-    
+
+
+            <div id="myModalProfileCom" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+              <!-- Modal content-->
+                <div class="modal-content">
+                <?php
+                          $query=" select a.*, b.companyname from companyuser a inner join company b on a.companyid = b.companyid where a.USERID=$UID";
+                          $student = mysqli_query($conn,$query);
+                          $rs = mysqli_fetch_array($student);
+                  ?> 
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                        
+                            <strong>Profile</strong>
+                          </div>
+                          <form action="" method="POST">
+                          <div class="card-body card-block">
+                            <div class="form-group">
+                              <label class=" form-control-label">First Name</label>
+                              <input type="text" value="<?php echo $rs["FirstName"]?>"class="form-control" name="firstname">
+                            </div>
+                            <div class="form-group">
+                              <label class=" form-control-label">Last Name</label>
+                              <input type="text" value="<?php echo $rs["LastName"]?>" class="form-control" name="lastName">
+                            </div>
+                            <div class="form-group">
+                              <label class=" form-control-label">Role</label>
+                              <input type="text" value="<?php echo $rs["Role"]?>" class="form-control" name="role">
+                            </div>
+                            <div class="form-group">
+                              <label class=" form-control-label">Email</label>
+                              <input type="text" value="<?php echo $rs["EmailAddress"]?>" class="form-control" name="Email">
+                            </div>
+                            <div class="form-group">
+                             <label class=" form-control-label">Contact No</label>
+                             <input type="text" value="<?php echo $rs["ContactNo"]?>" class="form-control" name="ContactNo">
+                            </div>                                           
+                          </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" name="UpdateCom">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+            </form>
+            <!-- Modal Code Finish-->            
+            
+
             <div id="myModalProfile" class="modal fade" role="dialog">
               <div class="modal-dialog">
               <!-- Modal content-->

@@ -44,7 +44,7 @@
                         <th>Student Name</th>
                         <th>Job Role</th>
                         <th>Feedback Status</th>
-                        <th>Open Feedback</th>
+                        <th>Submit Feedback</th>
                     </tr>
                 </thead>
                 <tbody>

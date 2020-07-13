@@ -17,7 +17,12 @@
 
     if(isset($_POST['submit']))
     {
-        header("location: feedback.php?UID=$UID");  
+        if ($_GET['RoleID']==4)
+         {header("location: feedback.php?UID=$UID");  
+         }else {
+            header("location: feedback_admin.php?UID=$UID");  
+        }
+             
     }
     
 ?>
