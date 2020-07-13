@@ -11,9 +11,10 @@
 
     //include 'feedback.php';
     $err_msg = "";
+    $SID = substr($_GET['UID'], strpos($_GET['UID'], "abcau=")+6);    
+    $_GET['UID'] = substr($_GET['UID'] , 0, strpos($_GET['UID'] , "?abc"));
     $UID = $_GET['UID'];
-    $mik =  $pr;
-
+    
 ?>
 
 <!-- HEADER DESKTOP-->
@@ -32,15 +33,15 @@
    <div class="container-fluid">
 <div class="row">
     <div class="col-lg-12">
-    <h2 class="title-1 m-b-25">FEEDBACK FORM</h2>
+    <h2 class="title-1 m-b-25">FEEDBACK FORM </h2>
+    
                 <div class="card">
                     <div class="card-body card-block">
                 <form action="" method="post">
                     
                     <?php
                      //Display 
-                     $UID = $_GET['UID'];
-                     $query="select * from v_comp_user where userid=$UID";
+                     $query="select * from v_feedback_info where userid=$UID and studentid = $SID";
                      $rs = mysqli_query($conn,$query);
                          foreach($rs as $row){
                      ?> 
@@ -48,7 +49,6 @@
                         <div class="col-lg-6">
                         <label>EMPLOYER NAME</label>
                         <input class="au-input au-input--full" style="font-weight: bold;" type="text" name="emp" value="<?php echo $row["employer"]?>" readonly required>
-                        <?php echo  "<p> <font color=red> $mik </font> </p>"; ?>
                          </div>
                         <div class="col-lg-6">
                         <label>ORGANISATION NAME</label>
@@ -66,25 +66,24 @@
                         <input class="au-input au-input--full" type="text" name="contactno" value="<?php echo $row["contactno"]?>" readonly required>
                     </div>
                     </div>
-                    <?php } ?>
-
-
                     <div class="row">
                     <div class="col-lg-6">
                         <label>STUDENT NAME</label>
-                        <input class="au-input au-input--full" type="stname" name="username" placeholder="STUDENT NAME"required>
+                        <input class="au-input au-input--full" type="text" name="student" value="<?php echo $row["student"]?>" readonly required>
                     </div>
                     <div class="col-lg-6">
                         <label>STUDENT NUMBER</label>
-                        <input class="au-input au-input--full" type="stnumber" name="username" placeholder="STUDENT NUMBER"required>
+                        <input class="au-input au-input--full" type="text" name="studentid" value="<?php echo $row["studentid"]?>" readonly required>
                     </div>
                     </div>
 
                     <div class="row">
                     <div class="col-lg-4">
                         <label>POSITION OR ASSIGNMENT</label>
-                        <input class="au-input au-input--full" type="empname" name="username" >
+                        <input class="au-input au-input--full" type="text" name="role" value="<?php echo $row["jobrole"]?>" readonly required>
                     </div>
+
+                    <?php } ?>
                     <div class="col-lg-4">
                         <label>Start Date:</label>
                         <input class="au-input au-input--full" type="date" name="start" required>
