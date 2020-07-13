@@ -85,12 +85,64 @@
                        
                 </tbody>
              </table>
+        </div>                
+            </div>
+                </div>
+                <br>
+                <h3> Completed   </h3>
+                                <div class="au-card">
+                                  <div>
+                                       <div class="table-responsive table--no-card m-b-40">
+            <table class="table table-borderless table-striped table-earning">
+            <thead>
+                    <tr>
+                        <th>SID</th>
+                        <th>Student Name</th>
+                        <th>Job Role</th>
+                        <th>Feedback Status</th>
+                        <th>Open Feedback</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+
+                   
+                   #$query="select a.internshipid , a.studentid, concat(b.FirstName , ' ', b.LastName) as 'fullname', d.website, c.location, c.JobRole, d.companyname, concat(e.FirstName , ' ', e.LastName) as 'supervisor', e.emailaddress, a.status, a.jobresponsibility, a.semester, b.emailaddress as 'semailadd' from student_intern a inner join student b on a.studentid = b.studentid inner join internship c on a.internshipid = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where a.Status != 'Pending' and  c.companyuserid = (select companyuserid from companyuser where userid =  $UID  )  order by semester, fullname ";
+                   $query = "select a.id, a.createddate, a.InternshipId, a.studentid, concat(b.FirstName , ' ', b.LastName) as 'student', c.jobrole from feedback a inner join student b on a.studentid = b.studentid inner join internship c on a.InternshipId = c.internshipid inner join company d on d.companyid = c.companyid inner join companyuser e on e.companyuserid = c.companyuserid where c.companyuserid = (select companyuserid from companyuser where userid =  $UID ) order by createddate, student ";
+                   $rs = mysqli_query($conn,$query);
+                
+                       foreach($rs as $row){
+                ?>   
+                    <tr>
+                   
+                        <td><?php echo $row["studentid"]?></td>
+                        <td><?php echo $row["student"]?></td>
+                        <td><?php echo $row["jobrole"]?></td>
+                        <td>Completed</td>
+                        <form action="" method="POST">                    
+                        <td>
+                            
+                        <div class="form-actions form-group">
+                        <input type="hidden" name="feedid" id="feedid" value="<?php echo $row["id"]; ?>"> 
+                        <input type="hidden" name="sidn" id="sidn" value="<?php echo $row["studentid"]; ?>">
+                        <?php echo  "<p> <font color=red> $err_msg </font> </p>"; ?>
+                        <input type="hidden" name="internshipid" id="internshipid" value="<?php echo $row["internshipid"]; ?>">
+                        <input type="hidden" name="stat" id="stat" value="<?php echo $row["status"]; ?>">
+          
+                        <a href="f.php?UID=<?php echo $_GET["UID"]?>?abcau=<?php echo $row['studentid']?>">OPEN</a>
+                        </div>  
+             
+                        </td>
+                               
+                    </tr>
+                     
+                    <?php }?> 
+                       
+                </tbody>
+             </table>
         </div>
-                                        
-                                    </div>
-                                    <hr>
-   
-                                </div>
+
+
                             </div>
                         </div>
                       </div>
