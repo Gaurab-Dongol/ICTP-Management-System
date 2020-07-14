@@ -152,7 +152,7 @@
                     <?php } ?>
                     <!-- Mdal Code Start -->
            	
-            <!-- Modal Code Finish-->
+                    <!-- Modal Code Finish-->
                     <?php 
                     //only visible to admin 
                     if($_SESSION['RoleId'] == 1 || $_SESSION['RoleId'] == 2){?>

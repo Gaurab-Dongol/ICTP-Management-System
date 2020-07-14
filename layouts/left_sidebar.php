@@ -68,9 +68,14 @@
                                 <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
                         <li>
+                            <a href="report.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="far fa-list-alt"></i>Final Report</a>
+                        </li>
+                        <li>
                             <a href="basetable.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="far fa-edit"></i>Edit Base Table</a>
                         </li>
+                        
                         <?php } ?>
 
                         <?php 

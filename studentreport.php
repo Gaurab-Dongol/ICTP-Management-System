@@ -21,9 +21,9 @@
 
     if (isset($_POST["SubmitBtn"]))
     {
-            $insert = "INSERT into finalreport (InternshipId, StudentID, DateSubmitted, Filename, WeekNo, StudentComment) VALUES (?,?,?,?,?,?)";
+            $insert = "INSERT into finalreport (InternshipId, StudentID, DateSubmitted, Filename, VersionNo, StudentComment, UCRemarks) VALUES (?,?,?,?,?,?,?)";
             if($stmt = mysqli_prepare($conn, $insert)) {
-                mysqli_stmt_bind_param($stmt, "ssssss", $param_InternshipId, $param_sid, $param_Date, $param_file, $param_weekno, $param_commment);
+                mysqli_stmt_bind_param($stmt, "sssssss", $param_InternshipId, $param_sid, $param_Date, $param_file, $param_versiono, $param_commment,$param_ucremarks);
                 
                 $sql4 = "select studentid from student where USERID='".$UID."'";
                 $rs = mysqli_query($conn, $sql4);
@@ -41,11 +41,12 @@
                 $param_sid = $row[0];
     
                 $param_file = '';
-                $param_weekno= '';
+                $param_versiono= '';
                 //$param_start = '2020-02-28';
-                $date = strtotime($_POST["Date"]);
+                $date = strtotime($_POST["DateSubmitted"]);
                 $param_Date = date("Y-m-d", $date);
                 $param_commment = trim($_POST["comment"]);
+                $param_ucremarks = '';
 
                 if(mysqli_stmt_execute($stmt)){
                     // Redirect to add page
@@ -53,9 +54,8 @@
                 } else{
                     echo "not working";
                 }
-    
                 mysqli_stmt_close($stmt);
-        }
+        }}
     else if (isset($_POST["UpdateBtn"]))
     {
     $sql4 = "select studentid from student where USERID='".$UID."'";
@@ -70,10 +70,10 @@
 
     $comment = $_POST["comment"];
     $udate = strtotime($_POST["DateSubmitted"]);
-    $sdate = date("Y-m-d H:i:s", $udate);
-    $update = "UPDATE finalreport SET StudentComment='test123',DateSubmitted='2020-06-02 23:58:34' where StudentID='19513498'";
+    $sdate = date("Y-m-d", $udate);
+    $update = "UPDATE finalreport SET StudentComment='".$comment."',DateSubmitted='".$sdate."' where StudentID='".$sid."'";
     mysqli_query($conn, $update);
-    }}
+    }
 ?>
 
 <div class="page-wrapper">
@@ -100,7 +100,7 @@
                                     <label for="textarea-input" class="form-control-label">Submitted Date</label>
                                 </div>
                                 <div class="col-12 col-md-3">
-                                    <input class="form-control" value="<?php echo $gdate;?>" type="date" name="Date" required>
+                                    <input class="form-control" value="<?php echo $gdate;?>" type="date" name="DateSubmitted" required>
                                 </div>
                             </div>
 
@@ -114,12 +114,19 @@
                             </div>
                     </div>
                         <div class="card-footer">
-                        <button type="submit" class="btn btn-primary btn-sm" name="SubmitBtn">
-                            <i class="fa fa-dot-circle-o"></i> Insert
-                        </button>
-                        <button type="upload" class="btn btn-primary btn-sm" name="UpdateBtn">
+                        <?php
+                        if (mysqli_num_rows($f) > 0)
+                        {
+                            echo '<button type="upload" class="btn btn-primary btn-sm" name="UpdateBtn">
                             <i class="fa fa-dot-circle-o"></i> Update
-                        </button>
+                            </button>';
+                        
+                        }
+                        else {
+                        echo '<button type="submit" class="btn btn-primary btn-sm" name="SubmitBtn">
+                            <i class="fa fa-dot-circle-o"></i> Insert</button>
+                            ';
+                        } ?>
                         </form> 
                     </div>
                 </div>      
