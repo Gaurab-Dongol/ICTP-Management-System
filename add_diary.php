@@ -70,7 +70,7 @@
                                                 <th>Status</th>
                                                 <th>Manager Remarks</th>
                                                 <th>Unit Coordinator Remarks</th>
-                                                <th>Edit/Delete</th>
+                                               <!-- <th>Edit/Delete</th> -->
                                                 
                                             </tr>
                                         </thead>
@@ -93,7 +93,7 @@
                                                 <td class="desc"><?php echo $row["status"]?></td>
                                                 <td class="desc"><?php echo $row["ManagerRemarks"]?></td>
                                                 <td class="desc"><?php echo $row["UCRemarks"]?></td>
-                                                <td>
+                                                <!-- <td>
                                                     <div class="table-data-feature">
                                                             <button class="item" data-toggle="modal" data-target="#myModalProfile" name="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
@@ -102,7 +102,7 @@
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
                                                     </div>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                         </tbody>
                                         <?php } ?>
