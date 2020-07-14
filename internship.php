@@ -38,21 +38,21 @@ function getComa(val) {
   $UID = $_GET['UID'];
   $error_msg ="";
   $company = $semester = $staff = "";
-  $query = "SELECT internshipID FROM internship where closingdate > date_sub(curdate(),interval 90 day) order by InternshipId";
+  $query = "SELECT internshipID FROM internship where closingdate > date_sub(curdate(),interval 150 day) order by InternshipId";
     $results = mysqli_query($conn,$query);
     while ($rows = mysqli_fetch_array($results))
     {
      $company .= '<option value="'.$rows["internshipID"].'">'.$rows["internshipID"] .'</option>';
     }  
 
-  $query2 = "SELECT id, semester FROM semester";
+  $query2 = "SELECT id, semester FROM semester order by id";
   $results = mysqli_query($conn,$query2);
   while ($rows = mysqli_fetch_array($results))
   {
    $semester .= '<option value="'.$rows["semester"].'">'.$rows["semester"] .'</option>';
   } 
   
-  $query3 = "SELECT staffid, concat(LastName, ', ', FirstName) as 'fullname' FROM staff";
+  $query3 = "SELECT staffid, concat(LastName, ', ', FirstName) as 'fullname' FROM staff order by lastname";
   $results = mysqli_query($conn,$query3);
   while ($rows = mysqli_fetch_array($results))
   {

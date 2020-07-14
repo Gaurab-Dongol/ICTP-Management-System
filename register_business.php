@@ -6,7 +6,7 @@ $cname = $uname = $pwd = $confirm_pwd = $fname_err = $email_err = $uname_err = $
 $pwd_format = "Should be at least 8 characters with at least a lowercase, an uppercase, a number and a special character ";
 
 
-$query12 = "SELECT companyid,companyname FROM company";
+$query12 = "SELECT companyid,companyname FROM company order by companyname";
 $results = mysqli_query($conn,$query12);
 while ($rows = mysqli_fetch_array($results))
 {

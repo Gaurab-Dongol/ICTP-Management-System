@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Specialisation</label>
                                     <select name="specialisation" id="specialisation" class="form-control" required>
-                                        <option value="0">Please select</option>
+                                        <option value="" disabled selected>Please select</option>
                                         <option value="Networking">Networking</option>
                                         <option value="Distributed Computing">Distributed Computing</option>
                                         <option value="Management">Management</option>
@@ -197,7 +197,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Year Enrolled</label>
                                     <select name="yearenrolled" id="yearenrolled" class="form-control" required>
-                                        <option value="0">Please select</option>
+                                        <option value="" disabled selected>Please select</option>
+
                                         <option value="2018">2018</option>
                                         <option value="2019">2019</option>
                                         <option value="2020">2020</option>
@@ -209,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Nationality</label>
                                     <select name="nationality" id="nationality" class="form-control">
+                                        <option value="" disabled selected>Please select</option>
                                         <option value="Afganistan">Afghanistan</option>
                                         <option value="Albania">Albania</option>
                                         <option value="Algeria">Algeria</option>
