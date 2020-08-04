@@ -184,27 +184,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <label for="select" class=" form-control-label">Specialisation</label>
                                     <select name="specialisation" id="specialisation" class="form-control" required>
                                         <option value="" disabled selected>Please select</option>
-                                        <option value="Networking">Networking</option>
-                                        <option value="Distributed Computing">Distributed Computing</option>
-                                        <option value="Management">Management</option>
-                                        <option value="Web and Mobile Computing">Web and Mobile Computing</option>
-                                        <option value="Health Informatics">Health Informatics</option>
-                                        <option value="Data Analytics">Data Analytics</option>
-                                        <option value="Digital Futures">Digital Futures</option>
-                                        <option value="Innovation and Entrepreneurship">Innovation and Entrepreneurship</option>
+                                        <?php
+                                    $query = "SELECT * from specialisation order by Description";
+                                    $results = mysqli_query($conn,$query);
+                                    while ($rows = mysqli_fetch_assoc($results))
+                                    { 
+                                    ?>
+                                    <option value="<?php echo $rows['Description']?>"><?php echo $rows['Description']?></option>
+                                    <?php
+                                    } 
+                                    ?>
                                     </select>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="select" class=" form-control-label">Year Enrolled</label>
                                     <select name="yearenrolled" id="yearenrolled" class="form-control" required>
                                         <option value="" disabled selected>Please select</option>
-
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
+                                        <?php
+                                    $query = "SELECT * from enrollmentyear order by year";
+                                    $results = mysqli_query($conn,$query);
+                                    while ($rows = mysqli_fetch_assoc($results))
+                                    { 
+                                    ?>
+                                    <option value="<?php echo $rows['Year']?>"><?php echo $rows['Year']?></option>
+                                    <?php
+                                    } 
+                                    ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
