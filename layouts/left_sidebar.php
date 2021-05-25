@@ -68,26 +68,21 @@
                                 <i class="fas fa-book"></i>Weekly Diary</a>
                         </li>
                         <li>
-<<<<<<< HEAD
                             <a href="report.php?UID=<?php echo $_GET['UID']?>">
-                                <i class="far fa-list-alt"></i>Final Report</a>
-=======
+                                <i class="fas fa-folder-open"></i>Final Report</a>
+                        </li>
+                        <li>
                             <a href="feedback_admin.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-table"></i>Feedback</a>
->>>>>>> 3a9705360dcfab9fbf2ef3a13c7cd810afefa6c8
                         </li>
                         <li>
                             <a href="basetable.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="far fa-edit"></i>Edit DropDown</a>
                         </li>
-<<<<<<< HEAD
-                        
-=======
                         <!--<li>
                             <a href="resetpassword.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-key"></i>Reset Password</a>
                         </li> -->
->>>>>>> 3a9705360dcfab9fbf2ef3a13c7cd810afefa6c8
                         <?php } ?>
 
                         <?php 
@@ -138,6 +133,10 @@
                         <li>
                             <a href="weeklydiary_admin.php?UID=<?php echo $_GET['UID']?>">
                                 <i class="fas fa-book"></i>Weekly Diary</a>
+                        </li>
+                        <li>
+                            <a href="report.php?UID=<?php echo $_GET['UID']?>">
+                                <i class="fas fa-folder-open"></i>Final Report</a>
                         </li>
                         <li>
                             <a href="feedback_admin.php?UID=<?php echo $_GET['UID']?>">
